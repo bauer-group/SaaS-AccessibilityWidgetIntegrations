@@ -24,4 +24,4 @@ export default defineNuxtConfig({
 });
 ```
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

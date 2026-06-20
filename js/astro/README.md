@@ -19,4 +19,4 @@ import AccessibilityWidget from '@bauer-group/accessibility-widget-astro/src/Acc
 
 Widget-Assets nach `public/accessibility-widget/*`.
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

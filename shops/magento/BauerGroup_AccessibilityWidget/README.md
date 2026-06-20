@@ -11,4 +11,4 @@ Widget-Assets aus `packages/widget/dist/` nach `view/frontend/web/` kopieren (`a
 
 Konfiguration: Stores → Configuration → (benutzerdefiniert: `accessibility_widget/settings/*`).
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

@@ -11,4 +11,4 @@ Widget-Assets aus `packages/widget/dist/` nach `src/Resources/public/` kopieren.
 
 Konfiguration: Plugin-Einstellungen im Shopware-Admin.
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

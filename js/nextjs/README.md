@@ -24,4 +24,4 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 Widget-Assets nach `public/accessibility-widget/*` kopieren.
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

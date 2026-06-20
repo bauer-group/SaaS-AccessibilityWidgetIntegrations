@@ -7,8 +7,8 @@
  * Requires PHP:      8.1
  * Author:            BAUER GROUP
  * Author URI:        https://www.bauer-group.com
- * License:           MIT
- * License URI:       https://opensource.org/licenses/MIT
+ * License:           AGPL-3.0-only
+ * License URI:       https://www.gnu.org/licenses/agpl-3.0.html
  * Text Domain:       accessibility-widget
  * Update URI:        https://github.com/bauer-group/SaaS-AccessibilityWidget
  */

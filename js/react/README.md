@@ -52,4 +52,4 @@ Smoke-Tests (Vitest + happy-dom) in [`test/AccessibilityWidget.test.tsx`](./test
 
 ## Lizenz
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

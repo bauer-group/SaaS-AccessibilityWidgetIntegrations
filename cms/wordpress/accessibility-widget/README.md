@@ -6,4 +6,4 @@ Widget-Assets (`accessibility-widget-loader.min.js`, `accessibility-widget-core.
 
 Konfiguration: Einstellungen → Accessibility Widget.
 
-Lizenz: MIT
+Lizenz: AGPL-3.0-only

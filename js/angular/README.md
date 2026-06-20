@@ -18,4 +18,4 @@ import { AccessibilityWidgetComponent } from '@bauer-group/accessibility-widget-
 export class AppComponent {}
 ```
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP

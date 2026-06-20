@@ -9,4 +9,4 @@ composer require bauer-group/accessibility-widget-typo3
 3. TypoScript-Template: "Accessibility Widget" als statische Vorlage einbinden.
 4. Konstanten über Constant-Editor anpassen (Position, Locale, Markenfarbe, SRI).
 
-Lizenz: MIT © BAUER GROUP
+Lizenz: AGPL-3.0-only or commercial · © 2026 BAUER GROUP

@@ -9,4 +9,4 @@ Widget-Assets aus `packages/widget/dist/` nach `modules/contrib/accessibility_wi
 
 Konfiguration: `/admin/config/user-interface/accessibility-widget` (Formular-Stub vorausgesetzt — in v1.1 als ConfigForm nachgereicht).
 
-Lizenz: MIT © BAUER GROUP
+Lizenz: AGPL-3.0-only or commercial · © 2026 BAUER GROUP

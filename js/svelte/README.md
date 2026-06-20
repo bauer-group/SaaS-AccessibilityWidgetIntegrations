@@ -10,4 +10,4 @@ Svelte 5 Action.
 <div use:accessibilityWidget={{ config: { locale: 'de' }, loaderSrc: '/accessibility-widget/accessibility-widget-loader.min.js' }} />
 ```
 
-MIT © BAUER GROUP
+AGPL-3.0-only or commercial · © 2026 BAUER GROUP
