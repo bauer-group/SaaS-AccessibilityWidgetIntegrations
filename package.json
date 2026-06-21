@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Framework, CMS and shop integrations for @bauer-group/accessibility-widget (React, Vue, Angular, Svelte, Next.js, Nuxt, Astro, WordPress, TYPO3, Drupal, Shopify, Shopware, Magento).",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
   "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations",
   "repository": {

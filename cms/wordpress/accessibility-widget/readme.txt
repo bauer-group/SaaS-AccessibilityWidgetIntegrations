@@ -5,8 +5,8 @@ Requires at least: 6.5
 Tested up to: 6.7
 Requires PHP: 8.1
 Stable tag: 1.0.0-alpha.1
-License: AGPL-3.0-only
-License URI: https://www.gnu.org/licenses/agpl-3.0.html
+License: MIT
+License URI: https://opensource.org/licenses/MIT
 
 Lazy-loading Accessibility-Widget nach BFSG / EN 301 549 / WCAG 2.2 AA. Loader ~4 KB gzip, Core ~24 KB gzip (28 Locales).
 

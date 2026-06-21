@@ -15,7 +15,7 @@ Copy the widget assets from `packages/widget/dist/` to `modules/contrib/accessib
 
 Configuration: `/admin/config/user-interface/accessibility-widget` (assumes a form stub — to be delivered as a ConfigForm in v1.1).
 
-License: AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+License: GPL-2.0-or-later · © 2026 BAUER GROUP — required by Drupal.org; the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
 
 ---
 
@@ -36,4 +36,4 @@ Widget-Assets aus `packages/widget/dist/` nach `modules/contrib/accessibility_wi
 
 Konfiguration: `/admin/config/user-interface/accessibility-widget` (Formular-Stub vorausgesetzt — in v1.1 als ConfigForm nachgereicht).
 
-Lizenz: AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+Lizenz: GPL-2.0-or-later · © 2026 BAUER GROUP — von Drupal.org gefordert; das geladene Widget ist separat lizenziert (AGPL-3.0-only oder kommerziell).

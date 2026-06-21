@@ -15,7 +15,7 @@ composer require bauer-group/accessibility-widget-typo3
 3. TypoScript template: include "Accessibility Widget" as a static template.
 4. Adjust the constants via the Constant Editor (position, locale, brand color, SRI).
 
-License: AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+License: MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
 
 ---
 
@@ -36,4 +36,4 @@ composer require bauer-group/accessibility-widget-typo3
 3. TypoScript-Template: "Accessibility Widget" als statische Vorlage einbinden.
 4. Konstanten über Constant-Editor anpassen (Position, Locale, Markenfarbe, SRI).
 
-Lizenz: AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+Lizenz: MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).

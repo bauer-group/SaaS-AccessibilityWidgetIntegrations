@@ -2,7 +2,7 @@
   "name": "bauer-group/accessibility-widget-typo3",
   "type": "typo3-cms-extension",
   "description": "BAUER GROUP Accessibility Widget für TYPO3 13.",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "authors": [
     {
       "name": "BAUER GROUP",

@@ -17,7 +17,7 @@ Copy the widget assets from `packages/widget/dist/` to `src/Resources/public/`. 
 
 Configuration: plugin settings in the Shopware admin.
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
 
 ---
 
@@ -40,4 +40,4 @@ Widget-Assets aus `packages/widget/dist/` nach `src/Resources/public/` kopieren.
 
 Konfiguration: Plugin-Einstellungen im Shopware-Admin.
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).

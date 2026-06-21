@@ -70,11 +70,11 @@ For production, **pin an immutable version + secure it via SRI**. The full guide
 
 ## Contributing
 
-Integrations here are maintained by the team and the community. Because the project is **dual-licensed** (AGPL-3.0 / commercial), a signed **[CLA](./CLA.md)** is required before merging — the CLA bot prompts for it automatically in the pull request. Conventional Commits (past tense), tests for new wrappers.
+Integrations here are maintained by the team and the community. They are **MIT-licensed** (the Drupal module GPL-2.0-or-later), so contributions follow the standard **inbound = outbound** model — just sign off your commits per the [DCO](./CLA.md) (`git commit -s`). Conventional Commits (past tense), tests for new wrappers.
 
 ## License
 
-Dual-licensed: **GNU AGPL-3.0-only** ([LICENSE](./LICENSE)) **or** commercial (`info@bauer-group.com`) — see [LICENSING.md](./LICENSING.md).
+**MIT** ([LICENSE](./LICENSE)) — the Drupal module is GPL-2.0-or-later (Drupal.org requirement). The Accessibility Widget loaded at runtime is a **separate work**, licensed AGPL-3.0-only or commercially. See [LICENSING.md](./LICENSING.md).
 
 ---
 
@@ -150,8 +150,8 @@ Für Produktion eine **unveränderliche Version pinnen + per SRI absichern**. Di
 
 ### Mitwirken
 
-Integrationen werden hier vom Team und der Community gepflegt. Weil das Projekt **dual-lizenziert** ist (AGPL-3.0 / kommerziell), ist vor dem Merge eine **[CLA](./CLA.md)**-Signatur nötig — der CLA-Bot fordert im Pull Request automatisch dazu auf. Conventional Commits (Past Tense), Tests für neue Wrapper.
+Integrationen werden hier vom Team und der Community gepflegt. Sie sind **MIT-lizenziert** (das Drupal-Modul GPL-2.0-or-later), daher folgen Beiträge dem Standardmodell **inbound = outbound** — signiere einfach deine Commits gemäß [DCO](./CLA.md) (`git commit -s`). Conventional Commits (Past Tense), Tests für neue Wrapper.
 
 ### Lizenz
 
-Dual-lizenziert: **GNU AGPL-3.0-only** ([LICENSE](./LICENSE)) **oder** kommerziell (`info@bauer-group.com`) — siehe [LICENSING.md](./LICENSING.md).
+**MIT** ([LICENSE](./LICENSE)) — das Drupal-Modul steht unter GPL-2.0-or-later (Drupal.org-Vorgabe). Das zur Laufzeit geladene Accessibility Widget ist ein **separates Werk**, lizenziert unter AGPL-3.0-only oder kommerziell. Siehe [LICENSING.md](./LICENSING.md).

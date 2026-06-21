@@ -12,7 +12,7 @@ Copy the widget assets (`accessibility-widget-loader.min.js`, `accessibility-wid
 
 Configuration: Settings → Accessibility Widget.
 
-License: AGPL-3.0-only
+License: MIT
 
 ---
 
@@ -30,4 +30,4 @@ Widget-Assets (`accessibility-widget-loader.min.js`, `accessibility-widget-core.
 
 Konfiguration: Einstellungen → Accessibility Widget.
 
-Lizenz: AGPL-3.0-only
+Lizenz: MIT

@@ -26,7 +26,7 @@ export class AppComponent {}
 
 ## License
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
 
 ---
 
@@ -58,4 +58,4 @@ export class AppComponent {}
 
 ### Lizenz
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).

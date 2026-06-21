@@ -17,7 +17,7 @@ Copy the widget assets from `packages/widget/dist/` to `view/frontend/web/` (`ac
 
 Configuration: Stores → Configuration → (custom: `accessibility_widget/settings/*`).
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
 
 ---
 
@@ -40,4 +40,4 @@ Widget-Assets aus `packages/widget/dist/` nach `view/frontend/web/` kopieren (`a
 
 Konfiguration: Stores → Configuration → (benutzerdefiniert: `accessibility_widget/settings/*`).
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).

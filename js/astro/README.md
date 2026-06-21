@@ -29,7 +29,7 @@ Widget assets go to `public/accessibility-widget/*`.
 
 ## License
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
 
 ---
 
@@ -64,4 +64,4 @@ Widget-Assets nach `public/accessibility-widget/*`.
 
 ### Lizenz
 
-AGPL-3.0-only or commercial · © 2026 BAUER GROUP
+MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).

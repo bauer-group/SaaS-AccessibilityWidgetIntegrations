@@ -2,7 +2,7 @@
   "name": "@bauer-group/accessibility-widget-angular",
   "version": "0.1.0",
   "description": "Angular Directive für das BAUER GROUP Accessibility Widget.",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
   "type": "module",
   "main": "./dist/index.js",
