@@ -18,42 +18,42 @@ This repository bundles the ready-to-use **integrations**. The widget **core** (
 
 ## Contents
 
-### JS/TS frameworks (`js/*` — pnpm workspace, published to npm)
+### JS/TS frameworks (`packages/js/*` — pnpm workspace, published to npm)
 
-| Package                                                      | Framework          |
-| ------------------------------------------------------------ | ------------------ |
-| [`@bauer-group/accessibility-widget-react`](./js/react/)     | React ≥ 18         |
-| [`@bauer-group/accessibility-widget-vue`](./js/vue/)         | Vue ≥ 3.3          |
-| [`@bauer-group/accessibility-widget-angular`](./js/angular/) | Angular ≥ 19       |
-| [`@bauer-group/accessibility-widget-svelte`](./js/svelte/)   | Svelte ≥ 5         |
-| [`@bauer-group/accessibility-widget-nextjs`](./js/nextjs/)   | Next.js App Router |
-| [`@bauer-group/accessibility-widget-nuxt`](./js/nuxt/)       | Nuxt 3             |
-| [`@bauer-group/accessibility-widget-astro`](./js/astro/)     | Astro ≥ 5          |
+| Package                                                               | Framework          |
+| --------------------------------------------------------------------- | ------------------ |
+| [`@bauer-group/accessibility-widget-react`](./packages/js/react/)     | React ≥ 18         |
+| [`@bauer-group/accessibility-widget-vue`](./packages/js/vue/)         | Vue ≥ 3.3          |
+| [`@bauer-group/accessibility-widget-angular`](./packages/js/angular/) | Angular ≥ 19       |
+| [`@bauer-group/accessibility-widget-svelte`](./packages/js/svelte/)   | Svelte ≥ 5         |
+| [`@bauer-group/accessibility-widget-nextjs`](./packages/js/nextjs/)   | Next.js App Router |
+| [`@bauer-group/accessibility-widget-nuxt`](./packages/js/nuxt/)       | Nuxt 3             |
+| [`@bauer-group/accessibility-widget-astro`](./packages/js/astro/)     | Astro ≥ 5          |
 
 The wrappers consume the core as a **published dependency** (`@bauer-group/accessibility-widget` ≥ 1.0.5) and import **types only** — at runtime the loader fetches the CDN bundles.
 
-### CMS & shops (`cms/*`, `shops/*` — separate ecosystems, not in the npm workspace)
+### CMS & shops (`packages/cms/*`, `packages/shop/*` — separate ecosystems, not in the npm workspace)
 
-| Folder                                | System           | Language |
-| ------------------------------------- | ---------------- | -------- |
-| [`cms/wordpress`](./cms/wordpress/)   | WordPress 6.x    | PHP      |
-| [`cms/typo3`](./cms/typo3/)           | TYPO3 13         | PHP      |
-| [`cms/drupal`](./cms/drupal/)         | Drupal 10/11     | PHP      |
-| [`shops/shopify`](./shops/shopify/)   | Shopify (OS 2.0) | Liquid   |
-| [`shops/shopware`](./shops/shopware/) | Shopware 6       | PHP      |
-| [`shops/magento`](./shops/magento/)   | Magento 2.4      | PHP      |
+| Folder                                                | System           | Language |
+| ----------------------------------------------------- | ---------------- | -------- |
+| [`packages/cms/wordpress`](./packages/cms/wordpress/) | WordPress 6.x    | PHP      |
+| [`packages/cms/typo3`](./packages/cms/typo3/)         | TYPO3 13         | PHP      |
+| [`packages/cms/drupal`](./packages/cms/drupal/)       | Drupal 10/11     | PHP      |
+| [`packages/shop/shopify`](./packages/shop/shopify/)   | Shopify (OS 2.0) | Liquid   |
+| [`packages/shop/shopware`](./packages/shop/shopware/) | Shopware 6       | PHP      |
+| [`packages/shop/magento`](./packages/shop/magento/)   | Magento 2.4      | PHP      |
 
 ## Development (JS wrappers)
 
 ```bash
 pnpm install
-pnpm build       # builds all js/* wrappers (tsc)
+pnpm build       # builds all packages/js/* wrappers (tsc)
 pnpm test        # vitest per wrapper
 pnpm typecheck
 pnpm lint
 ```
 
-Each wrapper has its own README with usage examples — e.g. [`js/react/README.md`](./js/react/README.md).
+Each wrapper has its own README with usage examples — e.g. [`packages/js/react/README.md`](./packages/js/react/README.md).
 
 ## Embedding the widget (short version)
 
@@ -98,30 +98,30 @@ Dieses Repository bündelt die einsatzfertigen **Integrationen**. Der **Core** d
 
 ### Inhalt
 
-#### JS-/TS-Frameworks (`js/*` — pnpm-Workspace, npm-publiziert)
+#### JS-/TS-Frameworks (`packages/js/*` — pnpm-Workspace, npm-publiziert)
 
-| Paket                                                        | Framework          |
-| ------------------------------------------------------------ | ------------------ |
-| [`@bauer-group/accessibility-widget-react`](./js/react/)     | React ≥ 18         |
-| [`@bauer-group/accessibility-widget-vue`](./js/vue/)         | Vue ≥ 3.3          |
-| [`@bauer-group/accessibility-widget-angular`](./js/angular/) | Angular ≥ 19       |
-| [`@bauer-group/accessibility-widget-svelte`](./js/svelte/)   | Svelte ≥ 5         |
-| [`@bauer-group/accessibility-widget-nextjs`](./js/nextjs/)   | Next.js App Router |
-| [`@bauer-group/accessibility-widget-nuxt`](./js/nuxt/)       | Nuxt 3             |
-| [`@bauer-group/accessibility-widget-astro`](./js/astro/)     | Astro ≥ 5          |
+| Paket                                                                 | Framework          |
+| --------------------------------------------------------------------- | ------------------ |
+| [`@bauer-group/accessibility-widget-react`](./packages/js/react/)     | React ≥ 18         |
+| [`@bauer-group/accessibility-widget-vue`](./packages/js/vue/)         | Vue ≥ 3.3          |
+| [`@bauer-group/accessibility-widget-angular`](./packages/js/angular/) | Angular ≥ 19       |
+| [`@bauer-group/accessibility-widget-svelte`](./packages/js/svelte/)   | Svelte ≥ 5         |
+| [`@bauer-group/accessibility-widget-nextjs`](./packages/js/nextjs/)   | Next.js App Router |
+| [`@bauer-group/accessibility-widget-nuxt`](./packages/js/nuxt/)       | Nuxt 3             |
+| [`@bauer-group/accessibility-widget-astro`](./packages/js/astro/)     | Astro ≥ 5          |
 
 Die Wrapper konsumieren den Core als **veröffentlichte Abhängigkeit** (`@bauer-group/accessibility-widget` ≥ 1.0.5) und importieren nur **Typen** — zur Laufzeit lädt der Loader die CDN-Bundles.
 
-#### CMS & Shops (`cms/*`, `shops/*` — eigene Ökosysteme, nicht im npm-Workspace)
+#### CMS & Shops (`packages/cms/*`, `packages/shop/*` — eigene Ökosysteme, nicht im npm-Workspace)
 
-| Ordner                                | System           | Sprache |
-| ------------------------------------- | ---------------- | ------- |
-| [`cms/wordpress`](./cms/wordpress/)   | WordPress 6.x    | PHP     |
-| [`cms/typo3`](./cms/typo3/)           | TYPO3 13         | PHP     |
-| [`cms/drupal`](./cms/drupal/)         | Drupal 10/11     | PHP     |
-| [`shops/shopify`](./shops/shopify/)   | Shopify (OS 2.0) | Liquid  |
-| [`shops/shopware`](./shops/shopware/) | Shopware 6       | PHP     |
-| [`shops/magento`](./shops/magento/)   | Magento 2.4      | PHP     |
+| Ordner                                                | System           | Sprache |
+| ----------------------------------------------------- | ---------------- | ------- |
+| [`packages/cms/wordpress`](./packages/cms/wordpress/) | WordPress 6.x    | PHP     |
+| [`packages/cms/typo3`](./packages/cms/typo3/)         | TYPO3 13         | PHP     |
+| [`packages/cms/drupal`](./packages/cms/drupal/)       | Drupal 10/11     | PHP     |
+| [`packages/shop/shopify`](./packages/shop/shopify/)   | Shopify (OS 2.0) | Liquid  |
+| [`packages/shop/shopware`](./packages/shop/shopware/) | Shopware 6       | PHP     |
+| [`packages/shop/magento`](./packages/shop/magento/)   | Magento 2.4      | PHP     |
 
 ### Entwicklung (JS-Wrapper)
 
@@ -133,7 +133,7 @@ pnpm typecheck
 pnpm lint
 ```
 
-Jeder Wrapper hat eine eigene README mit Nutzungsbeispielen — z. B. [`js/react/README.md`](./js/react/README.md).
+Jeder Wrapper hat eine eigene README mit Nutzungsbeispielen — z. B. [`packages/js/react/README.md`](./packages/js/react/README.md).
 
 ### Das Widget einbinden (Kurzfassung)
 
