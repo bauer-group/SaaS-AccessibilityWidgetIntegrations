@@ -31,15 +31,17 @@ locked version** to every channel.
 Ongoing releases publish **tokenless via OIDC**. A package must exist on npm before
 a Trusted Publisher can be configured, so there is a one-time bootstrap:
 
-1. **Bootstrap (automated).** Create an npm **Automation** access token (an account
-   that can publish under `@bauer-group`), add it as the repository secret
-   `NPM_TOKEN`, then run the **🔑 npm Bootstrap** workflow
-   (Actions → npm Bootstrap → Run workflow). It first-publishes all 7 wrappers.
+1. **Bootstrap (local, once).** Run `npm login` (completes 2FA in the browser),
+   then from the repo root:
+   ```bash
+   pnpm publish:bootstrap            # first-publishes all 7 wrappers
+   # pnpm publish:bootstrap -- --package react   # or just one
+   ```
 2. **Configure a Trusted Publisher** on npmjs.com for **each** package:
    - Repository: `bauer-group/SaaS-AccessibilityWidgetIntegrations`
    - Workflow: `release.yml`
-3. **Delete `NPM_TOKEN`.** Every release then publishes automatically via OIDC
-   (`id-token: write`) — no token.
+3. Ongoing releases then publish automatically via OIDC (`id-token: write`) — no
+   token, no further local publishing.
 
 `nextjs` depends on `accessibility-widget-react` via `workspace:^`; the publish job
 pins it to the released version (`npm pkg set`) before publishing.
@@ -88,7 +90,6 @@ and submit it to the store. TER can additionally be scripted later with `typo3/t
 
 | Name                                       | Type     | Used by                     |
 | ------------------------------------------ | -------- | --------------------------- |
-| `NPM_TOKEN`                                | secret   | npm Bootstrap (one-time)    |
 | `WPORG_SVN_USERNAME`, `WPORG_SVN_PASSWORD` | secret   | WordPress.org deploy        |
 | `PUBLISH_WORDPRESS_ORG`                    | variable | enable WordPress.org deploy |
 | `DRUPALORG_TOKEN`                          | secret   | Drupal.org push             |
