@@ -4,9 +4,9 @@
    ========================================================================== */
 
 :root {
-  --accent: #2f6bff;
-  --accent-700: #1f4fd6;
-  --accent-soft: rgba(47, 107, 255, 0.14);
+  --accent: #0058a3;
+  --accent-700: #00477f;
+  --accent-soft: rgba(0, 88, 163, 0.16);
   --radius: 14px;
   --radius-sm: 10px;
   --maxw: 1140px;
@@ -17,7 +17,7 @@
 
 html[data-theme='dark'] {
   --bg: #0b1020;
-  --bg-grad: radial-gradient(1100px 520px at 80% -10%, rgba(47, 107, 255, 0.22), transparent 60%);
+  --bg-grad: radial-gradient(1100px 520px at 80% -10%, rgba(0, 88, 163, 0.3), transparent 60%);
   --surface: #121a30;
   --surface-2: #0f1730;
   --border: #233152;
@@ -28,7 +28,7 @@ html[data-theme='dark'] {
 
 html[data-theme='light'] {
   --bg: #f6f8fc;
-  --bg-grad: radial-gradient(1100px 520px at 80% -10%, rgba(47, 107, 255, 0.14), transparent 60%);
+  --bg-grad: radial-gradient(1100px 520px at 80% -10%, rgba(0, 88, 163, 0.12), transparent 60%);
   --surface: #ffffff;
   --surface-2: #ffffff;
   --border: #dfe5f1;

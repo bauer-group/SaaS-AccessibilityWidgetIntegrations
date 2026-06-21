@@ -23,6 +23,9 @@ on:
       - '.github/**'
       - '*.md'
       - 'docs/**'
+      # The Pages directory site is decoupled (its own pages.yml, version fetched
+      # live). Site-only changes must NOT bump/republish the 13 integrations.
+      - 'site/**'
   workflow_dispatch:
     inputs:
       force-release:
