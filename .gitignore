@@ -10,6 +10,9 @@ build
 coverage
 *.tsbuildinfo
 
+# release artifacts (built by scripts/package-plugins.mjs)
+dist-artifacts
+
 # env
 .env
 .env.local

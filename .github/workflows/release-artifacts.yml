@@ -1,0 +1,122 @@
+# =============================================================================
+# Release Artifacts & Marketplace Distribution
+# =============================================================================
+# Runs after the GitHub Release is published (by the Release workflow). Builds a
+# versioned ZIP per CMS/shop plugin and attaches them to the release, then
+# (optionally) deploys to the marketplaces that support automation.
+#
+# Distribution matrix:
+#   - npm / GitHub Packages ....... release.yml (OIDC), every release
+#   - Packagist (TYPO3/Shopware/Magento composer) ... webhook, auto on the tag
+#   - WordPress.org ............... this workflow, if vars.PUBLISH_WORDPRESS_ORG
+#   - Drupal.org .................. this workflow, if vars.PUBLISH_DRUPAL_ORG
+#   - Shopify / Shopware Store / Magento Marketplace / TYPO3 TER
+#       ......................... review-gated: ZIP artifacts here, manual submit
+# =============================================================================
+
+name: 📦 Release Artifacts
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Git tag to package (e.g. v1.2.3)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  package-zips:
+    name: 🗜️ Build & attach plugin ZIPs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      tag: ${{ steps.ref.outputs.tag }}
+      version: ${{ steps.ref.outputs.version }}
+    steps:
+      - name: 🏷️ Resolve tag & version
+        id: ref
+        run: |
+          tag="${{ github.event.release.tag_name || inputs.tag }}"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "version=${tag#v}" >> "$GITHUB_OUTPUT"
+
+      - name: 📥 Checkout release tag
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.ref.outputs.tag }}
+          fetch-depth: 1
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+
+      - name: 🗜️ Build plugin artifacts
+        run: node scripts/package-plugins.mjs "${{ steps.ref.outputs.version }}"
+
+      - name: ⬆️ Attach artifacts to the release
+        run: gh release upload "${{ steps.ref.outputs.tag }}" dist-artifacts/*.zip --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  deploy-wordpress-org:
+    name: 🌐 Deploy to WordPress.org
+    needs: package-zips
+    # Enable once the plugin is approved on WordPress.org and the SVN secrets exist.
+    if: ${{ vars.PUBLISH_WORDPRESS_ORG == 'true' }}
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout release tag
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.package-zips.outputs.tag }}
+
+      - name: 🚀 WordPress.org plugin deploy (SVN)
+        uses: 10up/action-wordpress-plugin-deploy@v2
+        with:
+          generate-zip: true
+        env:
+          SVN_USERNAME: ${{ secrets.WPORG_SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.WPORG_SVN_PASSWORD }}
+          SLUG: accessibility-widget
+          VERSION: ${{ needs.package-zips.outputs.version }}
+          BUILD_DIR: packages/cms/wordpress/accessibility-widget
+
+  deploy-drupal-org:
+    name: 🌐 Deploy to Drupal.org
+    needs: package-zips
+    # Enable once the project exists on Drupal.org and the git credentials exist.
+    if: ${{ vars.PUBLISH_DRUPAL_ORG == 'true' }}
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout (full history for subtree split)
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.package-zips.outputs.tag }}
+          fetch-depth: 0
+
+      - name: 🚀 Push module subtree + tag to Drupal.org
+        run: |
+          set -euo pipefail
+          git config user.name "BAUER GROUP Bot"
+          git config user.email "info@bauer-group.com"
+          remote="https://oauth2:${DRUPALORG_TOKEN}@${DRUPALORG_REPO}"
+          # Isolate the module to its own commit history, then push branch + tag.
+          subtree_sha="$(git subtree split --prefix=packages/cms/drupal/accessibility_widget HEAD)"
+          git push "${remote}" "${subtree_sha}:refs/heads/${DRUPALORG_BRANCH}" --force
+          git tag -f "${VERSION}" "${subtree_sha}"
+          git push "${remote}" "refs/tags/${VERSION}" --force
+        env:
+          DRUPALORG_TOKEN: ${{ secrets.DRUPALORG_TOKEN }}
+          DRUPALORG_REPO: ${{ vars.DRUPALORG_REPO }}
+          DRUPALORG_BRANCH: ${{ vars.DRUPALORG_BRANCH }}
+          VERSION: ${{ needs.package-zips.outputs.version }}

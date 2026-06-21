@@ -28,7 +28,8 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,jsx,json,md,yml,yaml,css}\"",
     "clean": "pnpm -r run clean",
     "sync-version": "node scripts/sync-version.mjs",
-    "sync-version:check": "node scripts/sync-version.mjs --check"
+    "sync-version:check": "node scripts/sync-version.mjs --check",
+    "package-plugins": "node scripts/package-plugins.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
