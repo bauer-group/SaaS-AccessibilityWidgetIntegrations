@@ -29,7 +29,7 @@
     "svelte": ">=5"
   },
   "dependencies": {
-    "@bauer-group/accessibility-widget": "^1.0.3"
+    "@bauer-group/accessibility-widget": "^1.0.5"
   },
   "devDependencies": {
     "rimraf": "^6.0.1",

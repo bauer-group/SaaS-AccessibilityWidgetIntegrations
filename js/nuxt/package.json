@@ -17,7 +17,7 @@
     "nuxt": ">=3.10"
   },
   "dependencies": {
-    "@bauer-group/accessibility-widget": "^1.0.3"
+    "@bauer-group/accessibility-widget": "^1.0.5"
   },
   "devDependencies": {
     "typescript": "^5.8.0"
