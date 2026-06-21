@@ -38,4 +38,11 @@ export default tseslint.config(
       'no-console': 'off',
     },
   },
+  {
+    // CLI tooling — console output is the intended interface.
+    files: ['scripts/**/*.mjs'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
 );

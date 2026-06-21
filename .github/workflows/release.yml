@@ -119,12 +119,14 @@ jobs:
       - name: 🔖 Sync released version into all manifests
         run: node scripts/sync-version.mjs "${{ needs.release.outputs.version }}"
 
-      - name: 🔗 Pin nextjs workspace dependency to the released version
-        run: npm pkg set "dependencies.@bauer-group/accessibility-widget-react=^${{ needs.release.outputs.version }}"
-        working-directory: packages/js/nextjs
-
       - name: 🏗️ Build all wrappers (dependency order)
         run: pnpm -r build
+
+      - name: 🔗 Pin nextjs workspace dependency to the released version
+        # After build (so the workspace:^ link drives the build order); before publish
+        # (so the published manifest carries a real version range, not workspace:^).
+        run: npm pkg set "dependencies.@bauer-group/accessibility-widget-react=^${{ needs.release.outputs.version }}"
+        working-directory: packages/js/nextjs
 
       - name: 📤 Publish all 7 wrappers
         # OIDC (id-token: write) authenticates — no NODE_AUTH_TOKEN. Each package
@@ -168,12 +170,14 @@ jobs:
       - name: 🔖 Sync released version into all manifests
         run: node scripts/sync-version.mjs "${{ needs.release.outputs.version }}"
 
-      - name: 🔗 Pin nextjs workspace dependency to the released version
-        run: npm pkg set "dependencies.@bauer-group/accessibility-widget-react=^${{ needs.release.outputs.version }}"
-        working-directory: packages/js/nextjs
-
       - name: 🏗️ Build all wrappers (dependency order)
         run: pnpm -r build
+
+      - name: 🔗 Pin nextjs workspace dependency to the released version
+        # After build (so the workspace:^ link drives the build order); before publish
+        # (so the published manifest carries a real version range, not workspace:^).
+        run: npm pkg set "dependencies.@bauer-group/accessibility-widget-react=^${{ needs.release.outputs.version }}"
+        working-directory: packages/js/nextjs
 
       - name: 📤 Mirror all 7 wrappers to GitHub Packages
         run: |

@@ -1,9 +1,13 @@
 # =============================================================================
 # Release Artifacts & Marketplace Distribution
 # =============================================================================
-# Runs after the GitHub Release is published (by the Release workflow). Builds a
-# versioned ZIP per CMS/shop plugin and attaches them to the release, then
-# (optionally) deploys to the marketplaces that support automation.
+# Runs after the Release workflow completes. Builds a versioned ZIP per CMS/shop
+# plugin and attaches them to the release, then (optionally) deploys to the
+# marketplaces that support automation.
+#
+# Triggered via workflow_run (NOT `on: release`): a GitHub Release created by the
+# built-in GITHUB_TOKEN does not emit events that start other workflows, so
+# `on: release` would never fire. workflow_run is the documented exception.
 #
 # Distribution matrix:
 #   - npm / GitHub Packages ....... release.yml (OIDC), every release
@@ -17,8 +21,9 @@
 name: 📦 Release Artifacts
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ['🚀 Release & NPM Publish']
+    types: [completed]
   workflow_dispatch:
     inputs:
       tag:
@@ -32,24 +37,31 @@ permissions:
 jobs:
   package-zips:
     name: 🗜️ Build & attach plugin ZIPs
+    # Manual run, or only when the Release workflow succeeded.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
       tag: ${{ steps.ref.outputs.tag }}
       version: ${{ steps.ref.outputs.version }}
     steps:
-      - name: 🏷️ Resolve tag & version
-        id: ref
-        run: |
-          tag="${{ github.event.release.tag_name || inputs.tag }}"
-          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
-          echo "version=${tag#v}" >> "$GITHUB_OUTPUT"
-
-      - name: 📥 Checkout release tag
+      - name: 📥 Checkout (full history for tags)
         uses: actions/checkout@v7
         with:
-          ref: ${{ steps.ref.outputs.tag }}
-          fetch-depth: 1
+          fetch-depth: 0
+
+      - name: 🏷️ Resolve tag & version, checkout the tag
+        id: ref
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            tag="${{ inputs.tag }}"
+          else
+            tag="$(git describe --tags --abbrev=0)"
+          fi
+          git checkout --quiet "$tag"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "version=${tag#v}" >> "$GITHUB_OUTPUT"
 
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v6
