@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v1.1.0...v1.1.1) (2026-06-21)
+
+### 🐛 Bug Fixes
+
+* **site:** reworked directory per review feedback ([f91fcba](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/f91fcbad34d7b4334ee10a4889b6121477a07e4b))
+
 ## [1.1.0](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v1.0.0...v1.1.0) (2026-06-21)
 
 ### 🚀 Features
