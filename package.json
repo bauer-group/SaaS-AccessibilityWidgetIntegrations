@@ -24,9 +24,11 @@
     "typecheck": "pnpm -r run typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml,css}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml,css}\"",
-    "clean": "pnpm -r run clean"
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,jsx,json,md,yml,yaml,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,jsx,json,md,yml,yaml,css}\"",
+    "clean": "pnpm -r run clean",
+    "sync-version": "node scripts/sync-version.mjs",
+    "sync-version:check": "node scripts/sync-version.mjs --check"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
