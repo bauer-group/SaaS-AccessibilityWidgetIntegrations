@@ -42,7 +42,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo"
   },
   "peerDependencies": {
     "svelte": ">=5"

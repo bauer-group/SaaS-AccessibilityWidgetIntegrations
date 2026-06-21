@@ -43,7 +43,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo"
   },
   "peerDependencies": {
     "react": ">=18"

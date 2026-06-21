@@ -66,11 +66,11 @@ jobs:
       - name: 🔖 Version sync drift check
         run: pnpm sync-version:check
 
-      - name: 🔎 Typecheck
-        run: pnpm typecheck
-
       - name: 🏗️ Build
         run: pnpm build
+
+      - name: 🔎 Typecheck
+        run: pnpm typecheck
 
       - name: 🧪 Test
         run: pnpm test
