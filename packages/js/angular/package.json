@@ -1,6 +1,6 @@
 {
   "name": "@bauer-group/accessibility-widget-angular",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Angular Directive für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",

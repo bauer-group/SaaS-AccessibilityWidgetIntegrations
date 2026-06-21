@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v1.0.0...v1.1.0) (2026-06-21)
+
+### 🚀 Features
+
+* **site:** added GitHub Pages integrations directory ([eb49499](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/eb49499caca650b69f26a41ceafd8abcf5d89994))
+
 ## [1.0.0](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v0.0.0...v1.0.0) (2026-06-21)
 
 ### ⚠ BREAKING CHANGES

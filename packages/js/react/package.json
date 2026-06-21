@@ -1,6 +1,6 @@
 {
   "name": "@bauer-group/accessibility-widget-react",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React Wrapper für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
