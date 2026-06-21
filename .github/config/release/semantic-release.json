@@ -10,9 +10,25 @@
       }
     ],
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "node scripts/sync-version.mjs ${nextRelease.version}"
+      }
+    ],
+    [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md"],
+        "assets": [
+          "CHANGELOG.md",
+          "package.json",
+          "packages/js/*/package.json",
+          "packages/cms/wordpress/accessibility-widget/accessibility-widget.php",
+          "packages/cms/wordpress/accessibility-widget/readme.txt",
+          "packages/cms/typo3/accessibility_widget/ext_emconf.php",
+          "packages/cms/drupal/accessibility_widget/accessibility_widget.info.yml",
+          "packages/shop/magento/BauerGroup_AccessibilityWidget/etc/module.xml",
+          "packages/shop/shopify/snippets/accessibility-widget.liquid"
+        ],
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }
     ],

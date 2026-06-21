@@ -1,15 +1,20 @@
 # =============================================================================
-# Release Workflow
+# Release & NPM Publish Workflow
 # =============================================================================
-# Triggers:
-#   - Push to main branch (excluding docs/markdown changes)
-#   - Manual dispatch with force-release option
+# One locked version for ALL integrations per release. semantic-release computes
+# the version and runs scripts/sync-version.mjs (via @semantic-release/exec) to
+# bump every npm manifest AND every PHP/Liquid plugin header in one commit/tag.
 #
-# This workflow creates semantic releases without validation.
-# For validation, use separate CI workflows.
+# semantic-release config: .github/config/release/semantic-release.json
+# The publish-npm job then publishes the 7 JS wrappers TOKENLESS via OIDC Trusted
+# Publishing (each package needs a one-time bootstrap publish + Trusted Publisher
+# pointing at this repo + release.yml). publish-github mirrors to GitHub Packages.
+#
+# CMS/shop plugins are distributed separately (see release-artifacts.yml):
+# Packagist auto-updates on the tag; versioned ZIPs are attached to the release.
 # =============================================================================
 
-name: 🚀 Release
+name: 🚀 Release & NPM Publish
 
 on:
   push:
@@ -29,17 +34,155 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  id-token: write
 
 jobs:
-  # ============================================
-  # Release Job
-  # ============================================
+  test-and-build:
+    name: 🧪 Build & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4 # no version → reads packageManager
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: 📚 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🎨 Lint
+        run: pnpm lint
+
+      - name: 💅 Format check
+        run: pnpm format:check
+
+      - name: 🔖 Version sync drift check
+        run: pnpm sync-version:check
+
+      - name: 🔎 Typecheck
+        run: pnpm typecheck
+
+      - name: 🏗️ Build
+        run: pnpm build
+
+      - name: 🧪 Test
+        run: pnpm test
 
   release:
     name: 📦 Create Semantic Release
+    needs: [test-and-build]
+    if: needs.test-and-build.result == 'success'
     uses: bauer-group/automation-templates/.github/workflows/modules-semantic-release.yml@main
     with:
       target-branch: 'main'
       dry-run: false
       force-release: ${{ inputs.force-release || false }}
+      extra-plugins: '@semantic-release/exec'
     secrets: inherit
+
+  publish-npm:
+    name: 📤 Publish wrappers to npm (OIDC)
+    needs: release
+    if: needs.release.outputs.release-created == 'true'
+    # OIDC Trusted Publishing — tokenless. continue-on-error so one registry
+    # hiccup never blocks the GitHub Packages mirror or the artifact workflow.
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write # OIDC trusted publishing
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 📚 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔖 Sync released version into all manifests
+        run: node scripts/sync-version.mjs "${{ needs.release.outputs.version }}"
+
+      - name: 🔗 Pin nextjs workspace dependency to the released version
+        run: npm pkg set "dependencies.@bauer-group/accessibility-widget-react=^${{ needs.release.outputs.version }}"
+        working-directory: packages/js/nextjs
+
+      - name: 🏗️ Build all wrappers (dependency order)
+        run: pnpm -r build
+
+      - name: 📤 Publish all 7 wrappers
+        # OIDC (id-token: write) authenticates — no NODE_AUTH_TOKEN. Each package
+        # needs a Trusted Publisher on npmjs (repo + this workflow file).
+        run: |
+          fail=0
+          for d in react vue angular svelte nextjs nuxt astro; do
+            echo "::group::publish @bauer-group/accessibility-widget-$d"
+            (cd "packages/js/$d" && npm publish --access public) || fail=1
+            echo "::endgroup::"
+          done
+          exit $fail
+
+  publish-github:
+    name: 📤 Mirror wrappers to GitHub Packages
+    needs: release
+    if: needs.release.outputs.release-created == 'true'
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: 📚 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔖 Sync released version into all manifests
+        run: node scripts/sync-version.mjs "${{ needs.release.outputs.version }}"
+
+      - name: 🔗 Pin nextjs workspace dependency to the released version
+        run: npm pkg set "dependencies.@bauer-group/accessibility-widget-react=^${{ needs.release.outputs.version }}"
+        working-directory: packages/js/nextjs
+
+      - name: 🏗️ Build all wrappers (dependency order)
+        run: pnpm -r build
+
+      - name: 📤 Mirror all 7 wrappers to GitHub Packages
+        run: |
+          fail=0
+          for d in react vue angular svelte nextjs nuxt astro; do
+            echo "::group::mirror @bauer-group/accessibility-widget-$d"
+            (cd "packages/js/$d" && npm publish --access public) || fail=1
+            echo "::endgroup::"
+          done
+          exit $fail
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
