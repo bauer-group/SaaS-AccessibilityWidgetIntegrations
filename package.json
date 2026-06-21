@@ -1,6 +1,6 @@
 {
   "name": "@bauer-group/accessibility-widget-integrations",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Framework, CMS and shop integrations for @bauer-group/accessibility-widget (React, Vue, Angular, Svelte, Next.js, Nuxt, Astro, WordPress, TYPO3, Drupal, Shopify, Shopware, Magento).",
