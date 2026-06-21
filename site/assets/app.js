@@ -1,7 +1,17 @@
-import { REPO, CORE_DOCS, CDN_SNIPPET, INTEGRATIONS, CATEGORIES, I18N } from './data.js';
+import {
+  REPO,
+  CORE_REPO,
+  CORE_DOCS,
+  CORE_DEMO,
+  CDN_SNIPPET,
+  INTEGRATIONS,
+  CATEGORIES,
+  I18N,
+} from './data.js';
 
 const REPO_URL = `https://github.com/${REPO}`;
-const CORE_REPO_URL = 'https://github.com/bauer-group/SaaS-AccessibilityWidget';
+const CORE_REPO_URL = `https://github.com/${CORE_REPO}`;
+const DISTRIBUTION_URL = `${REPO_URL}/blob/main/docs/distribution.md`;
 const RELEASE_API = `https://api.github.com/repos/${REPO}/releases/latest`;
 const RELEASES_PAGE = `${REPO_URL}/releases/latest`;
 
@@ -43,13 +53,13 @@ function applyStaticI18n() {
   $('[data-filter="cms"]').textContent = CATEGORIES.cms[lang];
   $('[data-filter="shop"]').textContent = CATEGORIES.shop[lang];
 
-  // Static external links
-  $('#github-link').href = REPO_URL;
-  $('#hero-github').href = REPO_URL;
+  // Static links — header (product-facing) + footer (source, for developers)
+  $('#demo-link').href = CORE_DEMO;
+  $('#hero-demo').href = CORE_DEMO;
   $('#docs-link').href = CORE_DOCS;
+  $('#distribution-link').href = DISTRIBUTION_URL;
   $('#footer-core').href = CORE_REPO_URL;
   $('#footer-integrations').href = REPO_URL;
-  $('#footer-distribution').href = `${REPO_URL}/blob/main/docs/distribution.md`;
 
   $('#cdn-snippet').textContent = CDN_SNIPPET;
 
@@ -113,13 +123,13 @@ function cardHTML(item) {
     } else {
       dl = `<a class="btn btn-secondary" href="${RELEASES_PAGE}" target="_blank" rel="noopener">⬇ ${t('card_download_fallback')} ↗</a>`;
     }
-    const market = item.marketplace
-      ? `<a href="${esc(item.marketplace.url)}" target="_blank" rel="noopener">${esc(item.marketplace.label)} ↗</a>`
-      : '';
+    const markets = (item.markets || [])
+      .map((m) => `<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.label)} ↗</a>`)
+      .join('');
     body = `
       <div class="card-actions">${dl}</div>
       <div class="link-row">
-        ${market}
+        ${markets}
         <a href="${sourceUrl}" target="_blank" rel="noopener">${t('card_source')} ↗</a>
       </div>`;
   }

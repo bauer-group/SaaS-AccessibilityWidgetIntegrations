@@ -227,6 +227,7 @@ html[data-theme='light'] .icon-btn .i-moon {
   position: sticky;
   top: 0;
   z-index: 50;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   border-bottom: 1px solid var(--border);
@@ -631,7 +632,9 @@ html[data-theme='light'] .card-ver {
 }
 .footer-inner {
   display: grid;
-  gap: 1.2rem;
+  gap: 1.6rem 2rem;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  align-items: start;
 }
 .footer-brand {
   display: flex;
@@ -644,21 +647,112 @@ html[data-theme='light'] .card-ver {
   color: var(--text-dim);
   font-size: 0.85rem;
 }
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.footer-h {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin: 0;
+}
 .footer-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .footer-links a {
   color: var(--text);
   font-weight: 600;
   font-size: 0.9rem;
 }
+.footer-links a:hover {
+  color: var(--accent);
+}
 .footer-license {
+  grid-column: 1 / -1;
   color: var(--text-dim);
   font-size: 0.82rem;
   margin: 0;
-  max-width: 70ch;
+  max-width: 80ch;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 720px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Legal pages (Impressum / Barrierefreiheit) ──────────────────────────── */
+.legal {
+  padding: clamp(2rem, 6vw, 4rem) 0 3rem;
+}
+.legal .back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.legal h1 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin: 0 0 0.4rem;
+}
+.legal .legal-sub {
+  color: var(--text-dim);
+  margin: 0 0 2rem;
+}
+.legal-doc {
+  max-width: 72ch;
+}
+.legal-doc h2 {
+  font-size: 1.05rem;
+  margin: 2rem 0 0.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+}
+.legal-doc h2:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+.legal-doc h3 {
+  font-size: 0.95rem;
+  margin: 1.2rem 0 0.3rem;
+}
+.legal-doc p,
+.legal-doc address {
+  color: var(--text-dim);
+  margin: 0 0 0.8rem;
+  font-style: normal;
+  line-height: 1.7;
+}
+.legal-doc a {
+  font-weight: 600;
+}
+.lang-block {
+  margin-bottom: 2.5rem;
+}
+.lang-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.25em 0.7em;
+  border-radius: 999px;
+  margin-bottom: 1rem;
 }
 
 /* ── Toast ───────────────────────────────────────────────────────────────── */

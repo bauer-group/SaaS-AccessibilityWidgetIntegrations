@@ -3,10 +3,14 @@
 # =============================================================================
 # Publishes the static integrations site (site/) to GitHub Pages on the custom
 # domain accessibility-integration.widget.professional-hosting.com (CNAME in
-# site/). The page is pure static HTML/CSS/JS — no build step. Version numbers
-# and CMS/shop ZIP download links are fetched live from the Releases API in the
-# browser, so a new release needs NO redeploy; this only runs when site files
-# (or this workflow) change.
+# site/). Mirrors the core repo's deploy-pages.yml (action versions, two-job
+# build→deploy split, trigger set) — adapted to a no-build static site: there is
+# no pnpm/Vite build step, the build job just uploads site/.
+#
+# Version numbers and CMS/shop ZIP download links are fetched live from the
+# Releases API in the browser, so a new release shows up without a rebuild. We
+# still re-publish on workflow_run after a Release (parity with core) so the page
+# is refreshed on every release regardless.
 # =============================================================================
 
 name: 🌐 Deploy Pages
@@ -17,6 +21,12 @@ on:
     paths:
       - 'site/**'
       - '.github/workflows/pages.yml'
+  # Re-publish after every release (parity with the core demo). The release
+  # commit is pushed with GITHUB_TOKEN, which cannot re-trigger the push event
+  # above, so we key off the Release run completing.
+  workflow_run:
+    workflows: ['🚀 Release & NPM Publish']
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -24,31 +34,39 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment; let an in-flight run finish.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  build:
+    name: 🏗️ Build site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # On a workflow_run trigger, only publish when the Release actually
+    # succeeded; push and manual runs are unconditional.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
   deploy:
-    name: 🚀 Build & deploy
+    name: 🚀 Deploy
+    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: 📥 Checkout
-        uses: actions/checkout@v7
-
-      - name: ⚙️ Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: 📤 Upload site artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

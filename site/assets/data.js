@@ -10,6 +10,13 @@
 export const REPO = 'bauer-group/SaaS-AccessibilityWidgetIntegrations';
 export const CORE_REPO = 'bauer-group/SaaS-AccessibilityWidget';
 export const CORE_DOCS = `https://github.com/${CORE_REPO}/tree/main/docs`;
+// Live product demo (the core repo's own GitHub Pages site) — the non-developer
+// destination linked from the header.
+export const CORE_DEMO = 'https://accessibility.widget.professional-hosting.com';
+// Production CDN loader (floating v1 — auto-updates within the major). Embedded
+// on this page so the directory itself runs the widget it advertises.
+export const WIDGET_LOADER =
+  'https://widgets.professional-hosting.com/accessibility-widget/v1/accessibility-widget-loader.min.js';
 export const CDN_SNIPPET =
   '<script\n  src="https://widgets.professional-hosting.com/accessibility-widget/v1/accessibility-widget-loader.min.js"\n  defer\n></script>';
 
@@ -146,10 +153,9 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'wordpress-accessibility-widget',
-    marketplace: {
-      url: 'https://wordpress.org/plugins/accessibility-widget/',
-      label: 'WordPress.org',
-    },
+    markets: [
+      { url: 'https://wordpress.org/plugins/accessibility-widget/', label: 'WordPress.org' },
+    ],
     req: { en: 'WordPress 6.x · PHP', de: 'WordPress 6.x · PHP' },
     desc: {
       en: 'Plugin with an admin settings page. Install via Plugins → Add New → Upload.',
@@ -166,10 +172,13 @@ export const INTEGRATIONS = [
     onColor: '#0b1020',
     delivery: 'zip',
     assetPrefix: 'typo3-accessibility-widget',
-    marketplace: {
-      url: 'https://packagist.org/packages/bauer-group/accessibility-widget-typo3',
-      label: 'Packagist',
-    },
+    markets: [
+      {
+        url: 'https://packagist.org/packages/bauer-group/accessibility-widget-typo3',
+        label: 'Packagist',
+      },
+      { url: 'https://extensions.typo3.org/extension/accessibility_widget', label: 'TYPO3 TER' },
+    ],
     req: { en: 'TYPO3 13 · PHP', de: 'TYPO3 13 · PHP' },
     desc: {
       en: 'Extension. Upload in the Extension Manager or install via Composer.',
@@ -186,6 +195,7 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'drupal-accessibility-widget',
+    markets: [{ url: 'https://www.drupal.org/project/accessibility_widget', label: 'Drupal.org' }],
     req: { en: 'Drupal 10/11 · PHP', de: 'Drupal 10/11 · PHP' },
     desc: {
       en: 'Module (GPL-2.0-or-later). Install via Extend → Add new module.',
@@ -220,10 +230,16 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'shopware-accessibility-widget',
-    marketplace: {
-      url: 'https://packagist.org/packages/bauer-group/accessibility-widget-shopware',
-      label: 'Packagist',
-    },
+    markets: [
+      {
+        url: 'https://packagist.org/packages/bauer-group/accessibility-widget-shopware',
+        label: 'Packagist',
+      },
+      {
+        url: 'https://store.shopware.com/en/search?search=accessibility+widget',
+        label: 'Shopware Store',
+      },
+    ],
     req: { en: 'Shopware 6 · PHP', de: 'Shopware 6 · PHP' },
     desc: {
       en: 'Plugin. Upload in Admin → Extensions → My extensions, then activate.',
@@ -240,10 +256,16 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'magento-accessibility-widget',
-    marketplace: {
-      url: 'https://packagist.org/packages/bauer-group/accessibility-widget-magento',
-      label: 'Packagist',
-    },
+    markets: [
+      {
+        url: 'https://packagist.org/packages/bauer-group/accessibility-widget-magento',
+        label: 'Packagist',
+      },
+      {
+        url: 'https://marketplace.magento.com/catalogsearch/result/?q=accessibility%20widget',
+        label: 'Magento Marketplace',
+      },
+    ],
     req: { en: 'Magento 2.4 · PHP', de: 'Magento 2.4 · PHP' },
     desc: {
       en: 'Module (Adobe Commerce / Magento Open Source). Install via Composer or app/code.',
@@ -263,8 +285,9 @@ export const I18N = {
   en: {
     htmlLang: 'en',
     skip: 'Skip to content',
-    nav_github: 'GitHub',
+    nav_demo: 'Live demo',
     nav_docs: 'Docs',
+    nav_distribution: 'Distribution',
     hero_eyebrow: 'Integrations',
     hero_title: 'Accessibility Widget — Integrations',
     hero_lead:
@@ -273,7 +296,7 @@ export const I18N = {
     hero_version_loading: 'Loading latest version…',
     hero_version_label: 'Current release',
     hero_cta_browse: 'Browse integrations',
-    hero_cta_github: 'View on GitHub',
+    hero_cta_demo: 'Try the live demo',
     snippet_title: 'Or embed in one line (recommended)',
     snippet_note:
       'The CDN one-liner auto-updates within the v1 major. No build step, works on any site.',
@@ -290,6 +313,7 @@ export const I18N = {
     card_download_loading: 'Loading…',
     card_download_fallback: 'Releases',
     card_source: 'Source',
+    card_market: 'Marketplace',
     card_version: 'v',
     section_how_title: 'How installation works',
     how_npm_title: 'Frameworks (npm)',
@@ -301,19 +325,23 @@ export const I18N = {
     how_cdn_title: 'Plain HTML (CDN)',
     how_cdn_body:
       'No framework? Drop the one-line script tag above into your template. Updates roll out automatically within the major.',
+    footer_source_title: 'Source code',
+    footer_source_core: 'Core widget repo',
+    footer_source_integrations: 'Integrations repo',
+    footer_legal_title: 'Legal',
+    footer_impressum: 'Legal notice',
+    footer_statement: 'Accessibility statement',
     footer_license:
       'MIT licensed — the Drupal module is GPL-2.0-or-later. The Accessibility Widget loaded at runtime is a separate work (AGPL-3.0-only or commercial).',
-    footer_core: 'Core repo & docs',
-    footer_integrations: 'Integrations repo',
-    footer_distribution: 'Distribution model',
     api_error:
       'Could not load live version data from GitHub. Download links fall back to the Releases page.',
   },
   de: {
     htmlLang: 'de',
     skip: 'Zum Inhalt springen',
-    nav_github: 'GitHub',
+    nav_demo: 'Live-Demo',
     nav_docs: 'Doku',
+    nav_distribution: 'Distribution',
     hero_eyebrow: 'Integrationen',
     hero_title: 'Accessibility Widget — Integrationen',
     hero_lead:
@@ -322,7 +350,7 @@ export const I18N = {
     hero_version_loading: 'Neueste Version wird geladen…',
     hero_version_label: 'Aktuelles Release',
     hero_cta_browse: 'Integrationen ansehen',
-    hero_cta_github: 'Auf GitHub ansehen',
+    hero_cta_demo: 'Zur Live-Demo',
     snippet_title: 'Oder in einer Zeile einbinden (empfohlen)',
     snippet_note:
       'Der CDN-Einzeiler aktualisiert sich automatisch innerhalb von v1. Kein Build-Schritt, funktioniert auf jeder Seite.',
@@ -339,6 +367,7 @@ export const I18N = {
     card_download_loading: 'Lädt…',
     card_download_fallback: 'Releases',
     card_source: 'Quellcode',
+    card_market: 'Marktplatz',
     card_version: 'v',
     section_how_title: 'So funktioniert die Installation',
     how_npm_title: 'Frameworks (npm)',
@@ -350,11 +379,14 @@ export const I18N = {
     how_cdn_title: 'Reines HTML (CDN)',
     how_cdn_body:
       'Kein Framework? Den einzeiligen Script-Tag oben ins Template einfügen. Updates kommen automatisch innerhalb des Majors.',
+    footer_source_title: 'Quellcode',
+    footer_source_core: 'Core-Widget-Repo',
+    footer_source_integrations: 'Integrations-Repo',
+    footer_legal_title: 'Rechtliches',
+    footer_impressum: 'Impressum',
+    footer_statement: 'Barrierefreiheitserklärung',
     footer_license:
       'MIT-lizenziert — das Drupal-Modul GPL-2.0-or-later. Das zur Laufzeit geladene Accessibility Widget ist ein separates Werk (AGPL-3.0-only oder kommerziell).',
-    footer_core: 'Core-Repo & Doku',
-    footer_integrations: 'Integrations-Repo',
-    footer_distribution: 'Distributionsmodell',
     api_error:
       'Live-Versionsdaten konnten nicht von GitHub geladen werden. Download-Links verweisen ersatzweise auf die Releases-Seite.',
   },
