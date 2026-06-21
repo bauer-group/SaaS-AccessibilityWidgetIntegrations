@@ -1,0 +1,13 @@
+plugin.tx_accessibilitywidget {
+  settings {
+    # Asset URLs — default to the BAUER GROUP CDN (floating v1 tag, always current).
+    # Override only to self-host/mirror (then point at your own origin / EXT: path).
+    loaderPath = https://widgets.professional-hosting.com/accessibility-widget/v1/accessibility-widget-loader.min.js
+    corePath = https://widgets.professional-hosting.com/accessibility-widget/v1/accessibility-widget-core.min.js
+    cssPath = https://widgets.professional-hosting.com/accessibility-widget/v1/accessibility-widget.min.css
+
+    position = bottom-right
+    locale = auto
+    primaryColor = #0058a3
+  }
+}

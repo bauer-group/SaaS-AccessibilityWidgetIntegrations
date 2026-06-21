@@ -1,0 +1,90 @@
+# =============================================================================
+# Pull Request validation
+# =============================================================================
+# Validates both ecosystems: the JS wrappers (lint/format/typecheck/build/test +
+# version-drift guard) and the PHP plugins (syntax lint + composer validate).
+# =============================================================================
+
+name: ✅ PR
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  js:
+    name: 🧪 JS wrappers
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: 📚 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🎨 Lint
+        run: pnpm lint
+
+      - name: 💅 Format check
+        run: pnpm format:check
+
+      - name: 🔖 Version sync drift check
+        run: pnpm sync-version:check
+
+      - name: 🏗️ Build
+        run: pnpm build
+
+      - name: 🔎 Typecheck
+        run: pnpm typecheck
+
+      - name: 🧪 Test
+        run: pnpm test
+
+  php:
+    name: 🐘 PHP plugins
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: 🔎 Syntax-lint all PHP files
+        run: |
+          set -euo pipefail
+          fail=0
+          while IFS= read -r -d '' f; do
+            php -l "$f" >/dev/null || fail=1
+          done < <(find packages -type f \( -name '*.php' -o -name '*.phtml' \) -print0)
+          exit $fail
+
+      - name: ✅ Validate composer manifests
+        run: |
+          set -euo pipefail
+          for f in $(find packages -name composer.json -not -path '*/vendor/*'); do
+            echo "::group::composer validate $f"
+            composer validate --no-check-publish --strict "$f"
+            echo "::endgroup::"
+          done

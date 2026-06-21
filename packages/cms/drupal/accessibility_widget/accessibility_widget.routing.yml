@@ -1,0 +1,7 @@
+accessibility_widget.settings:
+  path: '/admin/config/user-interface/accessibility-widget'
+  defaults:
+    _form: '\Drupal\accessibility_widget\Form\SettingsForm'
+    _title: 'Accessibility Widget'
+  requirements:
+    _permission: 'administer site configuration'

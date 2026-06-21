@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * BAUER GROUP Accessibility Widget — Drupal integration.
+ *
+ * The widget is loaded from the CDN (floating `v1` tag) and stays current
+ * automatically; no assets are bundled with this module. Set "asset_base" in
+ * the module settings only to self-host or mirror the assets.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Default CDN origin — the floating `v1` (major) tag.
+ */
+const ACCESSIBILITY_WIDGET_CDN = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+
+/**
+ * Implements hook_page_attachments().
+ */
+function accessibility_widget_page_attachments(array &$attachments): void {
+  $config = \Drupal::config('accessibility_widget.settings');
+
+  $base = (string) ($config->get('asset_base') ?: ACCESSIBILITY_WIDGET_CDN);
+  $base = rtrim($base, '/');
+
+  // The loader does NOT derive core/CSS from its own <script src>, so pin them.
+  $widget_config = [
+    'corePath'     => $base . '/accessibility-widget-core.min.js',
+    'cssPath'      => $base . '/accessibility-widget.min.css',
+    'position'     => $config->get('position') ?: 'bottom-right',
+    'locale'       => $config->get('locale') ?: 'auto',
+    'primaryColor' => $config->get('primary_color') ?: '#0058a3',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#value' => 'window.AccessibilityWidgetConfig = ' . json_encode($widget_config, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';',
+    ],
+    'accessibility_widget_config',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => [
+        'src' => $base . '/accessibility-widget-loader.min.js',
+        'defer' => 'defer',
+        'data-aw-loader' => '1',
+      ],
+    ],
+    'accessibility_widget_loader',
+  ];
+}

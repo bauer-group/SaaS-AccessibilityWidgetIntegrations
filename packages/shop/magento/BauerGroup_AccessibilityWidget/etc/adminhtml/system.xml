@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+  <system>
+    <section id="accessibility_widget" translate="label" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+      <class>separator-top</class>
+      <label>Accessibility Widget</label>
+      <tab>general</tab>
+      <resource>BauerGroup_AccessibilityWidget::config</resource>
+      <group id="settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Settings</label>
+        <field id="position" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Position</label>
+          <comment>bottom-right (default), bottom-left, top-right or top-left.</comment>
+        </field>
+        <field id="locale" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Locale</label>
+          <comment>auto (default) or an ISO code (de, en, fr, …). 28 locales supported.</comment>
+        </field>
+        <field id="primary_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Primary color</label>
+          <comment>Hex color of the FAB button, e.g. #0058a3.</comment>
+        </field>
+        <field id="cdn_base" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Custom asset base URL (optional)</label>
+          <comment>Leave empty to load from the BAUER GROUP CDN (recommended; always current). Set to a custom origin only to self-host/mirror.</comment>
+        </field>
+      </group>
+    </section>
+  </system>
+</config>

@@ -1,0 +1,46 @@
+{
+  "name": "@bauer-group/accessibility-widget-nuxt",
+  "version": "0.0.0",
+  "description": "Nuxt Plugin für das BAUER GROUP Accessibility Widget.",
+  "license": "MIT",
+  "author": "BAUER GROUP <info@bauer-group.com>",
+  "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/tree/main/packages/js/nuxt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations.git",
+    "directory": "packages/js/nuxt"
+  },
+  "bugs": {
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues"
+  },
+  "keywords": [
+    "nuxt",
+    "vue",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "bfsg",
+    "en301549",
+    "widget",
+    "bauer-group"
+  ],
+  "type": "module",
+  "main": "./src/plugin.client.ts",
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "nuxt": ">=3.10"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

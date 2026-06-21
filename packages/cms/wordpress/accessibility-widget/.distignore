@@ -1,0 +1,4 @@
+# Files excluded from the WordPress.org SVN deploy (10up/action-wordpress-plugin-deploy).
+# readme.txt is the canonical WordPress.org readme; README.md is GitHub-only.
+README.md
+.distignore

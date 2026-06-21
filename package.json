@@ -1,0 +1,54 @@
+{
+  "name": "@bauer-group/accessibility-widget-integrations",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Framework, CMS and shop integrations for @bauer-group/accessibility-widget (React, Vue, Angular, Svelte, Next.js, Nuxt, Astro, WordPress, TYPO3, Drupal, Shopify, Shopware, Magento).",
+  "license": "MIT",
+  "author": "BAUER GROUP <info@bauer-group.com>",
+  "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,jsx,json,md,yml,yaml,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,jsx,json,md,yml,yaml,css}\"",
+    "clean": "pnpm -r run clean",
+    "sync-version": "node scripts/sync-version.mjs",
+    "sync-version:check": "node scripts/sync-version.mjs --check",
+    "package-plugins": "node scripts/package-plugins.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.20.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.20.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": true,
+    "arrowParens": "always",
+    "endOfLine": "lf"
+  }
+}

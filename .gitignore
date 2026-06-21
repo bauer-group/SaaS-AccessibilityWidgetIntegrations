@@ -1,0 +1,33 @@
+# deps
+node_modules
+.pnpm-store
+vendor
+
+# build outputs
+dist
+build
+.output
+coverage
+*.tsbuildinfo
+
+# release artifacts (built by scripts/package-plugins.mjs)
+dist-artifacts
+
+# env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# editor / os
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
