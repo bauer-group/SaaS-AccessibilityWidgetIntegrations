@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "Vue 3 Wrapper für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
-  "author": "BAUER GROUP <info@bauer-group.com>",
+  "author": "BAUER GROUP <info@ge.bauer-group.com>",
   "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/tree/main/packages/js/vue",
   "repository": {
     "type": "git",

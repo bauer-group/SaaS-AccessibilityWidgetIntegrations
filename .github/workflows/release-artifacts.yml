@@ -120,7 +120,7 @@ jobs:
         run: |
           set -euo pipefail
           git config user.name "BAUER GROUP Bot"
-          git config user.email "info@bauer-group.com"
+          git config user.email "info@ge.bauer-group.com"
           remote="https://oauth2:${DRUPALORG_TOKEN}@${DRUPALORG_REPO}"
           # Isolate the module to its own commit history, then push branch + tag.
           subtree_sha="$(git subtree split --prefix=packages/cms/drupal/accessibility_widget HEAD)"

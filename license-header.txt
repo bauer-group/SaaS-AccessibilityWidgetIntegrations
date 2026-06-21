@@ -1,5 +1,5 @@
 SPDX-License-Identifier: MIT
-SPDX-FileCopyrightText: © 2026 BAUER GROUP <info@bauer-group.com>
+SPDX-FileCopyrightText: © 2026 BAUER GROUP <info@ge.bauer-group.com>
 
 These integrations are licensed under the MIT License (see the LICENSE file in
 the project root). Exception: the Drupal module is GPL-2.0-or-later, as required
@@ -13,12 +13,12 @@ Optional header for new JS/TS source files (source headers are not enforced):
 
 /*
  * SPDX-License-Identifier: MIT
- * SPDX-FileCopyrightText: © 2026 BAUER GROUP <info@bauer-group.com>
+ * SPDX-FileCopyrightText: © 2026 BAUER GROUP <info@ge.bauer-group.com>
  */
 
 For the Drupal module, use instead:
 
 /*
  * SPDX-License-Identifier: GPL-2.0-or-later
- * SPDX-FileCopyrightText: © 2026 BAUER GROUP <info@bauer-group.com>
+ * SPDX-FileCopyrightText: © 2026 BAUER GROUP <info@ge.bauer-group.com>
  */
