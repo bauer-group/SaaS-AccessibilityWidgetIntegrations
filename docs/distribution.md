@@ -28,18 +28,18 @@ locked version** to every channel.
 
 ## npm (OIDC Trusted Publishing)
 
-Tokenless publishing — no `NPM_TOKEN`. Each of the 7 packages needs a one-time setup:
+Ongoing releases publish **tokenless via OIDC**. A package must exist on npm before
+a Trusted Publisher can be configured, so there is a one-time bootstrap:
 
-1. **Bootstrap publish** (the package must exist before a Trusted Publisher can be
-   configured). Locally, with 2FA, for each `packages/js/*`:
-   ```bash
-   pnpm --filter <pkg> build
-   cd packages/js/<name> && npm publish --access public
-   ```
-2. **Configure the Trusted Publisher** on npmjs.com for each package:
+1. **Bootstrap (automated).** Create an npm **Automation** access token (an account
+   that can publish under `@bauer-group`), add it as the repository secret
+   `NPM_TOKEN`, then run the **🔑 npm Bootstrap** workflow
+   (Actions → npm Bootstrap → Run workflow). It first-publishes all 7 wrappers.
+2. **Configure a Trusted Publisher** on npmjs.com for **each** package:
    - Repository: `bauer-group/SaaS-AccessibilityWidgetIntegrations`
    - Workflow: `release.yml`
-3. After that, every release publishes automatically via OIDC (`id-token: write`).
+3. **Delete `NPM_TOKEN`.** Every release then publishes automatically via OIDC
+   (`id-token: write`) — no token.
 
 `nextjs` depends on `accessibility-widget-react` via `workspace:^`; the publish job
 pins it to the released version (`npm pkg set`) before publishing.
@@ -88,6 +88,7 @@ and submit it to the store. TER can additionally be scripted later with `typo3/t
 
 | Name                                       | Type     | Used by                     |
 | ------------------------------------------ | -------- | --------------------------- |
+| `NPM_TOKEN`                                | secret   | npm Bootstrap (one-time)    |
 | `WPORG_SVN_USERNAME`, `WPORG_SVN_PASSWORD` | secret   | WordPress.org deploy        |
 | `PUBLISH_WORDPRESS_ORG`                    | variable | enable WordPress.org deploy |
 | `DRUPALORG_TOKEN`                          | secret   | Drupal.org push             |
