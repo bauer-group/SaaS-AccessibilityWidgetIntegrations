@@ -4,6 +4,25 @@
   "description": "Astro Component für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
+  "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/tree/main/packages/js/astro",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations.git",
+    "directory": "packages/js/astro"
+  },
+  "bugs": {
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues"
+  },
+  "keywords": [
+    "astro",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "bfsg",
+    "en301549",
+    "widget",
+    "bauer-group"
+  ],
   "type": "module",
   "main": "./src/AccessibilityWidget.astro",
   "files": [
@@ -12,5 +31,9 @@
   ],
   "peerDependencies": {
     "astro": ">=5"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
   }
 }

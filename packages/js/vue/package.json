@@ -4,6 +4,25 @@
   "description": "Vue 3 Wrapper für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
+  "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/tree/main/packages/js/vue",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations.git",
+    "directory": "packages/js/vue"
+  },
+  "bugs": {
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues"
+  },
+  "keywords": [
+    "vue",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "bfsg",
+    "en301549",
+    "widget",
+    "bauer-group"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -30,5 +49,9 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.8.0",
     "vue": "^3.5.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
   }
 }

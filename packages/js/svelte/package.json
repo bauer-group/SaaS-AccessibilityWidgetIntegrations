@@ -4,6 +4,25 @@
   "description": "Svelte 5 Component + Action für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
+  "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/tree/main/packages/js/svelte",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations.git",
+    "directory": "packages/js/svelte"
+  },
+  "bugs": {
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues"
+  },
+  "keywords": [
+    "svelte",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "bfsg",
+    "en301549",
+    "widget",
+    "bauer-group"
+  ],
   "type": "module",
   "main": "./src/index.js",
   "svelte": "./src/index.js",
@@ -32,5 +51,9 @@
     "rimraf": "^6.0.1",
     "svelte": "^5.20.0",
     "typescript": "^5.8.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
   }
 }

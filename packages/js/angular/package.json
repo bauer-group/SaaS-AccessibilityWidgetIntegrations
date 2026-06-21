@@ -4,6 +4,25 @@
   "description": "Angular Directive für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@bauer-group.com>",
+  "homepage": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/tree/main/packages/js/angular",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations.git",
+    "directory": "packages/js/angular"
+  },
+  "bugs": {
+    "url": "https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues"
+  },
+  "keywords": [
+    "angular",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "bfsg",
+    "en301549",
+    "widget",
+    "bauer-group"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,5 +54,9 @@
     "rxjs": "^7.8.0",
     "typescript": "^5.8.0",
     "zone.js": "^0.15.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
   }
 }

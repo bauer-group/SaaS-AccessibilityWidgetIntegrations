@@ -1,0 +1,16 @@
+accessibility_widget.settings:
+  type: config_object
+  label: 'Accessibility Widget settings'
+  mapping:
+    position:
+      type: string
+      label: 'FAB position'
+    locale:
+      type: string
+      label: 'Locale'
+    primary_color:
+      type: string
+      label: 'Primary color'
+    asset_base:
+      type: string
+      label: 'Custom asset base URL'
