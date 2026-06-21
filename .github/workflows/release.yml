@@ -1,5 +1,5 @@
 # =============================================================================
-# IAC-MAAS - Release Workflow
+# Release Workflow
 # =============================================================================
 # Triggers:
 #   - Push to main branch (excluding docs/markdown changes)

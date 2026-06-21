@@ -8,16 +8,16 @@
 version: 2
 updates:
   # GitHub Actions updates
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "06:30"
-      timezone: "Etc/UTC"
+      interval: 'weekly'
+      day: 'sunday'
+      time: '06:30'
+      timezone: 'Etc/UTC'
     labels:
-      - "dependencies"
-      - "github-actions"
-      - "dependabot"
+      - 'dependencies'
+      - 'github-actions'
+      - 'dependabot'
     commit-message:
-      prefix: "chore(ci)"
+      prefix: 'chore(ci)'
