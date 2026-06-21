@@ -26,6 +26,21 @@ locked version** to every channel.
 | GitHub Release ZIPs                                        | all 6 CMS/shop plugins              | `release-artifacts.yml`, every release                      |
 | Shopify / Shopware Store / Magento Marketplace / TYPO3 TER | review-gated                        | ZIP hand-off, manual submit                                 |
 
+## Directory & downloads (GitHub Pages)
+
+The public directory site at
+<https://accessibility-integration.widget.professional-hosting.com> lists all 13
+integrations and offers the latest plugin versions for **manual download**.
+
+- Source lives in [`site/`](../site/) — a dependency-free static page (HTML/CSS/JS).
+- Deployed by [`pages.yml`](../.github/workflows/pages.yml) via GitHub Actions
+  (Pages `build_type: workflow`); `site/CNAME` carries the custom domain.
+- The page fetches `releases/latest` from the GitHub API **in the browser**, so it
+  always shows the current version and links the matching CMS/shop ZIP assets — a
+  new release needs **no redeploy**. The page only redeploys when `site/**` changes.
+- Framework wrappers link to npm; CMS/shop plugins link to the release ZIP built by
+  `package-plugins.mjs`.
+
 ## npm (OIDC Trusted Publishing)
 
 Ongoing releases publish **tokenless via OIDC**. A package must exist on npm before

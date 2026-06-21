@@ -1,0 +1,54 @@
+# =============================================================================
+# GitHub Pages — Integrations directory
+# =============================================================================
+# Publishes the static integrations site (site/) to GitHub Pages on the custom
+# domain accessibility-integration.widget.professional-hosting.com (CNAME in
+# site/). The page is pure static HTML/CSS/JS — no build step. Version numbers
+# and CMS/shop ZIP download links are fetched live from the Releases API in the
+# browser, so a new release needs NO redeploy; this only runs when site files
+# (or this workflow) change.
+# =============================================================================
+
+name: 🌐 Deploy Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; let an in-flight run finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: 🚀 Build & deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v7
+
+      - name: ⚙️ Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📤 Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
