@@ -30,7 +30,7 @@ This repository bundles the ready-to-use **integrations**. The widget **core** (
 | [`@bauer-group/accessibility-widget-nuxt`](./packages/js/nuxt/)       | Nuxt 3             |
 | [`@bauer-group/accessibility-widget-astro`](./packages/js/astro/)     | Astro ≥ 5          |
 
-The wrappers consume the core as a **published dependency** (`@bauer-group/accessibility-widget` ≥ 1.0.5) and import **types only** — at runtime the loader fetches the CDN bundles.
+The wrappers are **dependency-free** and load the widget from the **CDN (floating `v1` tag)** by default — the integration may age, the widget stays current. Self-hosting is an optional override.
 
 ### CMS & shops (`packages/cms/*`, `packages/shop/*` — separate ecosystems, not in the npm workspace)
 
@@ -66,7 +66,7 @@ The **CDN one-liner integration** is preferred (automatic patch/minor updates wi
 ></script>
 ```
 
-For production, **pin an immutable version + secure it via SRI**. The full guide — CDN vs. npm, the immutable/floating path scheme, SRI pinning, the `window.AccessibilityWidgetConfig` API and how versioning works — is in the **[core repo under `docs/`](https://github.com/bauer-group/SaaS-AccessibilityWidget/tree/main/docs)**.
+All integrations use this CDN `v1` path by default (no SRI — the floating tag changes on every widget release, which is incompatible with a pinned hash). The full guide — the `window.AccessibilityWidgetConfig` API, the immutable/floating path scheme, and self-hosting — is in the **[core repo under `docs/`](https://github.com/bauer-group/SaaS-AccessibilityWidget/tree/main/docs)**.
 
 ## Contributing
 
@@ -110,7 +110,7 @@ Dieses Repository bündelt die einsatzfertigen **Integrationen**. Der **Core** d
 | [`@bauer-group/accessibility-widget-nuxt`](./packages/js/nuxt/)       | Nuxt 3             |
 | [`@bauer-group/accessibility-widget-astro`](./packages/js/astro/)     | Astro ≥ 5          |
 
-Die Wrapper konsumieren den Core als **veröffentlichte Abhängigkeit** (`@bauer-group/accessibility-widget` ≥ 1.0.5) und importieren nur **Typen** — zur Laufzeit lädt der Loader die CDN-Bundles.
+Die Wrapper sind **abhängigkeitsfrei** und laden das Widget standardmäßig vom **CDN (floating `v1`-Tag)** — die Integration darf veralten, das Widget bleibt aktuell. Self-Hosting ist ein optionaler Override.
 
 #### CMS & Shops (`packages/cms/*`, `packages/shop/*` — eigene Ökosysteme, nicht im npm-Workspace)
 
@@ -127,7 +127,7 @@ Die Wrapper konsumieren den Core als **veröffentlichte Abhängigkeit** (`@bauer
 
 ```bash
 pnpm install
-pnpm build       # baut alle js/*-Wrapper (tsc)
+pnpm build       # baut alle packages/js/*-Wrapper (tsc)
 pnpm test        # vitest je Wrapper
 pnpm typecheck
 pnpm lint
@@ -146,7 +146,7 @@ Bevorzugt ist die **CDN-Einzeiler-Integration** (automatische Patch/Minor-Update
 ></script>
 ```
 
-Für Produktion eine **unveränderliche Version pinnen + per SRI absichern**. Die vollständige Anleitung — CDN vs. npm, das immutable/floating-Pfadschema, SRI-Pinning, die `window.AccessibilityWidgetConfig`-API und wie die Versionierung funktioniert — steht im **[Core-Repo unter `docs/`](https://github.com/bauer-group/SaaS-AccessibilityWidget/tree/main/docs)**.
+Alle Integrationen nutzen standardmäßig diesen CDN-`v1`-Pfad (kein SRI — der floating Tag ändert sich bei jedem Widget-Release, was mit einem gepinnten Hash unvereinbar ist). Die vollständige Anleitung — die `window.AccessibilityWidgetConfig`-API, das immutable/floating-Pfadschema und Self-Hosting — steht im **[Core-Repo unter `docs/`](https://github.com/bauer-group/SaaS-AccessibilityWidget/tree/main/docs)**.
 
 ### Mitwirken
 

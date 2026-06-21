@@ -1,10 +1,25 @@
 import { defineComponent, onMounted, type PropType } from 'vue';
-import type { WidgetConfig, WidgetState } from '@bauer-group/accessibility-widget';
 
-export interface SriMap {
-  loader?: string;
-  core?: string;
-  css?: string;
+/**
+ * Default CDN origin — the floating `v1` (major) tag. The widget stays current
+ * automatically. Override the `*Src`/`cssHref` props only to self-host/mirror.
+ */
+const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+const DEFAULT_LOADER_SRC = `${CDN_V1}/accessibility-widget-loader.min.js`;
+const DEFAULT_CORE_SRC = `${CDN_V1}/accessibility-widget-core.min.js`;
+const DEFAULT_CSS_HREF = `${CDN_V1}/accessibility-widget.min.css`;
+
+/**
+ * Subset of the widget's runtime configuration. Declared locally so this MIT
+ * wrapper carries no dependency on the (AGPL) widget package; unknown keys pass through.
+ */
+export interface WidgetConfig {
+  corePath?: string;
+  cssPath?: string;
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  locale?: string;
+  primaryColor?: string;
+  [key: string]: unknown;
 }
 
 declare global {
@@ -14,7 +29,7 @@ declare global {
       open(): Promise<void>;
       close(): void;
       reset(): void;
-      getState(): WidgetState | null;
+      getState(): unknown;
     };
   }
 }
@@ -22,16 +37,19 @@ declare global {
 export const AccessibilityWidget = defineComponent({
   name: 'AccessibilityWidget',
   props: {
-    loaderSrc: { type: String, default: '/accessibility-widget-loader.min.js' },
-    cssHref: { type: String, default: '/accessibility-widget.min.css' },
+    loaderSrc: { type: String, default: DEFAULT_LOADER_SRC },
+    coreSrc: { type: String, default: DEFAULT_CORE_SRC },
+    cssHref: { type: String, default: DEFAULT_CSS_HREF },
     config: { type: Object as PropType<WidgetConfig>, default: () => ({}) },
-    sri: { type: Object as PropType<SriMap>, default: () => ({}) },
   },
   setup(props) {
     onMounted(() => {
       if (typeof window === 'undefined') return;
+      // The loader can't derive core/CSS from its own <script src>; pin them here.
       window.AccessibilityWidgetConfig = {
         ...(window.AccessibilityWidgetConfig ?? {}),
+        corePath: props.coreSrc,
+        cssPath: props.cssHref,
         ...props.config,
       };
 
@@ -40,10 +58,6 @@ export const AccessibilityWidget = defineComponent({
         link.rel = 'stylesheet';
         link.href = props.cssHref;
         link.setAttribute('data-aw-css', '1');
-        if (props.sri.css) {
-          link.integrity = props.sri.css;
-          link.crossOrigin = 'anonymous';
-        }
         document.head.appendChild(link);
       }
       if (props.loaderSrc && !document.querySelector('script[data-aw-loader]')) {
@@ -51,10 +65,6 @@ export const AccessibilityWidget = defineComponent({
         s.src = props.loaderSrc;
         s.defer = true;
         s.setAttribute('data-aw-loader', '1');
-        if (props.sri.loader) {
-          s.integrity = props.sri.loader;
-          s.crossOrigin = 'anonymous';
-        }
         document.head.appendChild(s);
       }
     });

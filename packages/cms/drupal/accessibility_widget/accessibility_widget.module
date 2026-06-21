@@ -3,28 +3,36 @@
 /**
  * @file
  * BAUER GROUP Accessibility Widget — Drupal integration.
+ *
+ * The widget is loaded from the CDN (floating `v1` tag) and stays current
+ * automatically; no assets are bundled with this module. Set "asset_base" in
+ * the module settings only to self-host or mirror the assets.
  */
 
 declare(strict_types=1);
+
+/**
+ * Default CDN origin — the floating `v1` (major) tag.
+ */
+const ACCESSIBILITY_WIDGET_CDN = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
 
 /**
  * Implements hook_page_attachments().
  */
 function accessibility_widget_page_attachments(array &$attachments): void {
   $config = \Drupal::config('accessibility_widget.settings');
-  $module_url = \Drupal::service('extension.path.resolver')->getPath('module', 'accessibility_widget');
 
+  $base = (string) ($config->get('asset_base') ?: ACCESSIBILITY_WIDGET_CDN);
+  $base = rtrim($base, '/');
+
+  // The loader does NOT derive core/CSS from its own <script src>, so pin them.
   $widget_config = [
-    'corePath'     => '/' . $module_url . '/assets/accessibility-widget-core.min.js',
-    'cssPath'      => '/' . $module_url . '/assets/accessibility-widget.min.css',
+    'corePath'     => $base . '/accessibility-widget-core.min.js',
+    'cssPath'      => $base . '/accessibility-widget.min.css',
     'position'     => $config->get('position') ?: 'bottom-right',
     'locale'       => $config->get('locale') ?: 'auto',
     'primaryColor' => $config->get('primary_color') ?: '#0058a3',
   ];
-  $integrity = $config->get('loader_integrity');
-  if (!empty($integrity)) {
-    $widget_config['coreIntegrity'] = (string) $config->get('core_integrity');
-  }
 
   $attachments['#attached']['html_head'][] = [
     [
@@ -35,20 +43,15 @@ function accessibility_widget_page_attachments(array &$attachments): void {
     'accessibility_widget_config',
   ];
 
-  $loader_attrs = [
-    'src' => '/' . $module_url . '/assets/accessibility-widget-loader.min.js',
-    'defer' => 'defer',
-    'data-aw-loader' => '1',
-  ];
-  if (!empty($integrity)) {
-    $loader_attrs['integrity'] = $integrity;
-    $loader_attrs['crossorigin'] = 'anonymous';
-  }
   $attachments['#attached']['html_head'][] = [
     [
       '#type' => 'html_tag',
       '#tag' => 'script',
-      '#attributes' => $loader_attrs,
+      '#attributes' => [
+        'src' => $base . '/accessibility-widget-loader.min.js',
+        'defer' => 'defer',
+        'data-aw-loader' => '1',
+      ],
     ],
     'accessibility_widget_loader',
   ];

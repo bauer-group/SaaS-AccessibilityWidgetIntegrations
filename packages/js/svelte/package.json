@@ -28,9 +28,6 @@
   "peerDependencies": {
     "svelte": ">=5"
   },
-  "dependencies": {
-    "@bauer-group/accessibility-widget": "^1.0.5"
-  },
   "devDependencies": {
     "rimraf": "^6.0.1",
     "svelte": "^5.20.0",

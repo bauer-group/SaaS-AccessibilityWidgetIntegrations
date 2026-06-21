@@ -5,7 +5,8 @@ import {
 } from '@bauer-group/accessibility-widget-react';
 
 /**
- * Drop into app/layout.tsx:
+ * Drop into app/layout.tsx — by default the widget loads from the CDN `v1` tag,
+ * so no props are required:
  *
  *   import { AccessibilityWidgetClient } from '@bauer-group/accessibility-widget-nextjs';
  *   export default function RootLayout({ children }) {
@@ -13,7 +14,7 @@ import {
  *       <html lang="de">
  *         <body>
  *           {children}
- *           <AccessibilityWidgetClient loaderSrc="/accessibility-widget/accessibility-widget-loader.min.js" />
+ *           <AccessibilityWidgetClient config={{ locale: 'auto' }} />
  *         </body>
  *       </html>
  *     );

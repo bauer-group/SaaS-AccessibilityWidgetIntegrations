@@ -2,9 +2,16 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { AccessibilityWidget } from '../src/AccessibilityWidget.js';
 
+const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+
 function resetInjectedAssets(): void {
   document.querySelectorAll('[data-aw-loader],[data-aw-css]').forEach((el) => el.remove());
   delete (window as unknown as { AccessibilityWidgetConfig?: unknown }).AccessibilityWidgetConfig;
+}
+
+type Cfg = Record<string, unknown>;
+function widgetConfig(): Cfg {
+  return (window as unknown as { AccessibilityWidgetConfig?: Cfg }).AccessibilityWidgetConfig ?? {};
 }
 
 describe('<AccessibilityWidget /> — smoke', () => {
@@ -13,52 +20,56 @@ describe('<AccessibilityWidget /> — smoke', () => {
     resetInjectedAssets();
   });
 
+  it('defaults all asset URLs to the CDN v1 tag (no SRI)', () => {
+    render(<AccessibilityWidget />);
+
+    const script = document.querySelector('script[data-aw-loader]') as HTMLScriptElement;
+    const link = document.querySelector('link[data-aw-css]') as HTMLLinkElement;
+    expect(script.getAttribute('src')).toBe(`${CDN_V1}/accessibility-widget-loader.min.js`);
+    expect(link.getAttribute('href')).toBe(`${CDN_V1}/accessibility-widget.min.css`);
+    // The loader can't derive these itself, so the wrapper must pin them.
+    expect(widgetConfig().corePath).toBe(`${CDN_V1}/accessibility-widget-core.min.js`);
+    expect(widgetConfig().cssPath).toBe(`${CDN_V1}/accessibility-widget.min.css`);
+    // No SRI on the floating v1 path.
+    expect(script.hasAttribute('integrity')).toBe(false);
+  });
+
   it('injects the loader script and stylesheet exactly once', () => {
-    const { rerender } = render(
-      <AccessibilityWidget
-        loaderSrc="/a/loader.min.js"
-        cssHref="/a/widget.min.css"
-        config={{ position: 'bottom-right' }}
-      />,
-    );
+    const { rerender } = render(<AccessibilityWidget config={{ position: 'bottom-right' }} />);
 
     expect(document.querySelectorAll('script[data-aw-loader]')).toHaveLength(1);
     expect(document.querySelectorAll('link[data-aw-css]')).toHaveLength(1);
 
     // A rerender must be idempotent — dedupe relies on data-aw-* markers.
-    rerender(<AccessibilityWidget loaderSrc="/a/loader.min.js" cssHref="/a/widget.min.css" />);
+    rerender(<AccessibilityWidget />);
     expect(document.querySelectorAll('script[data-aw-loader]')).toHaveLength(1);
     expect(document.querySelectorAll('link[data-aw-css]')).toHaveLength(1);
   });
 
   it('merges config onto window.AccessibilityWidgetConfig without clobbering existing keys', () => {
-    (
-      window as unknown as { AccessibilityWidgetConfig?: Record<string, unknown> }
-    ).AccessibilityWidgetConfig = {
+    (window as unknown as { AccessibilityWidgetConfig?: Cfg }).AccessibilityWidgetConfig = {
       debug: true,
     };
 
-    render(<AccessibilityWidget loaderSrc="/a/loader.min.js" config={{ locale: 'de' }} />);
+    render(<AccessibilityWidget config={{ locale: 'de' }} />);
 
-    const cfg = (window as unknown as { AccessibilityWidgetConfig?: Record<string, unknown> })
-      .AccessibilityWidgetConfig;
-    expect(cfg).toMatchObject({ debug: true, locale: 'de' });
+    expect(widgetConfig()).toMatchObject({ debug: true, locale: 'de' });
   });
 
-  it('wires SRI integrity attributes onto both injected tags', () => {
+  it('lets the caller override the CDN defaults (self-host escape hatch)', () => {
     render(
       <AccessibilityWidget
-        loaderSrc="/a/loader.min.js"
-        cssHref="/a/widget.min.css"
-        sri={{ loader: 'sha384-LOADER', css: 'sha384-CSS' }}
+        loaderSrc="/assets/aw-loader.min.js"
+        coreSrc="/assets/aw-core.min.js"
+        cssHref="/assets/aw.min.css"
+        config={{ corePath: '/custom/core.min.js' }}
       />,
     );
 
     const script = document.querySelector('script[data-aw-loader]') as HTMLScriptElement;
-    const link = document.querySelector('link[data-aw-css]') as HTMLLinkElement;
-    expect(script.integrity).toBe('sha384-LOADER');
-    expect(script.crossOrigin).toBe('anonymous');
-    expect(link.integrity).toBe('sha384-CSS');
-    expect(link.crossOrigin).toBe('anonymous');
+    expect(script.getAttribute('src')).toBe('/assets/aw-loader.min.js');
+    // config.corePath wins over the coreSrc-derived default.
+    expect(widgetConfig().corePath).toBe('/custom/core.min.js');
+    expect(widgetConfig().cssPath).toBe('/assets/aw.min.css');
   });
 });

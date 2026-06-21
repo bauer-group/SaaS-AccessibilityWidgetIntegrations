@@ -1,29 +1,37 @@
 ---
+/**
+ * Default CDN origin — the floating `v1` (major) tag. The widget stays current
+ * automatically. Override the `*Src`/`cssHref` props only to self-host/mirror.
+ */
+const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+
 interface Props {
   loaderSrc?: string;
+  coreSrc?: string;
   cssHref?: string;
   config?: Record<string, unknown>;
-  sri?: { loader?: string; css?: string };
 }
 
 const {
-  loaderSrc = '/accessibility-widget-loader.min.js',
-  cssHref = '/accessibility-widget.min.css',
+  loaderSrc = `${CDN_V1}/accessibility-widget-loader.min.js`,
+  coreSrc = `${CDN_V1}/accessibility-widget-core.min.js`,
+  cssHref = `${CDN_V1}/accessibility-widget.min.css`,
   config = {},
-  sri = {},
 } = Astro.props;
 
-const configJson = JSON.stringify(config);
+// The loader can't derive core/CSS from its own <script src>; pin them here.
+const configJson = JSON.stringify({ corePath: coreSrc, cssPath: cssHref, ...config });
 ---
 
 <script is:inline define:vars={{ configJson }}>
   try {
-    window.AccessibilityWidgetConfig = { ...(window.AccessibilityWidgetConfig ?? {}), ...JSON.parse(configJson) };
-  } catch (e) { /* silent */ }
+    window.AccessibilityWidgetConfig = {
+      ...(window.AccessibilityWidgetConfig ?? {}),
+      ...JSON.parse(configJson),
+    };
+  } catch (e) {
+    /* silent */
+  }
 </script>
-{cssHref && (
-  <link rel="stylesheet" href={cssHref} data-aw-css="1" {...(sri.css ? { integrity: sri.css, crossorigin: 'anonymous' } : {})} />
-)}
-{loaderSrc && (
-  <script src={loaderSrc} defer data-aw-loader="1" {...(sri.loader ? { integrity: sri.loader, crossorigin: 'anonymous' } : {})} />
-)}
+{cssHref && <link rel="stylesheet" href={cssHref} data-aw-css="1" />}
+{loaderSrc && <script is:inline src={loaderSrc} defer data-aw-loader="1" />}

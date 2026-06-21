@@ -1,11 +1,26 @@
 import { Component, Input, PLATFORM_ID, Inject, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import type { WidgetConfig, WidgetState } from '@bauer-group/accessibility-widget';
 
-export interface Sri {
-  loader?: string;
-  core?: string;
-  css?: string;
+/**
+ * Default CDN origin — the floating `v1` (major) tag. The widget stays current
+ * automatically. Override the `*Src`/`cssHref` inputs only to self-host/mirror.
+ */
+const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+const DEFAULT_LOADER_SRC = `${CDN_V1}/accessibility-widget-loader.min.js`;
+const DEFAULT_CORE_SRC = `${CDN_V1}/accessibility-widget-core.min.js`;
+const DEFAULT_CSS_HREF = `${CDN_V1}/accessibility-widget.min.css`;
+
+/**
+ * Subset of the widget's runtime configuration. Declared locally so this MIT
+ * wrapper carries no dependency on the (AGPL) widget package; unknown keys pass through.
+ */
+export interface WidgetConfig {
+  corePath?: string;
+  cssPath?: string;
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  locale?: string;
+  primaryColor?: string;
+  [key: string]: unknown;
 }
 
 declare global {
@@ -15,7 +30,7 @@ declare global {
       open(): Promise<void>;
       close(): void;
       reset(): void;
-      getState(): WidgetState | null;
+      getState(): unknown;
     };
   }
 }
@@ -26,17 +41,20 @@ declare global {
   template: '',
 })
 export class AccessibilityWidgetComponent implements OnInit {
-  @Input() loaderSrc = '/accessibility-widget-loader.min.js';
-  @Input() cssHref = '/accessibility-widget.min.css';
+  @Input() loaderSrc = DEFAULT_LOADER_SRC;
+  @Input() coreSrc = DEFAULT_CORE_SRC;
+  @Input() cssHref = DEFAULT_CSS_HREF;
   @Input() config: WidgetConfig = {};
-  @Input() sri: Sri = {};
 
   constructor(@Inject(PLATFORM_ID) private readonly platformId: object) {}
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
+    // The loader can't derive core/CSS from its own <script src>; pin them here.
     window.AccessibilityWidgetConfig = {
       ...(window.AccessibilityWidgetConfig ?? {}),
+      corePath: this.coreSrc,
+      cssPath: this.cssHref,
       ...this.config,
     };
 
@@ -45,10 +63,6 @@ export class AccessibilityWidgetComponent implements OnInit {
       link.rel = 'stylesheet';
       link.href = this.cssHref;
       link.setAttribute('data-aw-css', '1');
-      if (this.sri.css) {
-        link.integrity = this.sri.css;
-        link.crossOrigin = 'anonymous';
-      }
       document.head.appendChild(link);
     }
     if (this.loaderSrc && !document.querySelector('script[data-aw-loader]')) {
@@ -56,10 +70,6 @@ export class AccessibilityWidgetComponent implements OnInit {
       s.src = this.loaderSrc;
       s.defer = true;
       s.setAttribute('data-aw-loader', '1');
-      if (this.sri.loader) {
-        s.integrity = this.sri.loader;
-        s.crossOrigin = 'anonymous';
-      }
       document.head.appendChild(s);
     }
   }

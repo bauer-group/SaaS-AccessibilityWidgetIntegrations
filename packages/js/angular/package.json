@@ -28,9 +28,6 @@
     "@angular/core": ">=19",
     "rxjs": ">=7.8"
   },
-  "dependencies": {
-    "@bauer-group/accessibility-widget": "^1.0.5"
-  },
   "devDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0",

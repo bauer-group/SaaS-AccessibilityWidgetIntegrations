@@ -12,9 +12,11 @@
 npm install @bauer-group/accessibility-widget-react
 ```
 
-And place the widget assets (`accessibility-widget-loader.min.js`, `accessibility-widget-core.min.js`, `accessibility-widget.min.css`) under `/public/accessibility-widget/`.
+No assets to host: by default the widget loads from the BAUER GROUP CDN (the floating `v1` tag) and **stays current automatically** — the integration may age, the widget never does.
 
 ## Usage
+
+Zero-config — drop the component in once (e.g. in your root layout):
 
 ```tsx
 import {
@@ -26,14 +28,7 @@ export function App() {
   return (
     <>
       <AccessibilityWidget
-        loaderSrc="/accessibility-widget/accessibility-widget-loader.min.js"
-        cssHref="/accessibility-widget/accessibility-widget.min.css"
         config={{ position: 'bottom-right', locale: 'auto', primaryColor: '#0058a3' }}
-        sri={{
-          loader: 'sha384-…', // from dist/integrity.txt
-          core: 'sha384-…',
-          css: 'sha384-…',
-        }}
       />
       <button onClick={() => openAccessibilityWidget()}>Accessibility</button>
     </>
@@ -41,18 +36,28 @@ export function App() {
 }
 ```
 
+### Self-hosting (optional escape hatch)
+
+Only if you must avoid the third-party CDN (strict CSP, air-gapped, etc.): host the three assets yourself and point the wrapper at them. No SRI is used on the floating `v1` path.
+
+```tsx
+<AccessibilityWidget
+  loaderSrc="/accessibility-widget/accessibility-widget-loader.min.js"
+  coreSrc="/accessibility-widget/accessibility-widget-core.min.js"
+  cssHref="/accessibility-widget/accessibility-widget.min.css"
+/>
+```
+
 ## Development
 
-This package is **not** part of the pnpm root workspace. Dependencies are installed directly in the package folder:
-
 ```bash
-cd integrations/js/react
+cd packages/js/react
 pnpm install
 pnpm build
 pnpm test
 ```
 
-Smoke tests (Vitest + happy-dom) in [`test/AccessibilityWidget.test.tsx`](./test/AccessibilityWidget.test.tsx) serve as a reference pattern for further integrations (Vue, Svelte, Angular, …) — the dedupe mechanism (`data-aw-loader`, `data-aw-css`) is identical.
+Smoke tests (Vitest + happy-dom) in [`test/AccessibilityWidget.test.tsx`](./test/AccessibilityWidget.test.tsx) are the reference pattern for the other wrappers (Vue, Svelte, Angular, …) — the dedupe mechanism (`data-aw-loader`, `data-aw-css`) is identical.
 
 ## License
 
@@ -74,9 +79,11 @@ MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licens
 npm install @bauer-group/accessibility-widget-react
 ```
 
-Und die Widget-Assets (`accessibility-widget-loader.min.js`, `accessibility-widget-core.min.js`, `accessibility-widget.min.css`) unter `/public/accessibility-widget/` ablegen.
+Keine Assets zu hosten: Standardmäßig lädt das Widget vom BAUER GROUP CDN (floating `v1`-Tag) und **bleibt automatisch aktuell** — die Integration darf veralten, das Widget nie.
 
 ### Nutzung
+
+Zero-Config — die Komponente einmal einbinden (z. B. im Root-Layout):
 
 ```tsx
 import {
@@ -88,14 +95,7 @@ export function App() {
   return (
     <>
       <AccessibilityWidget
-        loaderSrc="/accessibility-widget/accessibility-widget-loader.min.js"
-        cssHref="/accessibility-widget/accessibility-widget.min.css"
         config={{ position: 'bottom-right', locale: 'auto', primaryColor: '#0058a3' }}
-        sri={{
-          loader: 'sha384-…', // aus dist/integrity.txt
-          core: 'sha384-…',
-          css: 'sha384-…',
-        }}
       />
       <button onClick={() => openAccessibilityWidget()}>Barrierefreiheit</button>
     </>
@@ -103,18 +103,28 @@ export function App() {
 }
 ```
 
+### Self-Hosting (optionaler Notausgang)
+
+Nur falls das Drittanbieter-CDN vermieden werden muss (strikte CSP, Air-Gap usw.): die drei Assets selbst hosten und den Wrapper darauf zeigen lassen. Auf dem floating `v1`-Pfad wird kein SRI verwendet.
+
+```tsx
+<AccessibilityWidget
+  loaderSrc="/accessibility-widget/accessibility-widget-loader.min.js"
+  coreSrc="/accessibility-widget/accessibility-widget-core.min.js"
+  cssHref="/accessibility-widget/accessibility-widget.min.css"
+/>
+```
+
 ### Entwicklung
 
-Dieses Paket ist **nicht** Teil des pnpm-Root-Workspace. Dependencies werden direkt im Paketordner installiert:
-
 ```bash
-cd integrations/js/react
+cd packages/js/react
 pnpm install
 pnpm build
 pnpm test
 ```
 
-Smoke-Tests (Vitest + happy-dom) in [`test/AccessibilityWidget.test.tsx`](./test/AccessibilityWidget.test.tsx) dienen als Referenz-Pattern für weitere Integrationen (Vue, Svelte, Angular, …) — das Dedupe-Muster (`data-aw-loader`, `data-aw-css`) ist identisch.
+Smoke-Tests (Vitest + happy-dom) in [`test/AccessibilityWidget.test.tsx`](./test/AccessibilityWidget.test.tsx) sind das Referenz-Pattern für die anderen Wrapper (Vue, Svelte, Angular, …) — das Dedupe-Muster (`data-aw-loader`, `data-aw-css`) ist identisch.
 
 ### Lizenz
 

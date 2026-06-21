@@ -29,9 +29,6 @@
   "peerDependencies": {
     "react": ">=18"
   },
-  "dependencies": {
-    "@bauer-group/accessibility-widget": "^1.0.5"
-  },
   "devDependencies": {
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.0",

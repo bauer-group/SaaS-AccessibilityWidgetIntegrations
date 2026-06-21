@@ -13,6 +13,8 @@ page {
   }
   includeJSFooterlibs {
     accessibilityWidgetLoader = {$plugin.tx_accessibilitywidget.settings.loaderPath}
+    # The loader is an absolute CDN URL — tell TYPO3 not to resolve it locally.
+    accessibilityWidgetLoader.external = 1
     accessibilityWidgetLoader.disableCompression = 1
     accessibilityWidgetLoader.excludeFromConcatenation = 1
     accessibilityWidgetLoader.defer = 1

@@ -1,29 +1,25 @@
 {%- comment -%}
   BAUER GROUP Accessibility Widget — Shopify snippet
+  Loads from the CDN (floating v1 tag) and stays current automatically.
   Usage:
     {% render 'accessibility-widget',
        position: 'bottom-right',
        locale: 'auto',
        primary_color: '#0058a3',
-       loader_integrity: '',
-       core_integrity: '' %}
+       cdn_base: '' %}   {%- comment -%} optional: override to self-host/mirror {%- endcomment -%}
 {%- endcomment -%}
 {%- assign _position = position | default: 'bottom-right' -%}
 {%- assign _locale = locale | default: 'auto' -%}
 {%- assign _color = primary_color | default: '#0058a3' -%}
+{%- assign _base = cdn_base | default: 'https://widgets.professional-hosting.com/accessibility-widget/v1' -%}
 
 <script>
   window.AccessibilityWidgetConfig = {
-    corePath: {{ 'accessibility-widget-core.min.js' | asset_url | json }},
-    cssPath: {{ 'accessibility-widget.min.css' | asset_url | json }},
+    corePath: {{ _base | append: '/accessibility-widget-core.min.js' | json }},
+    cssPath: {{ _base | append: '/accessibility-widget.min.css' | json }},
     position: {{ _position | json }},
     locale: {{ _locale | json }},
     primaryColor: {{ _color | json }}
-    {%- if core_integrity != blank -%}
-    , coreIntegrity: {{ core_integrity | json }}
-    {%- endif -%}
   };
 </script>
-<script src="{{ 'accessibility-widget-loader.min.js' | asset_url }}" defer
-  {%- if loader_integrity != blank %} integrity="{{ loader_integrity }}" crossorigin="anonymous"{% endif -%}
-  data-aw-loader="1"></script>
+<script src="{{ _base }}/accessibility-widget-loader.min.js" defer data-aw-loader="1"></script>

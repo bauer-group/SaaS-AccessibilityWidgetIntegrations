@@ -2,6 +2,10 @@
 /**
  * @var \Magento\Framework\View\Element\Template $block
  * @var \Magento\Framework\Escaper $escaper
+ *
+ * The widget is loaded from the CDN (floating v1 tag) and stays current
+ * automatically; no assets are bundled with this module. Set
+ * accessibility_widget/settings/cdn_base only to self-host/mirror.
  */
 
 $scopeConfig = $block->getData('scopeConfig')
@@ -11,10 +15,13 @@ $position = (string) ($scopeConfig->getValue('accessibility_widget/settings/posi
 $locale = (string) ($scopeConfig->getValue('accessibility_widget/settings/locale') ?: 'auto');
 $color = (string) ($scopeConfig->getValue('accessibility_widget/settings/primary_color') ?: '#0058a3');
 
-$baseUrl = $block->getViewFileUrl('BauerGroup_AccessibilityWidget::');
+$cdnDefault = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+$base = rtrim((string) ($scopeConfig->getValue('accessibility_widget/settings/cdn_base') ?: $cdnDefault), '/');
+
+// The loader does NOT derive core/CSS from its own <script src>, so pin them.
 $cfg = [
-    'corePath' => $baseUrl . 'accessibility-widget-core.min.js',
-    'cssPath' => $baseUrl . 'accessibility-widget.min.css',
+    'corePath' => $base . '/accessibility-widget-core.min.js',
+    'cssPath' => $base . '/accessibility-widget.min.css',
     'position' => $position,
     'locale' => $locale,
     'primaryColor' => $color,
@@ -23,4 +30,4 @@ $cfg = [
 <script>
   window.AccessibilityWidgetConfig = <?= /* @noEscape */ json_encode($cfg, JSON_UNESCAPED_SLASHES) ?>;
 </script>
-<script src="<?= $escaper->escapeUrl($baseUrl . 'accessibility-widget-loader.min.js') ?>" defer data-aw-loader="1"></script>
+<script src="<?= $escaper->escapeUrl($base . '/accessibility-widget-loader.min.js') ?>" defer data-aw-loader="1"></script>

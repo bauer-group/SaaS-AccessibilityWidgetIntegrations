@@ -6,15 +6,16 @@
   {% set pos = config('AccessibilityWidget.config.position') ?: 'bottom-right' %}
   {% set loc = config('AccessibilityWidget.config.locale') ?: 'auto' %}
   {% set col = config('AccessibilityWidget.config.primaryColor') ?: '#0058a3' %}
+  {% set base = config('AccessibilityWidget.config.cdnBase') ?: 'https://widgets.professional-hosting.com/accessibility-widget/v1' %}
 
   <script>
     window.AccessibilityWidgetConfig = {
-      corePath: '{{ asset('bundles/accessibilitywidget/accessibility-widget-core.min.js', 'asset') }}',
-      cssPath:  '{{ asset('bundles/accessibilitywidget/accessibility-widget.min.css', 'asset') }}',
+      corePath: {{ (base ~ '/accessibility-widget-core.min.js')|json_encode|raw }},
+      cssPath:  {{ (base ~ '/accessibility-widget.min.css')|json_encode|raw }},
       position: {{ pos|json_encode|raw }},
       locale:   {{ loc|json_encode|raw }},
       primaryColor: {{ col|json_encode|raw }}
     };
   </script>
-  <script src="{{ asset('bundles/accessibilitywidget/accessibility-widget-loader.min.js', 'asset') }}" defer data-aw-loader="1"></script>
+  <script src="{{ (base ~ '/accessibility-widget-loader.min.js')|escape('html_attr') }}" defer data-aw-loader="1"></script>
 {% endblock %}

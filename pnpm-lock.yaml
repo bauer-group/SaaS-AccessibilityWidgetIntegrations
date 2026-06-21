@@ -34,10 +34,6 @@ importers:
         version: 8.61.1(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3)
 
   packages/js/angular:
-    dependencies:
-      '@bauer-group/accessibility-widget':
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       '@angular/common':
         specifier: ^19.2.0
@@ -66,9 +62,6 @@ importers:
 
   packages/js/nextjs:
     dependencies:
-      '@bauer-group/accessibility-widget':
-        specifier: ^1.0.5
-        version: 1.0.5
       '@bauer-group/accessibility-widget-react':
         specifier: workspace:^
         version: link:../react
@@ -91,9 +84,6 @@ importers:
 
   packages/js/nuxt:
     dependencies:
-      '@bauer-group/accessibility-widget':
-        specifier: ^1.0.5
-        version: 1.0.5
       nuxt:
         specifier: '>=3.10'
         version: 4.4.8(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@parcel/watcher@2.5.6)(@types/node@24.13.2)(@vue/compiler-sfc@3.5.38)(cac@6.7.14)(db0@0.3.4)(eslint@9.39.4(jiti@2.7.0))(ioredis@5.11.1)(magicast@0.5.3)(optionator@0.9.4)(rollup-plugin-visualizer@7.0.1(rollup@4.62.2))(rollup@4.62.2)(srvx@0.11.17)(terser@5.48.0)(typescript@5.9.3)(vite@7.3.5(@types/node@24.13.2)(jiti@2.7.0)(terser@5.48.0)(yaml@2.9.0))(yaml@2.9.0)
@@ -103,10 +93,6 @@ importers:
         version: 5.9.3
 
   packages/js/react:
-    dependencies:
-      '@bauer-group/accessibility-widget':
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       '@testing-library/react':
         specifier: ^16.3.0
@@ -137,10 +123,6 @@ importers:
         version: 3.2.6(@types/debug@4.1.13)(@types/node@24.13.2)(happy-dom@17.6.3)(jiti@2.7.0)(terser@5.48.0)(yaml@2.9.0)
 
   packages/js/svelte:
-    dependencies:
-      '@bauer-group/accessibility-widget':
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       rimraf:
         specifier: ^6.0.1
@@ -153,10 +135,6 @@ importers:
         version: 5.9.3
 
   packages/js/vue:
-    dependencies:
-      '@bauer-group/accessibility-widget':
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       rimraf:
         specifier: ^6.0.1
@@ -342,9 +320,6 @@ packages:
   '@babel/types@8.0.0':
     resolution: {integrity: sha512-K8ponJDxBwDHigkeFqaqT5wLGl4bTlwMafR8k7b5CPxr6Ww+UG9ls8Yx6Tcpboxu97eeGVEEyKcHmEyOwN1vSw==}
     engines: {node: ^22.18.0 || >=24.11.0}
-
-  '@bauer-group/accessibility-widget@1.0.5':
-    resolution: {integrity: sha512-3p3gZWybcKxcOVlizR565cvQCl2gELIX9N8GqcDkMYKWuMxNwdsRJY2gPRggmC41nHIPckqK5FjI9LuNS74v/Q==}
 
   '@bomb.sh/tab@0.0.16':
     resolution: {integrity: sha512-xFtIH6JYVdXgkSft97gsQyJODZbjGXw+l+wkT06lBiBPuaF0CFYNulQNsgnYud7rURI7D4lyLmOQeAzRkvl1Fg==}
@@ -5305,8 +5280,6 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 8.0.0
       '@babel/helper-validator-identifier': 8.0.2
-
-  '@bauer-group/accessibility-widget@1.0.5': {}
 
   '@bomb.sh/tab@0.0.16(cac@6.7.14)(citty@0.2.2)':
     optionalDependencies:

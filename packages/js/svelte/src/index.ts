@@ -1,4 +1,24 @@
-import type { WidgetConfig, WidgetState } from '@bauer-group/accessibility-widget';
+/**
+ * Default CDN origin — the floating `v1` (major) tag. The widget stays current
+ * automatically. Override the `*Src`/`cssHref` options only to self-host/mirror.
+ */
+const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
+const DEFAULT_LOADER_SRC = `${CDN_V1}/accessibility-widget-loader.min.js`;
+const DEFAULT_CORE_SRC = `${CDN_V1}/accessibility-widget-core.min.js`;
+const DEFAULT_CSS_HREF = `${CDN_V1}/accessibility-widget.min.css`;
+
+/**
+ * Subset of the widget's runtime configuration. Declared locally so this MIT
+ * wrapper carries no dependency on the (AGPL) widget package; unknown keys pass through.
+ */
+export interface WidgetConfig {
+  corePath?: string;
+  cssPath?: string;
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  locale?: string;
+  primaryColor?: string;
+  [key: string]: unknown;
+}
 
 declare global {
   interface Window {
@@ -7,16 +27,16 @@ declare global {
       open(): Promise<void>;
       close(): void;
       reset(): void;
-      getState(): WidgetState | null;
+      getState(): unknown;
     };
   }
 }
 
 export interface AccessibilityWidgetOptions {
   loaderSrc?: string;
+  coreSrc?: string;
   cssHref?: string;
   config?: WidgetConfig;
-  sri?: { loader?: string; core?: string; css?: string };
 }
 
 /**
@@ -30,25 +50,23 @@ export function accessibilityWidget(
 ): { destroy(): void } {
   if (typeof window === 'undefined') return { destroy() {} };
 
-  const loaderSrc = opts.loaderSrc ?? '/accessibility-widget-loader.min.js';
-  const cssHref = opts.cssHref ?? '/accessibility-widget.min.css';
-  const sri = opts.sri ?? {};
+  const loaderSrc = opts.loaderSrc ?? DEFAULT_LOADER_SRC;
+  const coreSrc = opts.coreSrc ?? DEFAULT_CORE_SRC;
+  const cssHref = opts.cssHref ?? DEFAULT_CSS_HREF;
 
-  if (opts.config) {
-    window.AccessibilityWidgetConfig = {
-      ...(window.AccessibilityWidgetConfig ?? {}),
-      ...opts.config,
-    };
-  }
+  // The loader can't derive core/CSS from its own <script src>; pin them here.
+  window.AccessibilityWidgetConfig = {
+    ...(window.AccessibilityWidgetConfig ?? {}),
+    corePath: coreSrc,
+    cssPath: cssHref,
+    ...opts.config,
+  };
+
   if (cssHref && !document.querySelector('link[data-aw-css]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = cssHref;
     link.setAttribute('data-aw-css', '1');
-    if (sri.css) {
-      link.integrity = sri.css;
-      link.crossOrigin = 'anonymous';
-    }
     document.head.appendChild(link);
   }
   if (loaderSrc && !document.querySelector('script[data-aw-loader]')) {
@@ -56,10 +74,6 @@ export function accessibilityWidget(
     s.src = loaderSrc;
     s.defer = true;
     s.setAttribute('data-aw-loader', '1');
-    if (sri.loader) {
-      s.integrity = sri.loader;
-      s.crossOrigin = 'anonymous';
-    }
     document.head.appendChild(s);
   }
   return { destroy() {} };
