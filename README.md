@@ -36,7 +36,7 @@ The wrappers are **dependency-free** and load the widget from the **CDN (floatin
 
 | Folder                                                | System           | Language |
 | ----------------------------------------------------- | ---------------- | -------- |
-| [`packages/cms/wordpress`](./packages/cms/wordpress/) | WordPress 6.x    | PHP      |
+| [`packages/cms/wordpress`](./packages/cms/wordpress/) | WordPress 6/7    | PHP      |
 | [`packages/cms/typo3`](./packages/cms/typo3/)         | TYPO3 13         | PHP      |
 | [`packages/cms/drupal`](./packages/cms/drupal/)       | Drupal 10/11     | PHP      |
 | [`packages/shop/shopify`](./packages/shop/shopify/)   | Shopify (OS 2.0) | Liquid   |
@@ -120,7 +120,7 @@ Die Wrapper sind **abhängigkeitsfrei** und laden das Widget standardmäßig vom
 
 | Ordner                                                | System           | Sprache |
 | ----------------------------------------------------- | ---------------- | ------- |
-| [`packages/cms/wordpress`](./packages/cms/wordpress/) | WordPress 6.x    | PHP     |
+| [`packages/cms/wordpress`](./packages/cms/wordpress/) | WordPress 6/7    | PHP     |
 | [`packages/cms/typo3`](./packages/cms/typo3/)         | TYPO3 13         | PHP     |
 | [`packages/cms/drupal`](./packages/cms/drupal/)       | Drupal 10/11     | PHP     |
 | [`packages/shop/shopify`](./packages/shop/shopify/)   | Shopify (OS 2.0) | Liquid  |

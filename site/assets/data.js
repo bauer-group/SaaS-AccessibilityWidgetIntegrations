@@ -153,7 +153,7 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'wordpress-accessibility-widget',
-    req: { en: 'WordPress 6.x · PHP', de: 'WordPress 6.x · PHP' },
+    req: { en: 'WordPress 6/7 · PHP', de: 'WordPress 6/7 · PHP' },
     desc: {
       en: 'Plugin with an admin settings page. Install via Plugins → Add New → Upload.',
       de: 'Plugin mit Einstellungsseite. Installation über Plugins → Installieren → Hochladen.',
