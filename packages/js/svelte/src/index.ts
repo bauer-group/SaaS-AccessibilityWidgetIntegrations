@@ -1,5 +1,6 @@
 import {
   type WidgetConfig,
+  type WidgetApi,
   DEFAULT_LOADER_SRC,
   DEFAULT_CORE_SRC,
   DEFAULT_CSS_HREF,
@@ -12,6 +13,7 @@ import {
  */
 export type {
   WidgetConfig,
+  WidgetApi,
   WidgetPosition,
   WidgetLocale,
   FeatureId,
@@ -20,12 +22,7 @@ export type {
 declare global {
   interface Window {
     AccessibilityWidgetConfig?: WidgetConfig;
-    AccessibilityWidget?: {
-      open(): Promise<void>;
-      close(): void;
-      reset(): void;
-      getState(): unknown;
-    };
+    AccessibilityWidget?: WidgetApi;
   }
 }
 
@@ -80,3 +77,12 @@ export const openAccessibilityWidget = (): Promise<void> | undefined =>
   window.AccessibilityWidget?.open();
 export const closeAccessibilityWidget = (): void => window.AccessibilityWidget?.close();
 export const resetAccessibilityWidget = (): void => window.AccessibilityWidget?.reset();
+
+/** Programmatically toggle a widget feature, e.g. `setAccessibilityWidgetFeature('contrast', true)`. */
+export const setAccessibilityWidgetFeature = (
+  id: string,
+  value: unknown,
+): Promise<void> | undefined => window.AccessibilityWidget?.set(id, value);
+
+/** Read the widget's current state (active features, preferences, …). */
+export const getAccessibilityWidgetState = (): unknown => window.AccessibilityWidget?.getState();

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import {
   type WidgetConfig,
+  type WidgetApi,
   DEFAULT_LOADER_SRC,
   DEFAULT_CORE_SRC,
   DEFAULT_CSS_HREF,
@@ -13,6 +14,7 @@ import {
  */
 export type {
   WidgetConfig,
+  WidgetApi,
   WidgetPosition,
   WidgetLocale,
   FeatureId,
@@ -32,13 +34,7 @@ export interface AccessibilityWidgetProps {
 declare global {
   interface Window {
     AccessibilityWidgetConfig?: WidgetConfig;
-    AccessibilityWidget?: {
-      open(): Promise<void>;
-      close(): void;
-      reset(): void;
-      set(id: string, value: unknown): Promise<void>;
-      getState(): unknown;
-    };
+    AccessibilityWidget?: WidgetApi;
   }
 }
 
@@ -90,3 +86,12 @@ export const openAccessibilityWidget = (): Promise<void> | undefined =>
   window.AccessibilityWidget?.open();
 export const closeAccessibilityWidget = (): void => window.AccessibilityWidget?.close();
 export const resetAccessibilityWidget = (): void => window.AccessibilityWidget?.reset();
+
+/** Programmatically toggle a widget feature, e.g. `setAccessibilityWidgetFeature('contrast', true)`. */
+export const setAccessibilityWidgetFeature = (
+  id: string,
+  value: unknown,
+): Promise<void> | undefined => window.AccessibilityWidget?.set(id, value);
+
+/** Read the widget's current state (active features, preferences, …). */
+export const getAccessibilityWidgetState = (): unknown => window.AccessibilityWidget?.getState();

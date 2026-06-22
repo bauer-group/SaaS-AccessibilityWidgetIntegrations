@@ -128,6 +128,19 @@ ${tsTypeAlias(
 export interface WidgetConfig {
 ${tsConfigInterface()}
 }
+
+/**
+ * Imperative API exposed at \`window.AccessibilityWidget\` once the core bundle
+ * has loaded. Mirror this in each wrapper's \`declare global\` so the surface can
+ * never drift between packages.
+ */
+export interface WidgetApi {
+  open(): Promise<void>;
+  close(): void;
+  reset(): void;
+  set(id: string, value: unknown): Promise<void>;
+  getState(): unknown;
+}
 `;
 }
 

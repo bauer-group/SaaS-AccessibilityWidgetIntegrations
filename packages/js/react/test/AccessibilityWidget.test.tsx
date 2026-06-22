@@ -1,6 +1,14 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
-import { AccessibilityWidget } from '../src/AccessibilityWidget.js';
+import {
+  AccessibilityWidget,
+  openAccessibilityWidget,
+  closeAccessibilityWidget,
+  resetAccessibilityWidget,
+  setAccessibilityWidgetFeature,
+  getAccessibilityWidgetState,
+  type WidgetApi,
+} from '../src/AccessibilityWidget.js';
 
 const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
 
@@ -71,5 +79,42 @@ describe('<AccessibilityWidget /> — smoke', () => {
     // config.corePath wins over the coreSrc-derived default.
     expect(widgetConfig().corePath).toBe('/custom/core.min.js');
     expect(widgetConfig().cssPath).toBe('/assets/aw.min.css');
+  });
+});
+
+describe('imperative API helpers', () => {
+  afterEach(() => {
+    delete (window as unknown as { AccessibilityWidget?: unknown }).AccessibilityWidget;
+  });
+
+  it('forward every call to window.AccessibilityWidget (incl. set / getState)', () => {
+    const calls: string[] = [];
+    (window as unknown as { AccessibilityWidget?: WidgetApi }).AccessibilityWidget = {
+      open: () => {
+        calls.push('open');
+        return Promise.resolve();
+      },
+      close: () => calls.push('close'),
+      reset: () => calls.push('reset'),
+      set: (id, value) => {
+        calls.push(`set:${id}=${String(value)}`);
+        return Promise.resolve();
+      },
+      getState: () => ({ contrast: true }),
+    };
+
+    openAccessibilityWidget();
+    closeAccessibilityWidget();
+    resetAccessibilityWidget();
+    setAccessibilityWidgetFeature('contrast', true);
+
+    expect(calls).toEqual(['open', 'close', 'reset', 'set:contrast=true']);
+    expect(getAccessibilityWidgetState()).toEqual({ contrast: true });
+  });
+
+  it('no-op safely before the widget core has loaded', () => {
+    expect(() => closeAccessibilityWidget()).not.toThrow();
+    expect(getAccessibilityWidgetState()).toBeUndefined();
+    expect(setAccessibilityWidgetFeature('contrast', true)).toBeUndefined();
   });
 });
