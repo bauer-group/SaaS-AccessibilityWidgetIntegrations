@@ -2,7 +2,7 @@
 Contributors: bauergroup
 Tags: accessibility, a11y, bfsg, wcag, barrierefreiheit
 Requires at least: 6.5
-Tested up to: 6.7
+Tested up to: 7.0
 Requires PHP: 8.1
 Stable tag: 2.0.1
 License: MIT
@@ -29,8 +29,3 @@ Features:
 1. Plugin-Ordner `accessibility-widget/` in `wp-content/plugins/` hochladen.
 2. Plugin aktivieren.
 3. Unter "Einstellungen → Accessibility Widget" konfigurieren.
-
-== Changelog ==
-
-= 1.0.0-alpha.1 =
-* Initialversion
