@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  BauerGroup\AccessibilityWidget\:
+    resource: '../Classes/*'
+
+  # Resolved by the middleware dispatcher via the container, so it must be public.
+  BauerGroup\AccessibilityWidget\Middleware\WidgetConfigMiddleware:
+    public: true

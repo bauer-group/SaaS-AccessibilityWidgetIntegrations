@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "group": {
+      "appearance": "Appearance",
+      "behavior": "Behavior",
+      "content": "Content",
+      "features": "Features",
+      "advanced": "Advanced / self-hosting"
+    },
+    "position": {
+      "label": "Position",
+      "info": "Where the floating button appears."
+    },
+    "offsetX": {
+      "label": "Horizontal offset (px)",
+      "info": "Distance from the screen edge."
+    },
+    "offsetY": {
+      "label": "Vertical offset (px)",
+      "info": "Distance from the screen edge."
+    },
+    "zIndex": {
+      "label": "z-index",
+      "info": "Stacking order of the widget. Increase if it sits behind other elements."
+    },
+    "primaryColor": {
+      "label": "Brand color",
+      "info": "Color of the floating button."
+    },
+    "locale": {
+      "label": "Language",
+      "info": "Widget UI language. \"Auto\" detects the browser/page language."
+    },
+    "buttonLabel": {
+      "label": "Button label",
+      "info": "Accessible label for the button. Empty uses the localized default."
+    },
+    "draggableFab": {
+      "label": "Draggable button",
+      "info": "Let visitors drag the button to reposition it."
+    },
+    "respectReducedMotion": {
+      "label": "Respect reduced motion",
+      "info": "Honor the visitor's prefers-reduced-motion setting."
+    },
+    "hideOnPrint": {
+      "label": "Hide on print",
+      "info": "Hide the widget on printed pages."
+    },
+    "keyboardShortcut": {
+      "label": "Keyboard shortcut",
+      "info": "Shortcut to open the widget (e.g. ctrl+alt+a). Empty disables it."
+    },
+    "storageKey": {
+      "label": "Storage key",
+      "info": "localStorage key for saved visitor preferences. Change only to avoid conflicts."
+    },
+    "hidePoweredBy": {
+      "label": "Hide \"powered by\"",
+      "info": "Hide the provider credit in the widget panel."
+    },
+    "debug": {
+      "label": "Debug logging",
+      "info": "Log diagnostic messages to the browser console."
+    },
+    "statementUrl": {
+      "label": "Accessibility statement URL",
+      "info": "Link to your accessibility statement."
+    },
+    "disclaimer": {
+      "label": "Disclaimer text",
+      "info": "Short note shown in the widget panel."
+    },
+    "assetBase": {
+      "label": "Asset base URL",
+      "info": "Empty loads from the BAUER GROUP CDN (recommended, always current). Set only to self-host/mirror."
+    },
+    "corePath": {
+      "label": "Core script URL",
+      "info": "Overrides the derived core bundle URL. Advanced self-hosting only."
+    },
+    "cssPath": {
+      "label": "Stylesheet URL",
+      "info": "Overrides the derived stylesheet URL. Advanced self-hosting only."
+    },
+    "coreIntegrity": {
+      "label": "Core SRI hash",
+      "info": "Subresource Integrity hash for a pinned core URL. Only with a fixed self-hosted version."
+    },
+    "cssIntegrity": {
+      "label": "Stylesheet SRI hash",
+      "info": "Subresource Integrity hash for a pinned stylesheet URL."
+    },
+    "initiallyEnabled": {
+      "label": "Initially enabled features",
+      "info": "Comma-separated feature IDs to enable by default: fontSize, lineHeight, letterSpacing, contrast, grayscale, invertColors, dyslexiaFont, highlightLinks, pauseAnimations, bigCursor, focusOutline, readingMask, readingGuide, tts, structureNav"
+    },
+    "disabledFeatures": {
+      "label": "Hidden features",
+      "info": "Comma-separated feature IDs to hide: fontSize, lineHeight, letterSpacing, contrast, grayscale, invertColors, dyslexiaFont, highlightLinks, pauseAnimations, bigCursor, focusOutline, readingMask, readingGuide, tts, structureNav"
+    }
+  }
+}

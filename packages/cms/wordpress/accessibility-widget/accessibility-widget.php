@@ -10,6 +10,7 @@
  * License:           MIT
  * License URI:       https://opensource.org/licenses/MIT
  * Text Domain:       accessibility-widget
+ * Domain Path:       /languages
  * Update URI:        https://github.com/bauer-group/SaaS-AccessibilityWidget
  */
 
@@ -20,155 +21,315 @@ if (!defined('ABSPATH')) {
 define('ACCESSIBILITY_WIDGET_VERSION', '1.1.1');
 define('ACCESSIBILITY_WIDGET_SLUG', 'accessibility-widget');
 
-/**
- * Default CDN origin — the floating `v1` (major) tag. The widget stays current
- * automatically; no assets are bundled with this plugin. Set a custom base URL
- * in the settings only to self-host or mirror the assets.
- */
-define('ACCESSIBILITY_WIDGET_CDN', 'https://widgets.professional-hosting.com/accessibility-widget/v1');
+/** Settings option key. */
+const ACCESSIBILITY_WIDGET_OPTION = 'accessibility_widget_options';
 
-/** Resolve the asset base URL (trailing-slashed): custom override or CDN v1. */
-function accessibility_widget_base_url(): string {
-    $opts = get_option('accessibility_widget_options', []);
-    $base = !empty($opts['asset_base']) ? $opts['asset_base'] : ACCESSIBILITY_WIDGET_CDN;
-    return trailingslashit($base);
+/** The generated config schema (groups + fields + defaults + asset metadata). */
+function accessibility_widget_schema(): array
+{
+    static $schema = null;
+    if ($schema === null) {
+        $schema = require __DIR__ . '/inc/config-schema.php';
+    }
+    return $schema;
 }
 
-/** Enqueue loader + inline config on every front-end page. */
-function accessibility_widget_enqueue(): void {
-    $base = accessibility_widget_base_url();
-    $opts = wp_parse_args(get_option('accessibility_widget_options', []), [
-        'position'      => 'bottom-right',
-        'locale'        => 'auto',
-        'primary_color' => '#0058a3',
-    ]);
+/** Translate a generated (variable) string against this plugin's text domain. */
+function accessibility_widget_t(string $text): string
+{
+    // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText -- strings are generated; catalogs ship with the plugin.
+    return $text === '' ? '' : translate($text, 'accessibility-widget');
+}
 
-    // The loader does NOT derive core/CSS from its own <script src>, so pin them.
-    $config = [
-        'corePath'     => esc_url($base . 'accessibility-widget-core.min.js'),
-        'cssPath'      => esc_url($base . 'accessibility-widget.min.css'),
-        'position'     => sanitize_key($opts['position']),
-        'locale'       => sanitize_key($opts['locale']),
-        'primaryColor' => sanitize_hex_color($opts['primary_color']) ?: '#0058a3',
-    ];
+/** Load the German (and any other) translations. */
+add_action('init', static function (): void {
+    load_plugin_textdomain('accessibility-widget', false, dirname(plugin_basename(__FILE__)) . '/languages');
+});
+
+/** Defaults map (key => stored string), derived from the schema. */
+function accessibility_widget_defaults(): array
+{
+    $defaults = [];
+    foreach (accessibility_widget_schema()['fields'] as $field) {
+        $value = $field['default'] ?? '';
+        if (is_bool($value)) {
+            $value = $value ? '1' : '';
+        }
+        $defaults[$field['key']] = is_scalar($value) ? (string) $value : '';
+    }
+    return $defaults;
+}
+
+/** True for http/https/mailto/tel or relative URLs; rejects javascript:/data:. */
+function accessibility_widget_is_safe_url(string $url): bool
+{
+    $scheme = strtolower((string) wp_parse_url($url, PHP_URL_SCHEME));
+    return $scheme === '' || in_array($scheme, ['http', 'https', 'mailto', 'tel'], true);
+}
+
+/** Coerce a stored value into its runtime type, or null when it should be omitted. */
+function accessibility_widget_coerce(array $field, $raw)
+{
+    switch ($field['type']) {
+        case 'bool':
+            return !empty($raw);
+        case 'int':
+            $number = (int) $raw;
+            if (isset($field['min']) && $number < $field['min']) {
+                $number = (int) $field['min'];
+            }
+            return $number;
+        case 'enum':
+        case 'feature_state':
+            $values = array_column($field['options'], 'value');
+            return in_array($raw, $values, true) ? $raw : ($field['default'] ?? reset($values));
+        case 'color':
+            return sanitize_hex_color((string) $raw) ?: ($field['default'] ?? '#0058a3');
+        case 'url':
+            $value = trim((string) $raw);
+            if ($value === '') {
+                return null;
+            }
+            if (($field['validate'] ?? '') === 'url-safe' && !accessibility_widget_is_safe_url($value)) {
+                return null;
+            }
+            return esc_url_raw($value);
+        default: // string
+            $value = sanitize_text_field((string) $raw);
+            if (($field['special'] ?? '') === 'keyboardShortcut') {
+                return $value === '' ? false : $value;
+            }
+            return $value === '' ? null : $value;
+    }
+}
+
+/** Assemble window.AccessibilityWidgetConfig from the stored options. */
+function accessibility_widget_build_config(array $opts): array
+{
+    $schema = accessibility_widget_schema();
+    $config = [];
+    $offset = [];
+    $initial_features = [];
+    $disabled_features = [];
+    $assets = ['base' => '', 'core' => '', 'css' => '', 'coreIntegrity' => '', 'cssIntegrity' => ''];
+
+    foreach ($schema['fields'] as $field) {
+        $key = $field['key'];
+        $raw = $opts[$key] ?? ($field['default'] ?? '');
+
+        if (!empty($field['asset'])) {
+            $assets[$field['asset']] = trim((string) $raw);
+            continue;
+        }
+        if ($field['type'] === 'feature_state') {
+            if ($raw === 'on') {
+                $initial_features[$field['feature']] = true;
+            } elseif ($raw === 'off') {
+                $initial_features[$field['feature']] = false;
+            } elseif ($raw === 'disabled') {
+                $disabled_features[] = $field['feature'];
+            }
+            continue;
+        }
+
+        $value = accessibility_widget_coerce($field, $raw);
+        if ($value === null) {
+            continue;
+        }
+        if (isset($field['runtimeKey']) && strpos($field['runtimeKey'], 'offset.') === 0) {
+            $offset[substr($field['runtimeKey'], 7)] = $value;
+        } else {
+            $config[$key] = $value;
+        }
+    }
+
+    if ($offset) {
+        $config['offset'] = ['x' => $offset['x'] ?? 20, 'y' => $offset['y'] ?? 20];
+    }
+    if ($initial_features) {
+        $config['initialFeatures'] = $initial_features;
+    }
+    if ($disabled_features) {
+        $config['disabledFeatures'] = $disabled_features;
+    }
+
+    $base = $assets['base'] !== '' ? rtrim($assets['base'], '/') : rtrim($schema['cdnBase'], '/');
+    $config['corePath'] = $assets['core'] !== '' ? $assets['core'] : $base . '/' . $schema['assetFiles']['core'];
+    $config['cssPath'] = $assets['css'] !== '' ? $assets['css'] : $base . '/' . $schema['assetFiles']['css'];
+    if ($assets['coreIntegrity'] !== '') {
+        $config['coreIntegrity'] = $assets['coreIntegrity'];
+    }
+    if ($assets['cssIntegrity'] !== '') {
+        $config['cssIntegrity'] = $assets['cssIntegrity'];
+    }
+
+    return $config;
+}
+
+/** Enqueue the inline config + the deferred loader on every front-end page. */
+function accessibility_widget_enqueue(): void
+{
+    $schema = accessibility_widget_schema();
+    $opts = wp_parse_args(get_option(ACCESSIBILITY_WIDGET_OPTION, []), accessibility_widget_defaults());
+    $config = accessibility_widget_build_config($opts);
+
+    $base = !empty($opts['assetBase']) ? rtrim((string) $opts['assetBase'], '/') : rtrim($schema['cdnBase'], '/');
+    $loader = esc_url($base . '/' . $schema['assetFiles']['loader']);
+
+    // JSON_HEX_TAG guarantees no value can break out of the <script> context.
+    $json = wp_json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     wp_register_script('accessibility-widget-inline-config', '', [], ACCESSIBILITY_WIDGET_VERSION, true);
     wp_enqueue_script('accessibility-widget-inline-config');
-    wp_add_inline_script(
-        'accessibility-widget-inline-config',
-        'window.AccessibilityWidgetConfig = ' . wp_json_encode($config) . ';',
-        'before'
-    );
+    wp_add_inline_script('accessibility-widget-inline-config', 'window.AccessibilityWidgetConfig = ' . $json . ';', 'before');
 
     wp_enqueue_script(
         'accessibility-widget-loader',
-        $base . 'accessibility-widget-loader.min.js',
+        $loader,
         [],
-        null, // CDN URL is already version-pinned via the v1 path; no query string.
+        null, // CDN URL is version-pinned via the v1 path; no query string.
         ['strategy' => 'defer', 'in_footer' => true]
     );
 }
 add_action('wp_enqueue_scripts', 'accessibility_widget_enqueue');
 
-/** Settings page (Settings → Accessibility Widget) */
-function accessibility_widget_register_settings(): void {
-    register_setting(
-        'accessibility_widget',
-        'accessibility_widget_options',
-        [
-            'type' => 'array',
-            'sanitize_callback' => 'accessibility_widget_sanitize',
-            'default' => [],
-        ]
-    );
+/** Register the single array option with a schema-driven sanitizer. */
+function accessibility_widget_register_settings(): void
+{
+    register_setting(ACCESSIBILITY_WIDGET_SLUG, ACCESSIBILITY_WIDGET_OPTION, [
+        'type' => 'array',
+        'sanitize_callback' => 'accessibility_widget_sanitize',
+        'default' => [],
+    ]);
 }
 add_action('admin_init', 'accessibility_widget_register_settings');
 
-function accessibility_widget_sanitize(array $input): array {
-    $supported_locales = [
-        'auto', 'de', 'en', 'fr', 'es', 'it', 'pl', 'tr', 'ar',
-        'zh', 'hi', 'pt', 'bn', 'ru', 'ja', 'ko', 'vi', 'fa', 'ur',
-        'th', 'id', 'he', 'nl', 'sv', 'cs', 'el', 'hu', 'ro', 'uk',
-    ];
-    $locale = sanitize_key($input['locale'] ?? 'auto');
-    $base   = trim((string) ($input['asset_base'] ?? ''));
-    return [
-        'position'      => in_array($input['position'] ?? '', ['bottom-right', 'bottom-left', 'top-right', 'top-left'], true) ? $input['position'] : 'bottom-right',
-        'locale'        => in_array($locale, $supported_locales, true) ? $locale : 'auto',
-        'primary_color' => sanitize_hex_color($input['primary_color'] ?? '#0058a3') ?: '#0058a3',
-        'asset_base'    => $base === '' ? '' : esc_url_raw($base),
-    ];
+/** Sanitize every submitted field against the schema (whitelists + escaping). */
+function accessibility_widget_sanitize($input): array
+{
+    $input = is_array($input) ? $input : [];
+    $out = [];
+    foreach (accessibility_widget_schema()['fields'] as $field) {
+        $key = $field['key'];
+        $raw = $input[$key] ?? null;
+        switch ($field['type']) {
+            case 'bool':
+                $out[$key] = empty($raw) ? '' : '1';
+                break;
+            case 'int':
+                $number = (int) $raw;
+                if (isset($field['min']) && $number < $field['min']) {
+                    $number = (int) $field['min'];
+                }
+                $out[$key] = (string) $number;
+                break;
+            case 'enum':
+            case 'feature_state':
+                $values = array_column($field['options'], 'value');
+                $out[$key] = in_array($raw, $values, true) ? (string) $raw : (string) ($field['default'] ?? reset($values));
+                break;
+            case 'color':
+                $out[$key] = sanitize_hex_color((string) $raw) ?: (string) ($field['default'] ?? '#0058a3');
+                break;
+            case 'url':
+                $value = trim((string) $raw);
+                if ($value !== '' && (($field['validate'] ?? '') !== 'url-safe' || accessibility_widget_is_safe_url($value))) {
+                    $value = esc_url_raw($value);
+                } else {
+                    $value = '';
+                }
+                $out[$key] = $value;
+                break;
+            default:
+                $out[$key] = sanitize_text_field((string) $raw);
+        }
+    }
+    return $out;
 }
 
-function accessibility_widget_settings_page(): void {
+/** Settings page (Settings → Accessibility Widget). */
+function accessibility_widget_settings_page(): void
+{
     add_options_page(
         'Accessibility Widget',
         'Accessibility Widget',
         'manage_options',
-        'accessibility-widget',
+        ACCESSIBILITY_WIDGET_SLUG,
         'accessibility_widget_render_settings'
     );
 }
 add_action('admin_menu', 'accessibility_widget_settings_page');
 
-function accessibility_widget_render_settings(): void {
+/** Render one table row for a field, switching on its type. */
+function accessibility_widget_render_field(array $field, array $opts): void
+{
+    $key = $field['key'];
+    $id = 'aw_' . $key;
+    $name = ACCESSIBILITY_WIDGET_OPTION . '[' . $key . ']';
+    $value = (string) ($opts[$key] ?? ($field['default'] ?? ''));
+    $label = accessibility_widget_t($field['label']);
+
+    echo '<tr><th scope="row"><label for="' . esc_attr($id) . '">' . esc_html($label) . '</label></th><td>';
+    switch ($field['type']) {
+        case 'enum':
+        case 'feature_state':
+            echo '<select id="' . esc_attr($id) . '" name="' . esc_attr($name) . '">';
+            foreach ($field['options'] as $opt) {
+                $opt_label = !empty($field['optionsTranslatable']) ? accessibility_widget_t($opt['label']) : $opt['label'];
+                echo '<option value="' . esc_attr($opt['value']) . '" ' . selected($value, $opt['value'], false) . '>' . esc_html($opt_label) . '</option>';
+            }
+            echo '</select>';
+            break;
+        case 'bool':
+            echo '<input type="checkbox" id="' . esc_attr($id) . '" name="' . esc_attr($name) . '" value="1" ' . checked($value, '1', false) . ' />';
+            break;
+        case 'int':
+            $min = isset($field['min']) ? ' min="' . esc_attr((string) $field['min']) . '"' : '';
+            echo '<input type="number" id="' . esc_attr($id) . '" name="' . esc_attr($name) . '" value="' . esc_attr($value) . '"' . $min . ' class="small-text" />';
+            break;
+        case 'url':
+            echo '<input type="url" id="' . esc_attr($id) . '" name="' . esc_attr($name) . '" value="' . esc_attr($value) . '" class="large-text" />';
+            break;
+        default: // color, string
+            echo '<input type="text" id="' . esc_attr($id) . '" name="' . esc_attr($name) . '" value="' . esc_attr($value) . '" class="regular-text" />';
+    }
+    if (!empty($field['help'])) {
+        echo '<p class="description">' . esc_html(accessibility_widget_t($field['help'])) . '</p>';
+    }
+    echo '</td></tr>';
+}
+
+/** Render the grouped settings form. */
+function accessibility_widget_render_settings(): void
+{
     if (!current_user_can('manage_options')) {
         return;
     }
-    $opts = wp_parse_args(get_option('accessibility_widget_options', []), [
-        'position'      => 'bottom-right',
-        'locale'        => 'auto',
-        'primary_color' => '#0058a3',
-        'asset_base'    => '',
-    ]);
-    $locales = [
-        'auto', 'de', 'en', 'fr', 'es', 'it', 'pl', 'tr', 'ar',
-        'zh', 'hi', 'pt', 'bn', 'ru', 'ja', 'ko', 'vi', 'fa', 'ur',
-        'th', 'id', 'he', 'nl', 'sv', 'cs', 'el', 'hu', 'ro', 'uk',
-    ];
+    $schema = accessibility_widget_schema();
+    $opts = wp_parse_args(get_option(ACCESSIBILITY_WIDGET_OPTION, []), accessibility_widget_defaults());
+    $intro = accessibility_widget_t('Configure the lazy-loading widget. It loads from the CDN and stays current automatically.');
+    $docs = accessibility_widget_t('Documentation');
     ?>
     <div class="wrap">
       <h1>Accessibility Widget</h1>
-      <p>Konfiguration des lazy-loading Widgets. Das Widget wird vom CDN geladen und bleibt automatisch aktuell. Details: <a href="https://github.com/bauer-group/SaaS-AccessibilityWidget" target="_blank" rel="noopener">GitHub</a>.</p>
+      <p>
+        <?php echo esc_html($intro); ?>
+        <a href="https://github.com/bauer-group/SaaS-AccessibilityWidget" target="_blank" rel="noopener"><?php echo esc_html($docs); ?></a>
+      </p>
       <form method="post" action="options.php">
-        <?php settings_fields('accessibility_widget'); ?>
-        <table class="form-table" role="presentation">
-          <tr>
-            <th><label for="aw_position">Position</label></th>
-            <td>
-              <select name="accessibility_widget_options[position]" id="aw_position">
-                <?php foreach (['bottom-right', 'bottom-left', 'top-right', 'top-left'] as $p): ?>
-                  <option value="<?= esc_attr($p) ?>" <?= selected($opts['position'], $p, false) ?>><?= esc_html($p) ?></option>
-                <?php endforeach; ?>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th><label for="aw_locale">Locale</label></th>
-            <td>
-              <select name="accessibility_widget_options[locale]" id="aw_locale">
-                <?php foreach ($locales as $l): ?>
-                  <option value="<?= esc_attr($l) ?>" <?= selected($opts['locale'], $l, false) ?>><?= esc_html($l) ?></option>
-                <?php endforeach; ?>
-              </select>
-              <p class="description">28 Locales unterstützt; <code>auto</code> erkennt die Browser-/HTML-Sprache.</p>
-            </td>
-          </tr>
-          <tr>
-            <th><label for="aw_color">Markenfarbe</label></th>
-            <td>
-              <input type="text" id="aw_color" name="accessibility_widget_options[primary_color]" value="<?= esc_attr($opts['primary_color']) ?>" class="regular-text" />
-              <p class="description">Hex-Farbe des FAB-Buttons (z. B. #0058a3).</p>
-            </td>
-          </tr>
-          <tr>
-            <th><label for="aw_base">Asset-Basis-URL (optional)</label></th>
-            <td>
-              <input type="url" id="aw_base" name="accessibility_widget_options[asset_base]" value="<?= esc_attr($opts['asset_base']) ?>" class="large-text" placeholder="<?= esc_attr(ACCESSIBILITY_WIDGET_CDN) ?>" />
-              <p class="description">Leer lassen, um das Widget vom BAUER GROUP CDN zu laden (empfohlen — immer aktuell). Nur für Self-Hosting/Spiegelung auf eine eigene Origin setzen.</p>
-            </td>
-          </tr>
-        </table>
+        <?php settings_fields(ACCESSIBILITY_WIDGET_SLUG); ?>
+        <?php foreach ($schema['groups'] as $group): ?>
+          <h2><?php echo esc_html(accessibility_widget_t($group['label'])); ?></h2>
+          <table class="form-table" role="presentation">
+            <?php
+            foreach ($schema['fields'] as $field) {
+                if ($field['group'] === $group['id']) {
+                    accessibility_widget_render_field($field, $opts);
+                }
+            }
+            ?>
+          </table>
+        <?php endforeach; ?>
         <?php submit_button(); ?>
       </form>
     </div>

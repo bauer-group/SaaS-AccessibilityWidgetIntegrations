@@ -1,3 +1,5 @@
+import type { WidgetConfig } from './widget-config.generated.js';
+
 /**
  * Default CDN origin — the floating `v1` (major) tag. The widget stays current
  * automatically. Override via runtimeConfig only to self-host/mirror.
@@ -8,22 +10,24 @@ const DEFAULT_CORE_SRC = `${CDN_V1}/accessibility-widget-core.min.js`;
 const DEFAULT_CSS_HREF = `${CDN_V1}/accessibility-widget.min.css`;
 
 /**
- * Subset of the widget's runtime configuration. Declared locally so this MIT
- * wrapper carries no dependency on the (AGPL) widget package; unknown keys pass through.
+ * Full widget runtime config — generated from the shared MIT schema
+ * (config/widget-config.mjs), so this wrapper keeps no dependency on the (AGPL)
+ * widget package. Unknown keys still pass through to the runtime config.
  */
-export interface WidgetConfig {
-  corePath?: string;
-  cssPath?: string;
-  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
-  locale?: string;
-  primaryColor?: string;
-  [key: string]: unknown;
-}
+export type {
+  WidgetConfig,
+  WidgetPosition,
+  WidgetLocale,
+  FeatureId,
+} from './widget-config.generated.js';
 
 /**
- * Nuxt client-only plugin. Copy this file to `plugins/accessibility-widget.client.ts`
- * in your Nuxt app. By default the widget loads from the CDN `v1` tag — no config
- * needed. To self-host/mirror, override via `runtimeConfig.public.accessibilityWidget`
+ * Nuxt client-only plugin. Copy BOTH `plugin.client.ts` and its sibling
+ * `widget-config.generated.ts` from this package's `src/` into your Nuxt
+ * `plugins/` folder (keep them together) — e.g. as
+ * `plugins/accessibility-widget.client.ts`. By default the widget loads from the
+ * CDN `v1` tag — no config needed. To self-host/mirror, override via
+ * `runtimeConfig.public.accessibilityWidget`
  * in nuxt.config.ts:
  *
  *   export default defineNuxtConfig({

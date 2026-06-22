@@ -1,0 +1,103 @@
+{
+  "settings": {
+    "group": {
+      "appearance": "Darstellung",
+      "behavior": "Verhalten",
+      "content": "Inhalt",
+      "features": "Funktionen",
+      "advanced": "Erweitert / Self-Hosting"
+    },
+    "position": {
+      "label": "Position",
+      "info": "Wo die Schaltfläche erscheint."
+    },
+    "offsetX": {
+      "label": "Horizontaler Abstand (px)",
+      "info": "Abstand zum Bildschirmrand."
+    },
+    "offsetY": {
+      "label": "Vertikaler Abstand (px)",
+      "info": "Abstand zum Bildschirmrand."
+    },
+    "zIndex": {
+      "label": "z-index",
+      "info": "Stapelreihenfolge des Widgets. Erhöhen, falls es hinter anderen Elementen liegt."
+    },
+    "primaryColor": {
+      "label": "Markenfarbe",
+      "info": "Farbe der Schaltfläche."
+    },
+    "locale": {
+      "label": "Sprache",
+      "info": "Sprache der Widget-Oberfläche. „Auto“ erkennt die Browser-/Seitensprache."
+    },
+    "buttonLabel": {
+      "label": "Schaltflächen-Beschriftung",
+      "info": "Barrierefreie Beschriftung der Schaltfläche. Leer = lokalisierter Standard."
+    },
+    "draggableFab": {
+      "label": "Verschiebbare Schaltfläche",
+      "info": "Besucher können die Schaltfläche verschieben."
+    },
+    "respectReducedMotion": {
+      "label": "„Reduzierte Bewegung“ beachten",
+      "info": "Die Einstellung „prefers-reduced-motion“ des Besuchers berücksichtigen."
+    },
+    "hideOnPrint": {
+      "label": "Beim Drucken ausblenden",
+      "info": "Widget in der Druckansicht ausblenden."
+    },
+    "keyboardShortcut": {
+      "label": "Tastenkürzel",
+      "info": "Tastenkürzel zum Öffnen (z. B. ctrl+alt+a). Leer = deaktiviert."
+    },
+    "storageKey": {
+      "label": "Speicher-Schlüssel",
+      "info": "localStorage-Schlüssel für gespeicherte Einstellungen. Nur bei Konflikten ändern."
+    },
+    "hidePoweredBy": {
+      "label": "„Powered by“ ausblenden",
+      "info": "Den Anbieter-Hinweis im Widget ausblenden."
+    },
+    "debug": {
+      "label": "Debug-Protokollierung",
+      "info": "Diagnosemeldungen in der Browser-Konsole ausgeben."
+    },
+    "statementUrl": {
+      "label": "URL der Barrierefreiheitserklärung",
+      "info": "Link zu Ihrer Barrierefreiheitserklärung."
+    },
+    "disclaimer": {
+      "label": "Haftungsausschluss-Text",
+      "info": "Kurzer Hinweis im Widget-Panel."
+    },
+    "assetBase": {
+      "label": "Asset-Basis-URL",
+      "info": "Leer = Laden vom BAUER GROUP CDN (empfohlen, immer aktuell). Nur zum Self-Hosting/Spiegeln setzen."
+    },
+    "corePath": {
+      "label": "Core-Skript-URL",
+      "info": "Überschreibt die abgeleitete Core-Bundle-URL. Nur für fortgeschrittenes Self-Hosting."
+    },
+    "cssPath": {
+      "label": "Stylesheet-URL",
+      "info": "Überschreibt die abgeleitete Stylesheet-URL. Nur für fortgeschrittenes Self-Hosting."
+    },
+    "coreIntegrity": {
+      "label": "Core-SRI-Hash",
+      "info": "Subresource-Integrity-Hash für eine gepinnte Core-URL. Nur mit fester, selbst gehosteter Version."
+    },
+    "cssIntegrity": {
+      "label": "Stylesheet-SRI-Hash",
+      "info": "Subresource-Integrity-Hash für eine gepinnte Stylesheet-URL."
+    },
+    "initiallyEnabled": {
+      "label": "Standardmäßig aktivierte Funktionen",
+      "info": "Kommagetrennte Funktions-IDs, standardmäßig aktiviert: fontSize, lineHeight, letterSpacing, contrast, grayscale, invertColors, dyslexiaFont, highlightLinks, pauseAnimations, bigCursor, focusOutline, readingMask, readingGuide, tts, structureNav"
+    },
+    "disabledFeatures": {
+      "label": "Ausgeblendete Funktionen",
+      "info": "Kommagetrennte Funktions-IDs, die ausgeblendet werden: fontSize, lineHeight, letterSpacing, contrast, grayscale, invertColors, dyslexiaFont, highlightLinks, pauseAnimations, bigCursor, focusOutline, readingMask, readingGuide, tts, structureNav"
+    }
+  }
+}

@@ -68,6 +68,10 @@ The **CDN one-liner integration** is preferred (automatic patch/minor updates wi
 
 All integrations use this CDN `v1` path by default (no SRI — the floating tag changes on every widget release, which is incompatible with a pinned hash). The full guide — the `window.AccessibilityWidgetConfig` API, the immutable/floating path scheme, and self-hosting — is in the **[core repo under `docs/`](https://github.com/bauer-group/SaaS-AccessibilityWidget/tree/main/docs)**.
 
+### Configuration
+
+Every integration exposes the **full** widget configuration surface — appearance, behaviour, content, the 15 accessibility features, and advanced self-hosting (`corePath`/`cssPath` + SRI). The CMS/shop admin UIs ship **bilingual (EN + DE)** and render in the backend's language. All options are defined once in [`config/widget-config.mjs`](./config/widget-config.mjs) and the native settings (WordPress fields, TYPO3 Extension Configuration, Drupal form, Magento `system.xml`, Shopware `config.xml`, Shopify app block) plus the typed `WidgetConfig` TS surface are generated from it via `pnpm generate-config` (CI guards drift with `generate-config:check`). See the generated **[configuration reference](./docs/configuration.md)**.
+
 ## Contributing
 
 Integrations here are maintained by the team and the community. They are **MIT-licensed** (the Drupal module GPL-2.0-or-later), so contributions follow the standard **inbound = outbound** model — just sign off your commits per the [DCO](./CLA.md) (`git commit -s`). Conventional Commits (past tense), tests for new wrappers.
@@ -147,6 +151,10 @@ Bevorzugt ist die **CDN-Einzeiler-Integration** (automatische Patch/Minor-Update
 ```
 
 Alle Integrationen nutzen standardmäßig diesen CDN-`v1`-Pfad (kein SRI — der floating Tag ändert sich bei jedem Widget-Release, was mit einem gepinnten Hash unvereinbar ist). Die vollständige Anleitung — die `window.AccessibilityWidgetConfig`-API, das immutable/floating-Pfadschema und Self-Hosting — steht im **[Core-Repo unter `docs/`](https://github.com/bauer-group/SaaS-AccessibilityWidget/tree/main/docs)**.
+
+### Konfiguration
+
+Jede Integration bildet die **vollständige** Widget-Konfiguration ab — Darstellung, Verhalten, Inhalt, die 15 Barrierefreiheits-Funktionen und erweitertes Self-Hosting (`corePath`/`cssPath` + SRI). Die CMS-/Shop-Oberflächen sind **zweisprachig (EN + DE)** und zeigen die Sprache des Backends. Alle Optionen werden einmalig in [`config/widget-config.mjs`](./config/widget-config.mjs) definiert; die nativen Einstellungen (WordPress-Felder, TYPO3 Extension Configuration, Drupal-Formular, Magento `system.xml`, Shopware `config.xml`, Shopify App-Block) sowie das typisierte `WidgetConfig`-TS-Interface werden daraus per `pnpm generate-config` generiert (CI prüft Drift mit `generate-config:check`). Siehe die generierte **[Konfigurations-Referenz](./docs/configuration.md)**.
 
 ### Mitwirken
 

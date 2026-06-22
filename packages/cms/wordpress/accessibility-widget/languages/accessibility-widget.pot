@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: accessibility-widget\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Behavior"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Features"
+msgstr ""
+
+msgid "Advanced / self-hosting"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Where the floating button appears."
+msgstr ""
+
+msgid "Horizontal offset (px)"
+msgstr ""
+
+msgid "Distance from the screen edge."
+msgstr ""
+
+msgid "Vertical offset (px)"
+msgstr ""
+
+msgid "z-index"
+msgstr ""
+
+msgid "Stacking order of the widget. Increase if it sits behind other elements."
+msgstr ""
+
+msgid "Brand color"
+msgstr ""
+
+msgid "Color of the floating button."
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Widget UI language. \"Auto\" detects the browser/page language."
+msgstr ""
+
+msgid "Button label"
+msgstr ""
+
+msgid "Accessible label for the button. Empty uses the localized default."
+msgstr ""
+
+msgid "Draggable button"
+msgstr ""
+
+msgid "Let visitors drag the button to reposition it."
+msgstr ""
+
+msgid "Respect reduced motion"
+msgstr ""
+
+msgid "Honor the visitor's prefers-reduced-motion setting."
+msgstr ""
+
+msgid "Hide on print"
+msgstr ""
+
+msgid "Hide the widget on printed pages."
+msgstr ""
+
+msgid "Keyboard shortcut"
+msgstr ""
+
+msgid "Shortcut to open the widget (e.g. ctrl+alt+a). Empty disables it."
+msgstr ""
+
+msgid "Storage key"
+msgstr ""
+
+msgid "localStorage key for saved visitor preferences. Change only to avoid conflicts."
+msgstr ""
+
+msgid "Hide \"powered by\""
+msgstr ""
+
+msgid "Hide the provider credit in the widget panel."
+msgstr ""
+
+msgid "Debug logging"
+msgstr ""
+
+msgid "Log diagnostic messages to the browser console."
+msgstr ""
+
+msgid "Accessibility statement URL"
+msgstr ""
+
+msgid "Link to your accessibility statement."
+msgstr ""
+
+msgid "Disclaimer text"
+msgstr ""
+
+msgid "Short note shown in the widget panel."
+msgstr ""
+
+msgid "Asset base URL"
+msgstr ""
+
+msgid "Empty loads from the BAUER GROUP CDN (recommended, always current). Set only to self-host/mirror."
+msgstr ""
+
+msgid "Core script URL"
+msgstr ""
+
+msgid "Overrides the derived core bundle URL. Advanced self-hosting only."
+msgstr ""
+
+msgid "Stylesheet URL"
+msgstr ""
+
+msgid "Overrides the derived stylesheet URL. Advanced self-hosting only."
+msgstr ""
+
+msgid "Core SRI hash"
+msgstr ""
+
+msgid "Subresource Integrity hash for a pinned core URL. Only with a fixed self-hosted version."
+msgstr ""
+
+msgid "Stylesheet SRI hash"
+msgstr ""
+
+msgid "Subresource Integrity hash for a pinned stylesheet URL."
+msgstr ""
+
+msgid "Per-feature default state. \"Hidden\" removes the feature from the panel."
+msgstr ""
+
+msgid "Font size"
+msgstr ""
+
+msgid "Line height"
+msgstr ""
+
+msgid "Letter spacing"
+msgstr ""
+
+msgid "Contrast"
+msgstr ""
+
+msgid "Grayscale"
+msgstr ""
+
+msgid "Invert colors"
+msgstr ""
+
+msgid "Dyslexia font"
+msgstr ""
+
+msgid "Highlight links"
+msgstr ""
+
+msgid "Pause animations"
+msgstr ""
+
+msgid "Big cursor"
+msgstr ""
+
+msgid "Focus outline"
+msgstr ""
+
+msgid "Reading mask"
+msgstr ""
+
+msgid "Reading guide"
+msgstr ""
+
+msgid "Text to speech"
+msgstr ""
+
+msgid "Structure navigation"
+msgstr ""
+
+msgid "Default (widget decides)"
+msgstr ""
+
+msgid "On by default"
+msgstr ""
+
+msgid "Off by default"
+msgstr ""
+
+msgid "Hidden"
+msgstr ""
+
+msgid "Configure the lazy-loading widget. It loads from the CDN and stays current automatically."
+msgstr ""
+
+msgid "Documentation"
+msgstr ""

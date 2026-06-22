@@ -48,6 +48,9 @@ jobs:
       - name: 🔖 Version sync drift check
         run: pnpm sync-version:check
 
+      - name: 🧬 Config sync drift check
+        run: pnpm generate-config:check
+
       - name: 🏗️ Build
         run: pnpm build
 

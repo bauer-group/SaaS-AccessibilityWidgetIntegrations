@@ -1,3 +1,5 @@
+import type { WidgetConfig } from './widget-config.generated.js';
+
 /**
  * Default CDN origin — the floating `v1` (major) tag. The widget stays current
  * automatically. Override the `*Src`/`cssHref` options only to self-host/mirror.
@@ -8,17 +10,16 @@ const DEFAULT_CORE_SRC = `${CDN_V1}/accessibility-widget-core.min.js`;
 const DEFAULT_CSS_HREF = `${CDN_V1}/accessibility-widget.min.css`;
 
 /**
- * Subset of the widget's runtime configuration. Declared locally so this MIT
- * wrapper carries no dependency on the (AGPL) widget package; unknown keys pass through.
+ * Full widget runtime config — generated from the shared MIT schema
+ * (config/widget-config.mjs), so this wrapper keeps no dependency on the (AGPL)
+ * widget package. Unknown keys still pass through to the runtime config.
  */
-export interface WidgetConfig {
-  corePath?: string;
-  cssPath?: string;
-  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
-  locale?: string;
-  primaryColor?: string;
-  [key: string]: unknown;
-}
+export type {
+  WidgetConfig,
+  WidgetPosition,
+  WidgetLocale,
+  FeatureId,
+} from './widget-config.generated.js';
 
 declare global {
   interface Window {

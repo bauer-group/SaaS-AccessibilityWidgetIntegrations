@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: accessibility-widget\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+
+msgid "Appearance"
+msgstr "Darstellung"
+
+msgid "Behavior"
+msgstr "Verhalten"
+
+msgid "Content"
+msgstr "Inhalt"
+
+msgid "Features"
+msgstr "Funktionen"
+
+msgid "Advanced / self-hosting"
+msgstr "Erweitert / Self-Hosting"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Where the floating button appears."
+msgstr "Wo die Schaltfläche erscheint."
+
+msgid "Horizontal offset (px)"
+msgstr "Horizontaler Abstand (px)"
+
+msgid "Distance from the screen edge."
+msgstr "Abstand zum Bildschirmrand."
+
+msgid "Vertical offset (px)"
+msgstr "Vertikaler Abstand (px)"
+
+msgid "z-index"
+msgstr "z-index"
+
+msgid "Stacking order of the widget. Increase if it sits behind other elements."
+msgstr "Stapelreihenfolge des Widgets. Erhöhen, falls es hinter anderen Elementen liegt."
+
+msgid "Brand color"
+msgstr "Markenfarbe"
+
+msgid "Color of the floating button."
+msgstr "Farbe der Schaltfläche."
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Widget UI language. \"Auto\" detects the browser/page language."
+msgstr "Sprache der Widget-Oberfläche. „Auto“ erkennt die Browser-/Seitensprache."
+
+msgid "Button label"
+msgstr "Schaltflächen-Beschriftung"
+
+msgid "Accessible label for the button. Empty uses the localized default."
+msgstr "Barrierefreie Beschriftung der Schaltfläche. Leer = lokalisierter Standard."
+
+msgid "Draggable button"
+msgstr "Verschiebbare Schaltfläche"
+
+msgid "Let visitors drag the button to reposition it."
+msgstr "Besucher können die Schaltfläche verschieben."
+
+msgid "Respect reduced motion"
+msgstr "„Reduzierte Bewegung“ beachten"
+
+msgid "Honor the visitor's prefers-reduced-motion setting."
+msgstr "Die Einstellung „prefers-reduced-motion“ des Besuchers berücksichtigen."
+
+msgid "Hide on print"
+msgstr "Beim Drucken ausblenden"
+
+msgid "Hide the widget on printed pages."
+msgstr "Widget in der Druckansicht ausblenden."
+
+msgid "Keyboard shortcut"
+msgstr "Tastenkürzel"
+
+msgid "Shortcut to open the widget (e.g. ctrl+alt+a). Empty disables it."
+msgstr "Tastenkürzel zum Öffnen (z. B. ctrl+alt+a). Leer = deaktiviert."
+
+msgid "Storage key"
+msgstr "Speicher-Schlüssel"
+
+msgid "localStorage key for saved visitor preferences. Change only to avoid conflicts."
+msgstr "localStorage-Schlüssel für gespeicherte Einstellungen. Nur bei Konflikten ändern."
+
+msgid "Hide \"powered by\""
+msgstr "„Powered by“ ausblenden"
+
+msgid "Hide the provider credit in the widget panel."
+msgstr "Den Anbieter-Hinweis im Widget ausblenden."
+
+msgid "Debug logging"
+msgstr "Debug-Protokollierung"
+
+msgid "Log diagnostic messages to the browser console."
+msgstr "Diagnosemeldungen in der Browser-Konsole ausgeben."
+
+msgid "Accessibility statement URL"
+msgstr "URL der Barrierefreiheitserklärung"
+
+msgid "Link to your accessibility statement."
+msgstr "Link zu Ihrer Barrierefreiheitserklärung."
+
+msgid "Disclaimer text"
+msgstr "Haftungsausschluss-Text"
+
+msgid "Short note shown in the widget panel."
+msgstr "Kurzer Hinweis im Widget-Panel."
+
+msgid "Asset base URL"
+msgstr "Asset-Basis-URL"
+
+msgid "Empty loads from the BAUER GROUP CDN (recommended, always current). Set only to self-host/mirror."
+msgstr "Leer = Laden vom BAUER GROUP CDN (empfohlen, immer aktuell). Nur zum Self-Hosting/Spiegeln setzen."
+
+msgid "Core script URL"
+msgstr "Core-Skript-URL"
+
+msgid "Overrides the derived core bundle URL. Advanced self-hosting only."
+msgstr "Überschreibt die abgeleitete Core-Bundle-URL. Nur für fortgeschrittenes Self-Hosting."
+
+msgid "Stylesheet URL"
+msgstr "Stylesheet-URL"
+
+msgid "Overrides the derived stylesheet URL. Advanced self-hosting only."
+msgstr "Überschreibt die abgeleitete Stylesheet-URL. Nur für fortgeschrittenes Self-Hosting."
+
+msgid "Core SRI hash"
+msgstr "Core-SRI-Hash"
+
+msgid "Subresource Integrity hash for a pinned core URL. Only with a fixed self-hosted version."
+msgstr "Subresource-Integrity-Hash für eine gepinnte Core-URL. Nur mit fester, selbst gehosteter Version."
+
+msgid "Stylesheet SRI hash"
+msgstr "Stylesheet-SRI-Hash"
+
+msgid "Subresource Integrity hash for a pinned stylesheet URL."
+msgstr "Subresource-Integrity-Hash für eine gepinnte Stylesheet-URL."
+
+msgid "Per-feature default state. \"Hidden\" removes the feature from the panel."
+msgstr "Standardzustand je Funktion. „Ausgeblendet“ entfernt die Funktion aus dem Panel."
+
+msgid "Font size"
+msgstr "Schriftgröße"
+
+msgid "Line height"
+msgstr "Zeilenhöhe"
+
+msgid "Letter spacing"
+msgstr "Buchstabenabstand"
+
+msgid "Contrast"
+msgstr "Kontrast"
+
+msgid "Grayscale"
+msgstr "Graustufen"
+
+msgid "Invert colors"
+msgstr "Farben invertieren"
+
+msgid "Dyslexia font"
+msgstr "Dyslexie-Schrift"
+
+msgid "Highlight links"
+msgstr "Links hervorheben"
+
+msgid "Pause animations"
+msgstr "Animationen pausieren"
+
+msgid "Big cursor"
+msgstr "Großer Mauszeiger"
+
+msgid "Focus outline"
+msgstr "Fokus-Umrandung"
+
+msgid "Reading mask"
+msgstr "Lesemaske"
+
+msgid "Reading guide"
+msgstr "Leselineal"
+
+msgid "Text to speech"
+msgstr "Vorlesefunktion"
+
+msgid "Structure navigation"
+msgstr "Struktur-Navigation"
+
+msgid "Default (widget decides)"
+msgstr "Standard (Widget entscheidet)"
+
+msgid "On by default"
+msgstr "Standardmäßig an"
+
+msgid "Off by default"
+msgstr "Standardmäßig aus"
+
+msgid "Hidden"
+msgstr "Ausgeblendet"
+
+msgid "Configure the lazy-loading widget. It loads from the CDN and stays current automatically."
+msgstr "Konfiguration des Lazy-Loading-Widgets. Es wird vom CDN geladen und bleibt automatisch aktuell."
+
+msgid "Documentation"
+msgstr "Dokumentation"

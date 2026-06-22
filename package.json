@@ -30,6 +30,8 @@
     "clean": "pnpm -r run clean",
     "sync-version": "node scripts/sync-version.mjs",
     "sync-version:check": "node scripts/sync-version.mjs --check",
+    "generate-config": "node scripts/generate-config.mjs",
+    "generate-config:check": "node scripts/generate-config.mjs --check",
     "package-plugins": "node scripts/package-plugins.mjs",
     "publish:bootstrap": "node scripts/publish-bootstrap.mjs"
   },

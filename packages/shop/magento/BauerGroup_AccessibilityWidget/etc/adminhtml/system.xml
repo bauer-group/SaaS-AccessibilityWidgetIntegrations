@@ -7,23 +7,170 @@
       <label>Accessibility Widget</label>
       <tab>general</tab>
       <resource>BauerGroup_AccessibilityWidget::config</resource>
-      <group id="settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>Settings</label>
-        <field id="position" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+      <group id="appearance" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Appearance</label>
+        <field id="position" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
           <label>Position</label>
-          <comment>bottom-right (default), bottom-left, top-right or top-left.</comment>
+          <comment>Where the floating button appears.</comment>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\Position</source_model>
         </field>
-        <field id="locale" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-          <label>Locale</label>
-          <comment>auto (default) or an ISO code (de, en, fr, …). 28 locales supported.</comment>
+        <field id="offsetX" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Horizontal offset (px)</label>
+          <comment>Distance from the screen edge.</comment>
         </field>
-        <field id="primary_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-          <label>Primary color</label>
-          <comment>Hex color of the FAB button, e.g. #0058a3.</comment>
+        <field id="offsetY" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Vertical offset (px)</label>
+          <comment>Distance from the screen edge.</comment>
         </field>
-        <field id="cdn_base" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-          <label>Custom asset base URL (optional)</label>
-          <comment>Leave empty to load from the BAUER GROUP CDN (recommended; always current). Set to a custom origin only to self-host/mirror.</comment>
+        <field id="zIndex" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>z-index</label>
+          <comment>Stacking order of the widget. Increase if it sits behind other elements.</comment>
+        </field>
+        <field id="primaryColor" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Brand color</label>
+          <comment>Color of the floating button.</comment>
+        </field>
+        <field id="locale" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Language</label>
+          <comment>Widget UI language. &quot;Auto&quot; detects the browser/page language.</comment>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\Locale</source_model>
+        </field>
+        <field id="buttonLabel" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Button label</label>
+          <comment>Accessible label for the button. Empty uses the localized default.</comment>
+        </field>
+      </group>
+      <group id="behavior" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Behavior</label>
+        <field id="draggableFab" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Draggable button</label>
+          <comment>Let visitors drag the button to reposition it.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="respectReducedMotion" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Respect reduced motion</label>
+          <comment>Honor the visitor's prefers-reduced-motion setting.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="hideOnPrint" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Hide on print</label>
+          <comment>Hide the widget on printed pages.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="keyboardShortcut" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Keyboard shortcut</label>
+          <comment>Shortcut to open the widget (e.g. ctrl+alt+a). Empty disables it.</comment>
+        </field>
+        <field id="storageKey" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Storage key</label>
+          <comment>localStorage key for saved visitor preferences. Change only to avoid conflicts.</comment>
+        </field>
+        <field id="hidePoweredBy" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Hide &quot;powered by&quot;</label>
+          <comment>Hide the provider credit in the widget panel.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="debug" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Debug logging</label>
+          <comment>Log diagnostic messages to the browser console.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+      </group>
+      <group id="content" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Content</label>
+        <field id="statementUrl" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Accessibility statement URL</label>
+          <comment>Link to your accessibility statement.</comment>
+        </field>
+        <field id="disclaimer" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Disclaimer text</label>
+          <comment>Short note shown in the widget panel.</comment>
+        </field>
+      </group>
+      <group id="features" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Features</label>
+        <field id="feature_fontSize" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Font size</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_lineHeight" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Line height</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_letterSpacing" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Letter spacing</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_contrast" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Contrast</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_grayscale" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Grayscale</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_invertColors" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Invert colors</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_dyslexiaFont" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Dyslexia font</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_highlightLinks" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Highlight links</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_pauseAnimations" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Pause animations</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_bigCursor" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Big cursor</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_focusOutline" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Focus outline</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_readingMask" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Reading mask</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_readingGuide" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Reading guide</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_tts" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Text to speech</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+        <field id="feature_structureNav" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Structure navigation</label>
+          <source_model>BauerGroup\AccessibilityWidget\Model\Config\Source\FeatureState</source_model>
+        </field>
+      </group>
+      <group id="advanced" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Advanced / self-hosting</label>
+        <field id="assetBase" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Asset base URL</label>
+          <comment>Empty loads from the BAUER GROUP CDN (recommended, always current). Set only to self-host/mirror.</comment>
+        </field>
+        <field id="corePath" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Core script URL</label>
+          <comment>Overrides the derived core bundle URL. Advanced self-hosting only.</comment>
+        </field>
+        <field id="cssPath" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Stylesheet URL</label>
+          <comment>Overrides the derived stylesheet URL. Advanced self-hosting only.</comment>
+        </field>
+        <field id="coreIntegrity" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Core SRI hash</label>
+          <comment>Subresource Integrity hash for a pinned core URL. Only with a fixed self-hosted version.</comment>
+        </field>
+        <field id="cssIntegrity" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Stylesheet SRI hash</label>
+          <comment>Subresource Integrity hash for a pinned stylesheet URL.</comment>
         </field>
       </group>
     </section>

@@ -3,31 +3,107 @@
  * @var \Magento\Framework\View\Element\Template $block
  * @var \Magento\Framework\Escaper $escaper
  *
- * The widget is loaded from the CDN (floating v1 tag) and stays current
- * automatically; no assets are bundled with this module. Set
- * accessibility_widget/settings/cdn_base only to self-host/mirror.
+ * The widget loads from the CDN (floating v1 tag) and stays current
+ * automatically; no assets are bundled. Set accessibility_widget/advanced/assetBase
+ * only to self-host/mirror. Every option of window.AccessibilityWidgetConfig is
+ * exposed under Stores → Configuration → General → Accessibility Widget,
+ * generated from the shared schema (config-schema.php).
  */
+
+declare(strict_types=1);
+
+/** @var array{cdnBase: string, assetFiles: array<string, string>, fields: array<int, array<string, mixed>>} $schema */
+$schema = require dirname(__DIR__, 3) . '/config-schema.php';
 
 $scopeConfig = $block->getData('scopeConfig')
     ?? \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+$read = static fn (string $path): ?string => $scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
-$position = (string) ($scopeConfig->getValue('accessibility_widget/settings/position') ?: 'bottom-right');
-$locale = (string) ($scopeConfig->getValue('accessibility_widget/settings/locale') ?: 'auto');
-$color = (string) ($scopeConfig->getValue('accessibility_widget/settings/primary_color') ?: '#0058a3');
+$isSafeUrl = static function (string $url): bool {
+    $scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
+    return $scheme === '' || in_array($scheme, ['http', 'https', 'mailto', 'tel'], true);
+};
 
-$cdnDefault = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
-$base = rtrim((string) ($scopeConfig->getValue('accessibility_widget/settings/cdn_base') ?: $cdnDefault), '/');
+$config = [];
+$offset = [];
+$initialFeatures = [];
+$disabledFeatures = [];
+$assets = ['base' => '', 'core' => '', 'css' => '', 'coreIntegrity' => '', 'cssIntegrity' => ''];
 
-// The loader does NOT derive core/CSS from its own <script src>, so pin them.
-$cfg = [
-    'corePath' => $base . '/accessibility-widget-core.min.js',
-    'cssPath' => $base . '/accessibility-widget.min.css',
-    'position' => $position,
-    'locale' => $locale,
-    'primaryColor' => $color,
-];
+foreach ($schema['fields'] as $field) {
+    $raw = $read($field['path']);
+    if ($raw === null) {
+        $raw = $field['default'] ?? '';
+    }
+
+    if (!empty($field['asset'])) {
+        $assets[$field['asset']] = trim((string) $raw);
+        continue;
+    }
+    if ($field['type'] === 'feature_state') {
+        if ($raw === 'on') {
+            $initialFeatures[$field['feature']] = true;
+        } elseif ($raw === 'off') {
+            $initialFeatures[$field['feature']] = false;
+        } elseif ($raw === 'disabled') {
+            $disabledFeatures[] = $field['feature'];
+        }
+        continue;
+    }
+
+    switch ($field['type']) {
+        case 'bool':
+            $value = (bool) $raw;
+            break;
+        case 'int':
+            $value = (int) $raw;
+            if (isset($field['min']) && $value < $field['min']) {
+                $value = (int) $field['min'];
+            }
+            break;
+        default:
+            $value = (string) $raw;
+            if (($field['special'] ?? '') === 'keyboardShortcut') {
+                $value = $value === '' ? false : $value;
+            } elseif ($value === '') {
+                continue 2;
+            } elseif (($field['validate'] ?? '') === 'url-safe' && !$isSafeUrl($value)) {
+                continue 2;
+            }
+    }
+
+    if (isset($field['runtimeKey']) && str_starts_with((string) $field['runtimeKey'], 'offset.')) {
+        $offset[substr((string) $field['runtimeKey'], 7)] = $value;
+    } else {
+        $config[$field['key']] = $value;
+    }
+}
+
+if ($offset) {
+    $config['offset'] = ['x' => $offset['x'] ?? 20, 'y' => $offset['y'] ?? 20];
+}
+if ($initialFeatures) {
+    $config['initialFeatures'] = $initialFeatures;
+}
+if ($disabledFeatures) {
+    $config['disabledFeatures'] = $disabledFeatures;
+}
+
+$base = $assets['base'] !== '' ? rtrim($assets['base'], '/') : rtrim($schema['cdnBase'], '/');
+$config['corePath'] = $assets['core'] !== '' ? $assets['core'] : $base . '/' . $schema['assetFiles']['core'];
+$config['cssPath'] = $assets['css'] !== '' ? $assets['css'] : $base . '/' . $schema['assetFiles']['css'];
+if ($assets['coreIntegrity'] !== '') {
+    $config['coreIntegrity'] = $assets['coreIntegrity'];
+}
+if ($assets['cssIntegrity'] !== '') {
+    $config['cssIntegrity'] = $assets['cssIntegrity'];
+}
+
+$loader = $base . '/' . $schema['assetFiles']['loader'];
+// JSON_HEX_* escapes <, >, &, ' and " so no stored value can break out of <script>.
+$json = json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES);
 ?>
 <script>
-  window.AccessibilityWidgetConfig = <?= /* @noEscape */ json_encode($cfg, JSON_UNESCAPED_SLASHES) ?>;
+  window.AccessibilityWidgetConfig = <?= /* @noEscape */ $json ?>;
 </script>
-<script src="<?= $escaper->escapeUrl($base . '/accessibility-widget-loader.min.js') ?>" defer data-aw-loader="1"></script>
+<script src="<?= $escaper->escapeUrl($loader) ?>" defer data-aw-loader="1"></script>

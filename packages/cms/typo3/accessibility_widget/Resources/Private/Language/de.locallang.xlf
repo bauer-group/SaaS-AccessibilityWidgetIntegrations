@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="EXT:accessibility_widget/Resources/Private/Language/locallang.xlf" product-name="accessibility_widget">
+    <body>
+      <trans-unit id="option.position.label" resname="option.position.label">
+        <source>Position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="option.offsetX.label" resname="option.offsetX.label">
+        <source>Horizontal offset (px)</source>
+        <target>Horizontaler Abstand (px)</target>
+      </trans-unit>
+      <trans-unit id="option.offsetY.label" resname="option.offsetY.label">
+        <source>Vertical offset (px)</source>
+        <target>Vertikaler Abstand (px)</target>
+      </trans-unit>
+      <trans-unit id="option.zIndex.label" resname="option.zIndex.label">
+        <source>z-index</source>
+        <target>z-index</target>
+      </trans-unit>
+      <trans-unit id="option.primaryColor.label" resname="option.primaryColor.label">
+        <source>Brand color</source>
+        <target>Markenfarbe</target>
+      </trans-unit>
+      <trans-unit id="option.locale.label" resname="option.locale.label">
+        <source>Language</source>
+        <target>Sprache</target>
+      </trans-unit>
+      <trans-unit id="option.buttonLabel.label" resname="option.buttonLabel.label">
+        <source>Button label</source>
+        <target>Schaltflächen-Beschriftung</target>
+      </trans-unit>
+      <trans-unit id="option.draggableFab.label" resname="option.draggableFab.label">
+        <source>Draggable button</source>
+        <target>Verschiebbare Schaltfläche</target>
+      </trans-unit>
+      <trans-unit id="option.respectReducedMotion.label" resname="option.respectReducedMotion.label">
+        <source>Respect reduced motion</source>
+        <target>„Reduzierte Bewegung“ beachten</target>
+      </trans-unit>
+      <trans-unit id="option.hideOnPrint.label" resname="option.hideOnPrint.label">
+        <source>Hide on print</source>
+        <target>Beim Drucken ausblenden</target>
+      </trans-unit>
+      <trans-unit id="option.keyboardShortcut.label" resname="option.keyboardShortcut.label">
+        <source>Keyboard shortcut</source>
+        <target>Tastenkürzel</target>
+      </trans-unit>
+      <trans-unit id="option.storageKey.label" resname="option.storageKey.label">
+        <source>Storage key</source>
+        <target>Speicher-Schlüssel</target>
+      </trans-unit>
+      <trans-unit id="option.hidePoweredBy.label" resname="option.hidePoweredBy.label">
+        <source>Hide &quot;powered by&quot;</source>
+        <target>„Powered by“ ausblenden</target>
+      </trans-unit>
+      <trans-unit id="option.debug.label" resname="option.debug.label">
+        <source>Debug logging</source>
+        <target>Debug-Protokollierung</target>
+      </trans-unit>
+      <trans-unit id="option.statementUrl.label" resname="option.statementUrl.label">
+        <source>Accessibility statement URL</source>
+        <target>URL der Barrierefreiheitserklärung</target>
+      </trans-unit>
+      <trans-unit id="option.disclaimer.label" resname="option.disclaimer.label">
+        <source>Disclaimer text</source>
+        <target>Haftungsausschluss-Text</target>
+      </trans-unit>
+      <trans-unit id="option.assetBase.label" resname="option.assetBase.label">
+        <source>Asset base URL</source>
+        <target>Asset-Basis-URL</target>
+      </trans-unit>
+      <trans-unit id="option.corePath.label" resname="option.corePath.label">
+        <source>Core script URL</source>
+        <target>Core-Skript-URL</target>
+      </trans-unit>
+      <trans-unit id="option.cssPath.label" resname="option.cssPath.label">
+        <source>Stylesheet URL</source>
+        <target>Stylesheet-URL</target>
+      </trans-unit>
+      <trans-unit id="option.coreIntegrity.label" resname="option.coreIntegrity.label">
+        <source>Core SRI hash</source>
+        <target>Core-SRI-Hash</target>
+      </trans-unit>
+      <trans-unit id="option.cssIntegrity.label" resname="option.cssIntegrity.label">
+        <source>Stylesheet SRI hash</source>
+        <target>Stylesheet-SRI-Hash</target>
+      </trans-unit>
+      <trans-unit id="option.initiallyEnabled.label" resname="option.initiallyEnabled.label">
+        <source>Initially enabled features (comma-separated IDs)</source>
+        <target>Standardmäßig aktivierte Funktionen (kommagetrennte IDs)</target>
+      </trans-unit>
+      <trans-unit id="option.disabledFeatures.label" resname="option.disabledFeatures.label">
+        <source>Hidden features (comma-separated IDs)</source>
+        <target>Ausgeblendete Funktionen (kommagetrennte IDs)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

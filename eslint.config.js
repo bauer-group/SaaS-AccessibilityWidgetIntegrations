@@ -14,6 +14,7 @@ export default tseslint.config(
       '**/vendor/**',
       '**/*.min.js',
       '**/*.min.css',
+      '**/*.generated.ts',
     ],
   },
   js.configs.recommended,

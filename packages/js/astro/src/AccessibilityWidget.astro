@@ -5,11 +5,13 @@
  */
 const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
 
+import type { WidgetConfig } from './widget-config.generated';
+
 interface Props {
   loaderSrc?: string;
   coreSrc?: string;
   cssHref?: string;
-  config?: Record<string, unknown>;
+  config?: WidgetConfig;
 }
 
 const {

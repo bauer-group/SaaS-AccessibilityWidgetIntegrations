@@ -1,0 +1,68 @@
+# cat=appearance/a/10; type=options[bottom-right=bottom-right,bottom-left=bottom-left,top-right=top-right,top-left=top-left]; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.position.label
+position = bottom-right
+
+# cat=appearance/a/20; type=int+; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.offsetX.label
+offsetX = 20
+
+# cat=appearance/a/30; type=int+; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.offsetY.label
+offsetY = 20
+
+# cat=appearance/a/40; type=int+; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.zIndex.label
+zIndex = 2147483646
+
+# cat=appearance/a/50; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.primaryColor.label
+primaryColor = #0058a3
+
+# cat=appearance/a/60; type=options[Auto=auto,Deutsch=de,English=en,Français=fr,Español=es,Italiano=it,Polski=pl,Türkçe=tr,العربية=ar,中文=zh,हिन्दी=hi,Português=pt,বাংলা=bn,Русский=ru,日本語=ja,한국어=ko,Tiếng Việt=vi,فارسی=fa,اردو=ur,ไทย=th,Bahasa Indonesia=id,עברית=he,Nederlands=nl,Svenska=sv,Čeština=cs,Ελληνικά=el,Magyar=hu,Română=ro,Українська=uk]; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.locale.label
+locale = auto
+
+# cat=appearance/a/70; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.buttonLabel.label
+buttonLabel = 
+
+# cat=behavior/a/10; type=boolean; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.draggableFab.label
+draggableFab = 0
+
+# cat=behavior/a/20; type=boolean; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.respectReducedMotion.label
+respectReducedMotion = 1
+
+# cat=behavior/a/30; type=boolean; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.hideOnPrint.label
+hideOnPrint = 1
+
+# cat=behavior/a/40; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.keyboardShortcut.label
+keyboardShortcut = ctrl+alt+a
+
+# cat=behavior/a/50; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.storageKey.label
+storageKey = accessibility-widget
+
+# cat=behavior/a/60; type=boolean; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.hidePoweredBy.label
+hidePoweredBy = 0
+
+# cat=behavior/a/70; type=boolean; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.debug.label
+debug = 0
+
+# cat=content/a/10; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.statementUrl.label
+statementUrl = 
+
+# cat=content/a/20; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.disclaimer.label
+disclaimer = 
+
+# cat=features/a/10; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.initiallyEnabled.label
+initiallyEnabled =
+
+# cat=features/a/20; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.disabledFeatures.label
+disabledFeatures =
+
+# cat=advanced/a/10; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.assetBase.label
+assetBase = 
+
+# cat=advanced/a/20; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.corePath.label
+corePath = 
+
+# cat=advanced/a/30; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.cssPath.label
+cssPath = 
+
+# cat=advanced/a/40; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.coreIntegrity.label
+coreIntegrity = 
+
+# cat=advanced/a/50; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.cssIntegrity.label
+cssIntegrity =

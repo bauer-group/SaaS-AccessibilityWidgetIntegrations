@@ -1,26 +1,62 @@
 {%- comment -%}
   BAUER GROUP Accessibility Widget — Shopify snippet
   @version 1.1.1
-  Loads from the CDN (floating v1 tag) and stays current automatically.
-  Usage:
-    {% render 'accessibility-widget',
-       position: 'bottom-right',
-       locale: 'auto',
-       primary_color: '#0058a3',
-       cdn_base: '' %}   {%- comment -%} optional: override to self-host/mirror {%- endcomment -%}
+  Loads from the CDN (floating v1 tag) and stays current automatically. Builds
+  window.AccessibilityWidgetConfig from the passed settings, then injects the
+  loader. Every widget option is supported — see the app block or the README.
+  Manual usage (pass only what you want to override; defaults apply otherwise):
+    {% render 'accessibility-widget', position: 'bottom-left', locale: 'de' %}
 {%- endcomment -%}
-{%- assign _position = position | default: 'bottom-right' -%}
-{%- assign _locale = locale | default: 'auto' -%}
-{%- assign _color = primary_color | default: '#0058a3' -%}
-{%- assign _base = cdn_base | default: 'https://widgets.professional-hosting.com/accessibility-widget/v1' -%}
-
+{%- comment -%} BEGIN GENERATED: accessibility-widget config (scripts/generate-config.mjs) {%- endcomment -%}
+{%- liquid
+  assign _cdn = 'https://widgets.professional-hosting.com/accessibility-widget/v1'
+  assign _base = assetBase | default: _cdn
+  assign _core = corePath | default: ''
+  if _core == blank
+    assign _core = _base | append: '/accessibility-widget-core.min.js'
+  endif
+  assign _css = cssPath | default: ''
+  if _css == blank
+    assign _css = _base | append: '/accessibility-widget.min.css'
+  endif
+  assign _loader = _base | append: '/accessibility-widget-loader.min.js'
+  assign _enabled = initiallyEnabled | default: '' | replace: ' ', '' | split: ','
+  assign _disabled = disabledFeatures | default: '' | replace: ' ', '' | split: ','
+-%}
 <script>
   window.AccessibilityWidgetConfig = {
-    corePath: {{ _base | append: '/accessibility-widget-core.min.js' | json }},
-    cssPath: {{ _base | append: '/accessibility-widget.min.css' | json }},
-    position: {{ _position | json }},
-    locale: {{ _locale | json }},
-    primaryColor: {{ _color | json }}
+    corePath: {{ _core | json }},
+    cssPath: {{ _css | json }},
+    position: {{ position | default: 'bottom-right' | json }},
+    offset: { "x": {{ offsetX | default: 20 | json }}, "y": {{ offsetY | default: 20 | json }} },
+    zIndex: {{ zIndex | default: 2147483646 | json }},
+    primaryColor: {{ primaryColor | default: '#0058a3' | json }},
+    locale: {{ locale | default: 'auto' | json }},
+    draggableFab: {{ draggableFab | default: false, allow_false: true | json }},
+    respectReducedMotion: {{ respectReducedMotion | default: true, allow_false: true | json }},
+    hideOnPrint: {{ hideOnPrint | default: true, allow_false: true | json }},
+    keyboardShortcut: {% if keyboardShortcut == blank %}false{% else %}{{ keyboardShortcut | json }}{% endif %},
+    storageKey: {{ storageKey | default: 'accessibility-widget' | json }},
+    hidePoweredBy: {{ hidePoweredBy | default: false, allow_false: true | json }},
+    debug: {{ debug | default: false, allow_false: true | json }},
+    {%- if buttonLabel != blank %}
+    buttonLabel: {{ buttonLabel | json }},
+    {%- endif %}
+    {%- if statementUrl != blank %}{%- assign _scheme = statementUrl | split: ':' | first | downcase %}{%- unless _scheme == 'javascript' or _scheme == 'data' %}
+    statementUrl: {{ statementUrl | json }},
+    {%- endunless %}{%- endif %}
+    {%- if disclaimer != blank %}
+    disclaimer: {{ disclaimer | json }},
+    {%- endif %}
+    {%- if coreIntegrity != blank %}
+    coreIntegrity: {{ coreIntegrity | json }},
+    {%- endif %}
+    {%- if cssIntegrity != blank %}
+    cssIntegrity: {{ cssIntegrity | json }},
+    {%- endif %}
+    initialFeatures: { {%- for f in _enabled %}{%- if f != blank %}{{ f | json }}: true,{%- endif %}{%- endfor %} },
+    disabledFeatures: [ {%- for f in _disabled %}{%- if f != blank %}{{ f | json }},{%- endif %}{%- endfor %} ]
   };
 </script>
-<script src="{{ _base }}/accessibility-widget-loader.min.js" defer data-aw-loader="1"></script>
+<script src="{{ _loader | escape }}" defer data-aw-loader="1"></script>
+{%- comment -%} END GENERATED {%- endcomment -%}

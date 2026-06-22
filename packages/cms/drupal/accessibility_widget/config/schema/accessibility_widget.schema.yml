@@ -4,13 +4,109 @@ accessibility_widget.settings:
   mapping:
     position:
       type: string
-      label: 'FAB position'
+      label: 'Position'
+    offsetX:
+      type: integer
+      label: 'Horizontal offset (px)'
+    offsetY:
+      type: integer
+      label: 'Vertical offset (px)'
+    zIndex:
+      type: integer
+      label: 'z-index'
+    primaryColor:
+      type: string
+      label: 'Brand color'
     locale:
       type: string
-      label: 'Locale'
-    primary_color:
+      label: 'Language'
+    buttonLabel:
       type: string
-      label: 'Primary color'
-    asset_base:
+      label: 'Button label'
+    draggableFab:
+      type: boolean
+      label: 'Draggable button'
+    respectReducedMotion:
+      type: boolean
+      label: 'Respect reduced motion'
+    hideOnPrint:
+      type: boolean
+      label: 'Hide on print'
+    keyboardShortcut:
       type: string
-      label: 'Custom asset base URL'
+      label: 'Keyboard shortcut'
+    storageKey:
+      type: string
+      label: 'Storage key'
+    hidePoweredBy:
+      type: boolean
+      label: 'Hide "powered by"'
+    debug:
+      type: boolean
+      label: 'Debug logging'
+    statementUrl:
+      type: string
+      label: 'Accessibility statement URL'
+    disclaimer:
+      type: string
+      label: 'Disclaimer text'
+    feature_fontSize:
+      type: string
+      label: 'Font size'
+    feature_lineHeight:
+      type: string
+      label: 'Line height'
+    feature_letterSpacing:
+      type: string
+      label: 'Letter spacing'
+    feature_contrast:
+      type: string
+      label: 'Contrast'
+    feature_grayscale:
+      type: string
+      label: 'Grayscale'
+    feature_invertColors:
+      type: string
+      label: 'Invert colors'
+    feature_dyslexiaFont:
+      type: string
+      label: 'Dyslexia font'
+    feature_highlightLinks:
+      type: string
+      label: 'Highlight links'
+    feature_pauseAnimations:
+      type: string
+      label: 'Pause animations'
+    feature_bigCursor:
+      type: string
+      label: 'Big cursor'
+    feature_focusOutline:
+      type: string
+      label: 'Focus outline'
+    feature_readingMask:
+      type: string
+      label: 'Reading mask'
+    feature_readingGuide:
+      type: string
+      label: 'Reading guide'
+    feature_tts:
+      type: string
+      label: 'Text to speech'
+    feature_structureNav:
+      type: string
+      label: 'Structure navigation'
+    assetBase:
+      type: string
+      label: 'Asset base URL'
+    corePath:
+      type: string
+      label: 'Core script URL'
+    cssPath:
+      type: string
+      label: 'Stylesheet URL'
+    coreIntegrity:
+      type: string
+      label: 'Core SRI hash'
+    cssIntegrity:
+      type: string
+      label: 'Stylesheet SRI hash'

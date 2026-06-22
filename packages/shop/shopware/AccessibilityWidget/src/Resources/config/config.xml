@@ -2,70 +2,680 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
   <card>
-    <title>BAUER GROUP Accessibility Widget</title>
-    <title lang="de-DE">BAUER GROUP Barrierefreiheits-Widget</title>
+    <title>Appearance</title>
+    <title lang="de-DE">Darstellung</title>
 
     <input-field type="single-select">
       <name>position</name>
       <defaultValue>bottom-right</defaultValue>
       <label>Position</label>
+      <label lang="de-DE">Position</label>
+      <helpText>Where the floating button appears.</helpText>
+      <helpText lang="de-DE">Wo die Schaltfläche erscheint.</helpText>
       <options>
-        <option><id>bottom-right</id><name>Bottom right</name></option>
-        <option><id>bottom-left</id><name>Bottom left</name></option>
-        <option><id>top-right</id><name>Top right</name></option>
-        <option><id>top-left</id><name>Top left</name></option>
+        <option><id>bottom-right</id><name>bottom-right</name></option>
+        <option><id>bottom-left</id><name>bottom-left</name></option>
+        <option><id>top-right</id><name>top-right</name></option>
+        <option><id>top-left</id><name>top-left</name></option>
       </options>
     </input-field>
 
-    <input-field type="single-select">
-      <name>locale</name>
-      <defaultValue>auto</defaultValue>
-      <label>Locale</label>
-      <options>
-        <option><id>auto</id><name>Auto</name></option>
-        <option><id>de</id><name>de</name></option>
-        <option><id>en</id><name>en</name></option>
-        <option><id>fr</id><name>fr</name></option>
-        <option><id>es</id><name>es</name></option>
-        <option><id>it</id><name>it</name></option>
-        <option><id>pl</id><name>pl</name></option>
-        <option><id>tr</id><name>tr</name></option>
-        <option><id>ar</id><name>ar</name></option>
-        <option><id>zh</id><name>zh</name></option>
-        <option><id>hi</id><name>hi</name></option>
-        <option><id>pt</id><name>pt</name></option>
-        <option><id>bn</id><name>bn</name></option>
-        <option><id>ru</id><name>ru</name></option>
-        <option><id>ja</id><name>ja</name></option>
-        <option><id>ko</id><name>ko</name></option>
-        <option><id>vi</id><name>vi</name></option>
-        <option><id>fa</id><name>fa</name></option>
-        <option><id>ur</id><name>ur</name></option>
-        <option><id>th</id><name>th</name></option>
-        <option><id>id</id><name>id</name></option>
-        <option><id>he</id><name>he</name></option>
-        <option><id>nl</id><name>nl</name></option>
-        <option><id>sv</id><name>sv</name></option>
-        <option><id>cs</id><name>cs</name></option>
-        <option><id>el</id><name>el</name></option>
-        <option><id>hu</id><name>hu</name></option>
-        <option><id>ro</id><name>ro</name></option>
-        <option><id>uk</id><name>uk</name></option>
-      </options>
+    <input-field type="int">
+      <name>offsetX</name>
+      <defaultValue>20</defaultValue>
+      <label>Horizontal offset (px)</label>
+      <label lang="de-DE">Horizontaler Abstand (px)</label>
+      <helpText>Distance from the screen edge.</helpText>
+      <helpText lang="de-DE">Abstand zum Bildschirmrand.</helpText>
+    </input-field>
+
+    <input-field type="int">
+      <name>offsetY</name>
+      <defaultValue>20</defaultValue>
+      <label>Vertical offset (px)</label>
+      <label lang="de-DE">Vertikaler Abstand (px)</label>
+      <helpText>Distance from the screen edge.</helpText>
+      <helpText lang="de-DE">Abstand zum Bildschirmrand.</helpText>
+    </input-field>
+
+    <input-field type="int">
+      <name>zIndex</name>
+      <defaultValue>2147483646</defaultValue>
+      <label>z-index</label>
+      <label lang="de-DE">z-index</label>
+      <helpText>Stacking order of the widget. Increase if it sits behind other elements.</helpText>
+      <helpText lang="de-DE">Stapelreihenfolge des Widgets. Erhöhen, falls es hinter anderen Elementen liegt.</helpText>
     </input-field>
 
     <input-field type="colorpicker">
       <name>primaryColor</name>
       <defaultValue>#0058a3</defaultValue>
-      <label>Primärfarbe</label>
+      <label>Brand color</label>
+      <label lang="de-DE">Markenfarbe</label>
+      <helpText>Color of the floating button.</helpText>
+      <helpText lang="de-DE">Farbe der Schaltfläche.</helpText>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>locale</name>
+      <defaultValue>auto</defaultValue>
+      <label>Language</label>
+      <label lang="de-DE">Sprache</label>
+      <helpText>Widget UI language. &quot;Auto&quot; detects the browser/page language.</helpText>
+      <helpText lang="de-DE">Sprache der Widget-Oberfläche. „Auto“ erkennt die Browser-/Seitensprache.</helpText>
+      <options>
+        <option><id>auto</id><name>Auto</name></option>
+        <option><id>de</id><name>Deutsch</name></option>
+        <option><id>en</id><name>English</name></option>
+        <option><id>fr</id><name>Français</name></option>
+        <option><id>es</id><name>Español</name></option>
+        <option><id>it</id><name>Italiano</name></option>
+        <option><id>pl</id><name>Polski</name></option>
+        <option><id>tr</id><name>Türkçe</name></option>
+        <option><id>ar</id><name>العربية</name></option>
+        <option><id>zh</id><name>中文</name></option>
+        <option><id>hi</id><name>हिन्दी</name></option>
+        <option><id>pt</id><name>Português</name></option>
+        <option><id>bn</id><name>বাংলা</name></option>
+        <option><id>ru</id><name>Русский</name></option>
+        <option><id>ja</id><name>日本語</name></option>
+        <option><id>ko</id><name>한국어</name></option>
+        <option><id>vi</id><name>Tiếng Việt</name></option>
+        <option><id>fa</id><name>فارسی</name></option>
+        <option><id>ur</id><name>اردو</name></option>
+        <option><id>th</id><name>ไทย</name></option>
+        <option><id>id</id><name>Bahasa Indonesia</name></option>
+        <option><id>he</id><name>עברית</name></option>
+        <option><id>nl</id><name>Nederlands</name></option>
+        <option><id>sv</id><name>Svenska</name></option>
+        <option><id>cs</id><name>Čeština</name></option>
+        <option><id>el</id><name>Ελληνικά</name></option>
+        <option><id>hu</id><name>Magyar</name></option>
+        <option><id>ro</id><name>Română</name></option>
+        <option><id>uk</id><name>Українська</name></option>
+      </options>
     </input-field>
 
     <input-field type="text">
-      <name>cdnBase</name>
-      <label>Custom asset base URL (optional)</label>
-      <label lang="de-DE">Eigene Asset-Basis-URL (optional)</label>
-      <helpText>Leave empty to load from the BAUER GROUP CDN (recommended; always current). Set to a custom origin only to self-host/mirror.</helpText>
-      <helpText lang="de-DE">Leer lassen, um vom BAUER GROUP CDN zu laden (empfohlen — immer aktuell). Nur für Self-Hosting/Spiegelung auf eine eigene Origin setzen.</helpText>
+      <name>buttonLabel</name>
+      <label>Button label</label>
+      <label lang="de-DE">Schaltflächen-Beschriftung</label>
+      <helpText>Accessible label for the button. Empty uses the localized default.</helpText>
+      <helpText lang="de-DE">Barrierefreie Beschriftung der Schaltfläche. Leer = lokalisierter Standard.</helpText>
+    </input-field>
+  </card>
+
+  <card>
+    <title>Behavior</title>
+    <title lang="de-DE">Verhalten</title>
+
+    <input-field type="bool">
+      <name>draggableFab</name>
+      <defaultValue>false</defaultValue>
+      <label>Draggable button</label>
+      <label lang="de-DE">Verschiebbare Schaltfläche</label>
+      <helpText>Let visitors drag the button to reposition it.</helpText>
+      <helpText lang="de-DE">Besucher können die Schaltfläche verschieben.</helpText>
+    </input-field>
+
+    <input-field type="bool">
+      <name>respectReducedMotion</name>
+      <defaultValue>true</defaultValue>
+      <label>Respect reduced motion</label>
+      <label lang="de-DE">„Reduzierte Bewegung“ beachten</label>
+      <helpText>Honor the visitor's prefers-reduced-motion setting.</helpText>
+      <helpText lang="de-DE">Die Einstellung „prefers-reduced-motion“ des Besuchers berücksichtigen.</helpText>
+    </input-field>
+
+    <input-field type="bool">
+      <name>hideOnPrint</name>
+      <defaultValue>true</defaultValue>
+      <label>Hide on print</label>
+      <label lang="de-DE">Beim Drucken ausblenden</label>
+      <helpText>Hide the widget on printed pages.</helpText>
+      <helpText lang="de-DE">Widget in der Druckansicht ausblenden.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>keyboardShortcut</name>
+      <defaultValue>ctrl+alt+a</defaultValue>
+      <label>Keyboard shortcut</label>
+      <label lang="de-DE">Tastenkürzel</label>
+      <helpText>Shortcut to open the widget (e.g. ctrl+alt+a). Empty disables it.</helpText>
+      <helpText lang="de-DE">Tastenkürzel zum Öffnen (z. B. ctrl+alt+a). Leer = deaktiviert.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>storageKey</name>
+      <defaultValue>accessibility-widget</defaultValue>
+      <label>Storage key</label>
+      <label lang="de-DE">Speicher-Schlüssel</label>
+      <helpText>localStorage key for saved visitor preferences. Change only to avoid conflicts.</helpText>
+      <helpText lang="de-DE">localStorage-Schlüssel für gespeicherte Einstellungen. Nur bei Konflikten ändern.</helpText>
+    </input-field>
+
+    <input-field type="bool">
+      <name>hidePoweredBy</name>
+      <defaultValue>false</defaultValue>
+      <label>Hide &quot;powered by&quot;</label>
+      <label lang="de-DE">„Powered by“ ausblenden</label>
+      <helpText>Hide the provider credit in the widget panel.</helpText>
+      <helpText lang="de-DE">Den Anbieter-Hinweis im Widget ausblenden.</helpText>
+    </input-field>
+
+    <input-field type="bool">
+      <name>debug</name>
+      <defaultValue>false</defaultValue>
+      <label>Debug logging</label>
+      <label lang="de-DE">Debug-Protokollierung</label>
+      <helpText>Log diagnostic messages to the browser console.</helpText>
+      <helpText lang="de-DE">Diagnosemeldungen in der Browser-Konsole ausgeben.</helpText>
+    </input-field>
+  </card>
+
+  <card>
+    <title>Content</title>
+    <title lang="de-DE">Inhalt</title>
+
+    <input-field type="text">
+      <name>statementUrl</name>
+      <label>Accessibility statement URL</label>
+      <label lang="de-DE">URL der Barrierefreiheitserklärung</label>
+      <helpText>Link to your accessibility statement.</helpText>
+      <helpText lang="de-DE">Link zu Ihrer Barrierefreiheitserklärung.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>disclaimer</name>
+      <label>Disclaimer text</label>
+      <label lang="de-DE">Haftungsausschluss-Text</label>
+      <helpText>Short note shown in the widget panel.</helpText>
+      <helpText lang="de-DE">Kurzer Hinweis im Widget-Panel.</helpText>
+    </input-field>
+  </card>
+
+  <card>
+    <title>Features</title>
+    <title lang="de-DE">Funktionen</title>
+
+    <input-field type="single-select">
+      <name>feature_fontSize</name>
+      <defaultValue>default</defaultValue>
+      <label>Font size</label>
+      <label lang="de-DE">Schriftgröße</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_lineHeight</name>
+      <defaultValue>default</defaultValue>
+      <label>Line height</label>
+      <label lang="de-DE">Zeilenhöhe</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_letterSpacing</name>
+      <defaultValue>default</defaultValue>
+      <label>Letter spacing</label>
+      <label lang="de-DE">Buchstabenabstand</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_contrast</name>
+      <defaultValue>default</defaultValue>
+      <label>Contrast</label>
+      <label lang="de-DE">Kontrast</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_grayscale</name>
+      <defaultValue>default</defaultValue>
+      <label>Grayscale</label>
+      <label lang="de-DE">Graustufen</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_invertColors</name>
+      <defaultValue>default</defaultValue>
+      <label>Invert colors</label>
+      <label lang="de-DE">Farben invertieren</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_dyslexiaFont</name>
+      <defaultValue>default</defaultValue>
+      <label>Dyslexia font</label>
+      <label lang="de-DE">Dyslexie-Schrift</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_highlightLinks</name>
+      <defaultValue>default</defaultValue>
+      <label>Highlight links</label>
+      <label lang="de-DE">Links hervorheben</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_pauseAnimations</name>
+      <defaultValue>default</defaultValue>
+      <label>Pause animations</label>
+      <label lang="de-DE">Animationen pausieren</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_bigCursor</name>
+      <defaultValue>default</defaultValue>
+      <label>Big cursor</label>
+      <label lang="de-DE">Großer Mauszeiger</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_focusOutline</name>
+      <defaultValue>default</defaultValue>
+      <label>Focus outline</label>
+      <label lang="de-DE">Fokus-Umrandung</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_readingMask</name>
+      <defaultValue>default</defaultValue>
+      <label>Reading mask</label>
+      <label lang="de-DE">Lesemaske</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_readingGuide</name>
+      <defaultValue>default</defaultValue>
+      <label>Reading guide</label>
+      <label lang="de-DE">Leselineal</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_tts</name>
+      <defaultValue>default</defaultValue>
+      <label>Text to speech</label>
+      <label lang="de-DE">Vorlesefunktion</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+
+    <input-field type="single-select">
+      <name>feature_structureNav</name>
+      <defaultValue>default</defaultValue>
+      <label>Structure navigation</label>
+      <label lang="de-DE">Struktur-Navigation</label>
+      <options>
+        <option>
+          <id>default</id>
+          <name>Default (widget decides)</name>
+          <name lang="de-DE">Standard (Widget entscheidet)</name>
+        </option>
+        <option>
+          <id>on</id>
+          <name>On by default</name>
+          <name lang="de-DE">Standardmäßig an</name>
+        </option>
+        <option>
+          <id>off</id>
+          <name>Off by default</name>
+          <name lang="de-DE">Standardmäßig aus</name>
+        </option>
+        <option>
+          <id>disabled</id>
+          <name>Hidden</name>
+          <name lang="de-DE">Ausgeblendet</name>
+        </option>
+      </options>
+    </input-field>
+  </card>
+
+  <card>
+    <title>Advanced / self-hosting</title>
+    <title lang="de-DE">Erweitert / Self-Hosting</title>
+
+    <input-field type="text">
+      <name>assetBase</name>
+      <label>Asset base URL</label>
+      <label lang="de-DE">Asset-Basis-URL</label>
+      <helpText>Empty loads from the BAUER GROUP CDN (recommended, always current). Set only to self-host/mirror.</helpText>
+      <helpText lang="de-DE">Leer = Laden vom BAUER GROUP CDN (empfohlen, immer aktuell). Nur zum Self-Hosting/Spiegeln setzen.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>corePath</name>
+      <label>Core script URL</label>
+      <label lang="de-DE">Core-Skript-URL</label>
+      <helpText>Overrides the derived core bundle URL. Advanced self-hosting only.</helpText>
+      <helpText lang="de-DE">Überschreibt die abgeleitete Core-Bundle-URL. Nur für fortgeschrittenes Self-Hosting.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>cssPath</name>
+      <label>Stylesheet URL</label>
+      <label lang="de-DE">Stylesheet-URL</label>
+      <helpText>Overrides the derived stylesheet URL. Advanced self-hosting only.</helpText>
+      <helpText lang="de-DE">Überschreibt die abgeleitete Stylesheet-URL. Nur für fortgeschrittenes Self-Hosting.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>coreIntegrity</name>
+      <label>Core SRI hash</label>
+      <label lang="de-DE">Core-SRI-Hash</label>
+      <helpText>Subresource Integrity hash for a pinned core URL. Only with a fixed self-hosted version.</helpText>
+      <helpText lang="de-DE">Subresource-Integrity-Hash für eine gepinnte Core-URL. Nur mit fester, selbst gehosteter Version.</helpText>
+    </input-field>
+
+    <input-field type="text">
+      <name>cssIntegrity</name>
+      <label>Stylesheet SRI hash</label>
+      <label lang="de-DE">Stylesheet-SRI-Hash</label>
+      <helpText>Subresource Integrity hash for a pinned stylesheet URL.</helpText>
+      <helpText lang="de-DE">Subresource-Integrity-Hash für eine gepinnte Stylesheet-URL.</helpText>
     </input-field>
   </card>
 </config>
