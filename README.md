@@ -53,7 +53,7 @@ pnpm typecheck
 pnpm lint
 ```
 
-Each wrapper has its own README with usage examples — e.g. [`packages/js/react/README.md`](./packages/js/react/README.md). How releases reach npm, Packagist and the plugin marketplaces is documented in [`docs/distribution.md`](./docs/distribution.md).
+Each wrapper has its own README with usage examples — e.g. [`packages/js/react/README.md`](./packages/js/react/README.md). How releases reach npm, Composer and the GitHub Release ZIPs is documented in [`docs/distribution.md`](./docs/distribution.md).
 
 ## Embedding the widget (short version)
 
@@ -137,7 +137,7 @@ pnpm typecheck
 pnpm lint
 ```
 
-Jeder Wrapper hat eine eigene README mit Nutzungsbeispielen — z. B. [`packages/js/react/README.md`](./packages/js/react/README.md). Wie Releases zu npm, Packagist und den Plugin-Marktplätzen gelangen, steht in [`docs/distribution.md`](./docs/distribution.md).
+Jeder Wrapper hat eine eigene README mit Nutzungsbeispielen — z. B. [`packages/js/react/README.md`](./packages/js/react/README.md). Wie Releases zu npm, Composer und den GitHub-Release-ZIPs gelangen, steht in [`docs/distribution.md`](./docs/distribution.md).
 
 ### Das Widget einbinden (Kurzfassung)
 
