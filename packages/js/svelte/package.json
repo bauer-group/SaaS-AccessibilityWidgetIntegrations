@@ -1,6 +1,6 @@
 {
   "name": "@bauer-group/accessibility-widget-svelte",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Svelte 5 Component + Action für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@ge.bauer-group.com>",
