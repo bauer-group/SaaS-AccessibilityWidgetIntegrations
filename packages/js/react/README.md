@@ -54,6 +54,23 @@ The `config` prop is fully typed (`WidgetConfig`) and accepts **every** option o
 
 Full option list (types, defaults, EN/DE descriptions): **[configuration reference](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/blob/main/docs/configuration.md)**. The exported types `WidgetConfig`, `WidgetPosition`, `WidgetLocale` and `FeatureId` give you autocomplete for every value.
 
+### Imperative API
+
+Drive the widget from code — every helper is a safe no-op until the core has loaded:
+
+```ts
+import {
+  openAccessibilityWidget,
+  setAccessibilityWidgetFeature,
+  getAccessibilityWidgetState,
+} from '@bauer-group/accessibility-widget-react';
+
+setAccessibilityWidgetFeature('contrast', true); // e.g. from your own "high contrast" button
+const state = getAccessibilityWidgetState();
+```
+
+Also available: `closeAccessibilityWidget` and `resetAccessibilityWidget`. The full surface is the typed `WidgetApi`.
+
 ### Self-hosting (optional escape hatch)
 
 Only if you must avoid the third-party CDN (strict CSP, air-gapped, …): host the three assets yourself and point the wrapper at them. No SRI is used on the floating `v1` path.
@@ -138,6 +155,23 @@ Die `config`-Prop ist vollständig typisiert (`WidgetConfig`) und akzeptiert **j
 ```
 
 Komplette Optionsliste (Typen, Defaults, EN/DE-Beschreibungen): **[Konfigurations-Referenz](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/blob/main/docs/configuration.md)**. Die exportierten Typen `WidgetConfig`, `WidgetPosition`, `WidgetLocale` und `FeatureId` liefern Autovervollständigung für jeden Wert.
+
+### Imperative API
+
+Das Widget per Code steuern — jeder Helfer ist ein sicherer No-op, bis der Core geladen ist:
+
+```ts
+import {
+  openAccessibilityWidget,
+  setAccessibilityWidgetFeature,
+  getAccessibilityWidgetState,
+} from '@bauer-group/accessibility-widget-react';
+
+setAccessibilityWidgetFeature('contrast', true); // z. B. aus eigenem „Hoher Kontrast"-Button
+const state = getAccessibilityWidgetState();
+```
+
+Ebenfalls verfügbar: `closeAccessibilityWidget` und `resetAccessibilityWidget`. Die komplette Fläche ist der typisierte `WidgetApi`.
 
 ### Self-Hosting (optionaler Notausgang)
 
