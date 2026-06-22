@@ -153,9 +153,6 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'wordpress-accessibility-widget',
-    markets: [
-      { url: 'https://wordpress.org/plugins/accessibility-widget/', label: 'WordPress.org' },
-    ],
     req: { en: 'WordPress 6.x · PHP', de: 'WordPress 6.x · PHP' },
     desc: {
       en: 'Plugin with an admin settings page. Install via Plugins → Add New → Upload.',
@@ -172,13 +169,6 @@ export const INTEGRATIONS = [
     onColor: '#0b1020',
     delivery: 'zip',
     assetPrefix: 'typo3-accessibility-widget',
-    markets: [
-      {
-        url: 'https://packagist.org/packages/bauer-group/accessibility-widget-typo3',
-        label: 'Packagist',
-      },
-      { url: 'https://extensions.typo3.org/extension/accessibility_widget', label: 'TYPO3 TER' },
-    ],
     req: { en: 'TYPO3 13 · PHP', de: 'TYPO3 13 · PHP' },
     desc: {
       en: 'Extension. Upload in the Extension Manager or install via Composer.',
@@ -195,7 +185,6 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'drupal-accessibility-widget',
-    markets: [{ url: 'https://www.drupal.org/project/accessibility_widget', label: 'Drupal.org' }],
     req: { en: 'Drupal 10/11 · PHP', de: 'Drupal 10/11 · PHP' },
     desc: {
       en: 'Module (GPL-2.0-or-later). Install via Extend → Add new module.',
@@ -230,16 +219,6 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'shopware-accessibility-widget',
-    markets: [
-      {
-        url: 'https://packagist.org/packages/bauer-group/accessibility-widget-shopware',
-        label: 'Packagist',
-      },
-      {
-        url: 'https://store.shopware.com/en/search?search=accessibility+widget',
-        label: 'Shopware Store',
-      },
-    ],
     req: { en: 'Shopware 6 · PHP', de: 'Shopware 6 · PHP' },
     desc: {
       en: 'Plugin. Upload in Admin → Extensions → My extensions, then activate.',
@@ -256,16 +235,6 @@ export const INTEGRATIONS = [
     onColor: '#ffffff',
     delivery: 'zip',
     assetPrefix: 'magento-accessibility-widget',
-    markets: [
-      {
-        url: 'https://packagist.org/packages/bauer-group/accessibility-widget-magento',
-        label: 'Packagist',
-      },
-      {
-        url: 'https://marketplace.magento.com/catalogsearch/result/?q=accessibility%20widget',
-        label: 'Magento Marketplace',
-      },
-    ],
     req: { en: 'Magento 2.4 · PHP', de: 'Magento 2.4 · PHP' },
     desc: {
       en: 'Module (Adobe Commerce / Magento Open Source). Install via Composer or app/code.',
