@@ -1,3 +1,24 @@
+## [2.0.0](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v1.1.1...v2.0.0) (2026-06-22)
+
+### ⚠ BREAKING CHANGES
+
+* **config:** admin setting keys were unified to the runtime camelCase
+names (primary_color -> primaryColor, cdn_base/asset_base -> assetBase);
+Magento config paths moved to accessibility_widget/<group>/<key> and
+etc/frontend/default.xml was replaced by etc/config.xml; TYPO3 settings moved
+from TypoScript constants to Extension Configuration; Shopware now requires
+shopware/storefront. Existing installs must re-enter their settings.
+
+Signed-off-by: Karl Bauer <karl.bauer@bauer-group.com>
+
+### 🚀 Features
+
+* **config:** added schema-driven full config parity ([8c1c283](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/8c1c283c1e11f487f8ab6b280e67c863c228a225))
+
+### 🐛 Bug Fixes
+
+* **site:** adopted real brand mark, favicon and colours from core ([efd8af8](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/efd8af88bd293d8eb2190c368868e307e006b916)), closes [#0058a3](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/issues/0058a3)
+
 ## [1.1.1](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v1.1.0...v1.1.1) (2026-06-21)
 
 ### 🐛 Bug Fixes

@@ -4,7 +4,7 @@ Tags: accessibility, a11y, bfsg, wcag, barrierefreiheit
 Requires at least: 6.5
 Tested up to: 6.7
 Requires PHP: 8.1
-Stable tag: 1.1.1
+Stable tag: 2.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
