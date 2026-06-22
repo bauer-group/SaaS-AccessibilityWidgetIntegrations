@@ -12,7 +12,7 @@
 npm install @bauer-group/accessibility-widget-react
 ```
 
-No assets to host: by default the widget loads from the BAUER GROUP CDN (the floating `v1` tag) and **stays current automatically** — the integration may age, the widget never does.
+**No assets to host:** by default the widget loads from the BAUER GROUP CDN (the floating `v1` tag) and **stays current automatically** — the integration may age, the widget never does.
 
 ## Usage
 
@@ -27,18 +27,36 @@ import {
 export function App() {
   return (
     <>
-      <AccessibilityWidget
-        config={{ position: 'bottom-right', locale: 'auto', primaryColor: '#0058a3' }}
-      />
+      <AccessibilityWidget />
       <button onClick={() => openAccessibilityWidget()}>Accessibility</button>
     </>
   );
 }
 ```
 
+## Configuration
+
+The `config` prop is fully typed (`WidgetConfig`) and accepts **every** option of `window.AccessibilityWidgetConfig` — appearance (`position`, `offset`, `zIndex`, `primaryColor`, `locale`, `buttonLabel`), behaviour (`draggableFab`, `keyboardShortcut`, `respectReducedMotion`, …), content (`statementUrl`, `disclaimer`) and the 15 accessibility features via `initialFeatures` / `disabledFeatures`. Unknown keys pass straight through, so newer widget options work without a wrapper update.
+
+```tsx
+<AccessibilityWidget
+  config={{
+    position: 'bottom-left',
+    primaryColor: '#0058a3',
+    locale: 'de',
+    offset: { x: 24, y: 24 },
+    initialFeatures: { contrast: true },
+    disabledFeatures: ['tts'],
+    statementUrl: '/accessibility',
+  }}
+/>
+```
+
+Full option list (types, defaults, EN/DE descriptions): **[configuration reference](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/blob/main/docs/configuration.md)**. The exported types `WidgetConfig`, `WidgetPosition`, `WidgetLocale` and `FeatureId` give you autocomplete for every value.
+
 ### Self-hosting (optional escape hatch)
 
-Only if you must avoid the third-party CDN (strict CSP, air-gapped, etc.): host the three assets yourself and point the wrapper at them. No SRI is used on the floating `v1` path.
+Only if you must avoid the third-party CDN (strict CSP, air-gapped, …): host the three assets yourself and point the wrapper at them. No SRI is used on the floating `v1` path.
 
 ```tsx
 <AccessibilityWidget
@@ -69,7 +87,7 @@ MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licens
 
 ## 🇩🇪 Deutsch
 
-> React Wrapper für das BAUER GROUP Accessibility Widget (BFSG / EN 301 549 / WCAG 2.2 AA).
+> React-Wrapper für das BAUER GROUP Accessibility Widget (BFSG / EN 301 549 / WCAG 2.2 AA).
 
 [🇬🇧 English](#english) · **🇩🇪 Deutsch**
 
@@ -79,7 +97,7 @@ MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licens
 npm install @bauer-group/accessibility-widget-react
 ```
 
-Keine Assets zu hosten: Standardmäßig lädt das Widget vom BAUER GROUP CDN (floating `v1`-Tag) und **bleibt automatisch aktuell** — die Integration darf veralten, das Widget nie.
+**Keine Assets zu hosten:** Standardmäßig lädt das Widget vom BAUER GROUP CDN (floating `v1`-Tag) und **bleibt automatisch aktuell** — die Integration darf veralten, das Widget nie.
 
 ### Nutzung
 
@@ -94,14 +112,32 @@ import {
 export function App() {
   return (
     <>
-      <AccessibilityWidget
-        config={{ position: 'bottom-right', locale: 'auto', primaryColor: '#0058a3' }}
-      />
+      <AccessibilityWidget />
       <button onClick={() => openAccessibilityWidget()}>Barrierefreiheit</button>
     </>
   );
 }
 ```
+
+### Konfiguration
+
+Die `config`-Prop ist vollständig typisiert (`WidgetConfig`) und akzeptiert **jede** Option von `window.AccessibilityWidgetConfig` — Darstellung (`position`, `offset`, `zIndex`, `primaryColor`, `locale`, `buttonLabel`), Verhalten (`draggableFab`, `keyboardShortcut`, `respectReducedMotion`, …), Inhalt (`statementUrl`, `disclaimer`) und die 15 Barrierefreiheits-Funktionen über `initialFeatures` / `disabledFeatures`. Unbekannte Schlüssel werden durchgereicht — neue Widget-Optionen funktionieren also ohne Wrapper-Update.
+
+```tsx
+<AccessibilityWidget
+  config={{
+    position: 'bottom-left',
+    primaryColor: '#0058a3',
+    locale: 'de',
+    offset: { x: 24, y: 24 },
+    initialFeatures: { contrast: true },
+    disabledFeatures: ['tts'],
+    statementUrl: '/barrierefreiheit',
+  }}
+/>
+```
+
+Komplette Optionsliste (Typen, Defaults, EN/DE-Beschreibungen): **[Konfigurations-Referenz](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/blob/main/docs/configuration.md)**. Die exportierten Typen `WidgetConfig`, `WidgetPosition`, `WidgetLocale` und `FeatureId` liefern Autovervollständigung für jeden Wert.
 
 ### Self-Hosting (optionaler Notausgang)
 
@@ -128,4 +164,4 @@ Smoke-Tests (Vitest + happy-dom) in [`test/AccessibilityWidget.test.tsx`](./test
 
 ### Lizenz
 
-MIT · © 2026 BAUER GROUP — the widget loaded at runtime is separately licensed (AGPL-3.0-only or commercial).
+MIT · © 2026 BAUER GROUP — das zur Laufzeit geladene Widget ist separat lizenziert (AGPL-3.0-only oder kommerziell).
