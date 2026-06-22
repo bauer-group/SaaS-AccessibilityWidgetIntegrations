@@ -1,14 +1,10 @@
 import { defineComponent, onMounted, type PropType } from 'vue';
-import type { WidgetConfig } from './widget-config.generated.js';
-
-/**
- * Default CDN origin — the floating `v1` (major) tag. The widget stays current
- * automatically. Override the `*Src`/`cssHref` props only to self-host/mirror.
- */
-const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
-const DEFAULT_LOADER_SRC = `${CDN_V1}/accessibility-widget-loader.min.js`;
-const DEFAULT_CORE_SRC = `${CDN_V1}/accessibility-widget-core.min.js`;
-const DEFAULT_CSS_HREF = `${CDN_V1}/accessibility-widget.min.css`;
+import {
+  type WidgetConfig,
+  DEFAULT_LOADER_SRC,
+  DEFAULT_CORE_SRC,
+  DEFAULT_CSS_HREF,
+} from './widget-config.generated.js';
 
 /**
  * Full widget runtime config — generated from the shared MIT schema

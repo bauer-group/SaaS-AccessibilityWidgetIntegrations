@@ -1,11 +1,10 @@
 ---
-/**
- * Default CDN origin — the floating `v1` (major) tag. The widget stays current
- * automatically. Override the `*Src`/`cssHref` props only to self-host/mirror.
- */
-const CDN_V1 = 'https://widgets.professional-hosting.com/accessibility-widget/v1';
-
 import type { WidgetConfig } from './widget-config.generated';
+import {
+  DEFAULT_LOADER_SRC,
+  DEFAULT_CORE_SRC,
+  DEFAULT_CSS_HREF,
+} from './widget-config.generated';
 
 interface Props {
   loaderSrc?: string;
@@ -15,9 +14,9 @@ interface Props {
 }
 
 const {
-  loaderSrc = `${CDN_V1}/accessibility-widget-loader.min.js`,
-  coreSrc = `${CDN_V1}/accessibility-widget-core.min.js`,
-  cssHref = `${CDN_V1}/accessibility-widget.min.css`,
+  loaderSrc = DEFAULT_LOADER_SRC,
+  coreSrc = DEFAULT_CORE_SRC,
+  cssHref = DEFAULT_CSS_HREF,
   config = {},
 } = Astro.props;
 
