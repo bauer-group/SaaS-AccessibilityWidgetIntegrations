@@ -1,6 +1,6 @@
 {
   "name": "@bauer-group/accessibility-widget-nuxt",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Nuxt Plugin für das BAUER GROUP Accessibility Widget.",
   "license": "MIT",
   "author": "BAUER GROUP <info@ge.bauer-group.com>",

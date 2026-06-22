@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v2.0.0...v2.0.1) (2026-06-22)
+
+### ♻️ Refactoring
+
+* **config:** sourced JS wrapper CDN defaults from the schema ([2d12934](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/2d12934458edfcf54e20f079b5578540955427a1))
+
 ## [2.0.0](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v1.1.1...v2.0.0) (2026-06-22)
 
 ### ⚠ BREAKING CHANGES
