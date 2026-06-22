@@ -13,6 +13,9 @@ coverage
 # release artifacts (built by scripts/package-plugins.mjs)
 dist-artifacts
 
+# static Composer repository (generated into the Pages site at deploy time)
+site/composer/packages.json
+
 # env
 .env
 .env.local

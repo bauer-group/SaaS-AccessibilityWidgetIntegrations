@@ -33,6 +33,7 @@
     "generate-config": "node scripts/generate-config.mjs",
     "generate-config:check": "node scripts/generate-config.mjs --check",
     "package-plugins": "node scripts/package-plugins.mjs",
+    "build-composer-repo": "node scripts/build-composer-repo.mjs",
     "publish:bootstrap": "node scripts/publish-bootstrap.mjs"
   },
   "devDependencies": {

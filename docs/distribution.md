@@ -10,21 +10,21 @@ locked version** to every channel.
 - During `prepare`, `@semantic-release/exec` runs `scripts/sync-version.mjs <version>`,
   which writes that one version into **every** manifest and plugin header (npm
   packages + WordPress, TYPO3, Drupal, Magento, Shopify). Composer manifests stay
-  version-less on purpose — Packagist derives the version from the git tag.
+  version-less on purpose — `build-composer-repo.mjs` injects the version per git tag.
 - All of those files are committed in the release commit and the `vX.Y.Z` tag.
 - CI guards consistency with `pnpm sync-version:check` (fails on drift).
 
 ## Channels at a glance
 
-| Channel                                                    | What                                | Automation                                                  |
-| ---------------------------------------------------------- | ----------------------------------- | ----------------------------------------------------------- |
-| npm                                                        | 7 JS wrappers                       | `release.yml` → `publish-npm` (OIDC), every release         |
-| GitHub Packages                                            | 7 JS wrappers (mirror)              | `release.yml` → `publish-github`                            |
-| Packagist                                                  | TYPO3, Shopware, Magento (Composer) | Webhook, auto on the tag                                    |
-| WordPress.org                                              | WordPress plugin                    | `release-artifacts.yml`, gated `vars.PUBLISH_WORDPRESS_ORG` |
-| Drupal.org                                                 | Drupal module                       | `release-artifacts.yml`, gated `vars.PUBLISH_DRUPAL_ORG`    |
-| GitHub Release ZIPs                                        | all 6 CMS/shop plugins              | `release-artifacts.yml`, every release                      |
-| Shopify / Shopware Store / Magento Marketplace / TYPO3 TER | review-gated                        | ZIP hand-off, manual submit                                 |
+| Channel                                                    | What                                | Automation                                                      |
+| ---------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------- |
+| npm                                                        | 7 JS wrappers                       | `release.yml` → `publish-npm` (OIDC), every release             |
+| GitHub Packages                                            | 7 JS wrappers (mirror)              | `release.yml` → `publish-github`                                |
+| Composer (static repo)                                     | TYPO3, Shopware, Magento (Composer) | `pages.yml` builds `site/composer/packages.json`, every release |
+| WordPress.org                                              | WordPress plugin                    | `release-artifacts.yml`, gated `vars.PUBLISH_WORDPRESS_ORG`     |
+| Drupal.org                                                 | Drupal module                       | `release-artifacts.yml`, gated `vars.PUBLISH_DRUPAL_ORG`        |
+| GitHub Release ZIPs                                        | all 6 CMS/shop plugins              | `release-artifacts.yml`, every release                          |
+| Shopify / Shopware Store / Magento Marketplace / TYPO3 TER | review-gated                        | ZIP hand-off, manual submit                                     |
 
 ## Directory & downloads (GitHub Pages)
 
@@ -64,16 +64,41 @@ pins it to the released version (`npm pkg set`) before publishing.
 > Provenance (`--provenance`) is omitted because it requires a public source repo.
 > Re-add it in `release.yml` if this repository is made public.
 
-## Packagist (Composer)
+## Composer (static repository — no Packagist, no monorepo split)
 
-No CI job. One-time per Composer package (TYPO3, Shopware, Magento):
+Public **packagist.org reads `composer.json` only from a repository root** (one repo =
+one package) and can't resolve subdirectories, so the three subdirectory packages
+(TYPO3, Shopware, Magento) can't be published there without splitting the monorepo
+into per-package repos. Instead we serve a **static Composer repository** from the
+Pages site and reuse the GitHub Release ZIPs as `dist`:
 
-1. Submit the repo URL at https://packagist.org/packages/submit.
-2. Add the GitHub service hook (Packagist auto-suggests it) so new tags sync
-   instantly. `composer require bauer-group/<package>` then resolves from the tag.
+- `scripts/build-composer-repo.mjs` generates `site/composer/packages.json` from the
+  three `composer.json` manifests + the git tags (`>= 2.0.0`), pointing each version's
+  `dist` at the release ZIP that `package-plugins.mjs` already builds. Composer
+  flattens the single root folder on extract, so those ZIPs work unchanged.
+- The [`pages.yml`](../.github/workflows/pages.yml) build job runs it on every deploy
+  (incl. `workflow_run` after each Release), so a new release publishes automatically —
+  no commit, no extra service, no third party.
 
-Keep the `version` field **absent** from every `composer.json` — Packagist reads it
-from the tag (CI lints this).
+**Consumers** add one repository entry, then `composer require` resolves from the tag:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://accessibility-integration.widget.professional-hosting.com/composer"
+    }
+  ]
+}
+```
+
+```bash
+composer require bauer-group/accessibility-widget-magento   # or -typo3 / -shopware
+```
+
+Keep the `version` field **absent** from every `composer.json` — the generator injects
+it per tag (`composer validate` runs with `--no-check-publish`, so version-less is fine).
 
 ## WordPress.org
 

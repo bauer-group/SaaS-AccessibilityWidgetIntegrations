@@ -49,6 +49,17 @@ jobs:
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v7
+        with:
+          # Full history + tags so the Composer repo can enumerate released versions.
+          fetch-depth: 0
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+
+      - name: 🎼 Build static Composer repository
+        run: node scripts/build-composer-repo.mjs
 
       - name: ⚙️ Setup Pages
         uses: actions/configure-pages@v6
