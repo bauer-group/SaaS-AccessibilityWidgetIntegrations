@@ -5,6 +5,7 @@
     <referenceBlock name="before.body.end">
       <block class="Magento\Framework\View\Element\Template"
              name="accessibility.widget.loader"
+             ifconfig="accessibility_widget/general/enabled"
              template="BauerGroup_AccessibilityWidget::loader.phtml"
              after="-"/>
     </referenceBlock>

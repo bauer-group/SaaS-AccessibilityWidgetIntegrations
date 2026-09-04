@@ -13,7 +13,7 @@ zIndex = 2147483646
 # cat=appearance/a/50; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.primaryColor.label
 primaryColor = #0058a3
 
-# cat=appearance/a/60; type=options[Auto=auto,Deutsch=de,English=en,Français=fr,Español=es,Italiano=it,Polski=pl,Türkçe=tr,العربية=ar,中文=zh,हिन्दी=hi,Português=pt,বাংলা=bn,Русский=ru,日本語=ja,한국어=ko,Tiếng Việt=vi,فارسی=fa,اردو=ur,ไทย=th,Bahasa Indonesia=id,עברית=he,Nederlands=nl,Svenska=sv,Čeština=cs,Ελληνικά=el,Magyar=hu,Română=ro,Українська=uk]; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.locale.label
+# cat=appearance/a/60; type=options[Auto=auto,Deutsch=de,English=en,Français=fr,Español=es,Italiano=it,Polski=pl,Türkçe=tr,العربية=ar,中文=zh,हिन्दी=hi,Português=pt,বাংলা=bn,Русский=ru,日本語=ja,한국어=ko,Tiếng Việt=vi,فارسی=fa,اردو=ur,ไทย=th,Bahasa Indonesia=id,עברית=he,Nederlands=nl,Svenska=sv,Čeština=cs,Ελληνικά=el,Magyar=hu,Română=ro,Українська=uk,Latviešu=lv]; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.locale.label
 locale = auto
 
 # cat=appearance/a/70; type=string; label=LLL:EXT:accessibility_widget/Resources/Private/Language/locallang.xlf:option.buttonLabel.label
