@@ -32,6 +32,9 @@
   "peerDependencies": {
     "astro": ">=5"
   },
+  "devDependencies": {
+    "astro": "^7.2.8"
+  },
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
