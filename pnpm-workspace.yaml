@@ -1,2 +1,7 @@
 packages:
   - 'packages/js/*'
+
+# next@15 pins postcss to an exact, vulnerable 8.4.31 (no patched release of
+# that line exists). Lift only next's copy onto a patched postcss 8.5.x.
+overrides:
+  'next>postcss': ^8.5.23
