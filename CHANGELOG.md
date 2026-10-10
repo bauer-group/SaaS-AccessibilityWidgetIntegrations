@@ -1,3 +1,22 @@
+# Changelog
+
+All notable changes to this project are documented here. This file is maintained
+automatically by [semantic-release](https://github.com/semantic-release/semantic-release)
+on every release to `main`.
+
+## [2.1.1](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v2.1.0...v2.1.1) (2026-10-10)
+
+### 🐛 Bug Fixes
+
+* **ci:** added the missing permissions block ([f665c12](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/f665c12dca9ad206c902134d0ec3b92d11c0c947))
+* **deps:** remediated all open Dependabot security alerts ([41ca3a4](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/41ca3a4c647bdd65212bc203df4c58fb023cd90d))
+
+### 🔧 Maintenance
+
+* **ci:** removed issue AI summary workflow ([061f2d3](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/061f2d333a2031a06d00a7763db79b6f89f17828)), references [bauer-group/automation-templates#105](https://github.com/bauer-group/automation-templates/issues/105)
+* **ci:** removed redundant teams notification ([800bb5b](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/800bb5bb057ca3f3b3c5bae0d8b5933ac36f55ac))
+* **codeowners:** reassigned ownership to core team [skip ci] ([afc681a](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/afc681adfd2bb8d04b64aee7792ba7334f23de2e))
+
 ## [2.1.0](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v2.0.1...v2.1.0) (2026-06-22)
 
 ### 🚀 Features
