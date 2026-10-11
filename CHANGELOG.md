@@ -4,6 +4,12 @@ All notable changes to this project are documented here. This file is maintained
 automatically by [semantic-release](https://github.com/semantic-release/semantic-release)
 on every release to `main`.
 
+## [2.1.2](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v2.1.1...v2.1.2) (2026-10-11)
+
+### 🐛 Bug Fixes
+
+* **deps:** updated http-cache-semantics to 4.3.0 ([c47b846](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/commit/c47b846f821bdadc29a41d6fa37a07547266a2f4))
+
 ## [2.1.1](https://github.com/bauer-group/SaaS-AccessibilityWidgetIntegrations/compare/v2.1.0...v2.1.1) (2026-10-10)
 
 ### 🐛 Bug Fixes
