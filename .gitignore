@@ -8,6 +8,7 @@ dist
 build
 .output
 coverage
+.astro
 *.tsbuildinfo
 
 # release artifacts (built by scripts/package-plugins.mjs)

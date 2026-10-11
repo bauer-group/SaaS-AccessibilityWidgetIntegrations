@@ -10,6 +10,7 @@ export default tseslint.config(
       '**/build/**',
       '**/.output/**',
       '**/coverage/**',
+      '**/.astro/**',
       '**/node_modules/**',
       '**/vendor/**',
       '**/*.min.js',
