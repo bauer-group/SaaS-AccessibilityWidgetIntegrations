@@ -1,0 +1,14 @@
+---
+// Smoke-test page: compiles the published component with the workspace's
+// Astro version so a toolchain update that breaks it fails CI.
+import AccessibilityWidget from '../../../../src/AccessibilityWidget.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Astro wrapper fixture</title>
+    <AccessibilityWidget config={{ position: 'bottom-left', locale: 'de' }} />
+  </head>
+  <body></body>
+</html>

@@ -29,6 +29,9 @@
     "src",
     "README.md"
   ],
+  "scripts": {
+    "test": "astro build --root test/fixture && node test/assert-build.mjs"
+  },
   "peerDependencies": {
     "astro": ">=5"
   },
