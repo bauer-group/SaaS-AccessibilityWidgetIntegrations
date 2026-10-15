@@ -3,6 +3,9 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
   <default>
     <accessibility_widget>
+      <general>
+        <enabled>1</enabled>
+      </general>
       <appearance>
         <position>bottom-right</position>
         <offsetX>20</offsetX>
