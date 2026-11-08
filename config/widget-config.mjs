@@ -75,6 +75,7 @@ export const LOCALES = [
   'hu',
   'ro',
   'uk',
+  'lv',
 ];
 
 /** Locale option labels — endonyms (language-neutral), so they read the same in any admin. */
@@ -108,6 +109,7 @@ export const LOCALE_LABELS = {
   hu: 'Magyar',
   ro: 'Română',
   uk: 'Українська',
+  lv: 'Latviešu',
 };
 
 /** The 15 widget features, in display order, with bilingual labels. */

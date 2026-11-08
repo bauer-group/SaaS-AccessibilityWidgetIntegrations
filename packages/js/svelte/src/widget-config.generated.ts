@@ -42,7 +42,8 @@ export type WidgetLocale =
   | 'el'
   | 'hu'
   | 'ro'
-  | 'uk';
+  | 'uk'
+  | 'lv';
 
 export type FeatureId =
   | 'fontSize'

@@ -43,6 +43,7 @@ class Locale implements OptionSourceInterface
             ['value' => 'hu', 'label' => 'Magyar'],
             ['value' => 'ro', 'label' => 'Română'],
             ['value' => 'uk', 'label' => 'Українська'],
+            ['value' => 'lv', 'label' => 'Latviešu'],
         ];
     }
 }
