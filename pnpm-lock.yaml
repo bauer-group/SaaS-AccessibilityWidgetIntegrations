@@ -39,8 +39,8 @@ importers:
   packages/js/angular:
     devDependencies:
       '@angular/common':
-        specifier: ^20.3.28
-        version: 20.3.33(@angular/core@20.3.33(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
+        specifier: ^20.3.34
+        version: 20.3.34(@angular/core@20.3.33(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
       '@angular/core':
         specifier: ^20.3.28
         version: 20.3.33(rxjs@7.8.2)(zone.js@0.15.1)
@@ -150,11 +150,11 @@ importers:
 
 packages:
 
-  '@angular/common@20.3.33':
-    resolution: {integrity: sha512-PMfSF2j/C3gGHPp6O6c/BL+32msNzhmkzavrxtmBSxIGAOB5Q4KNktnIuolVrvVvu/0UrZj1/zwT91r/GKRaeA==}
+  '@angular/common@20.3.34':
+    resolution: {integrity: sha512-OhB/l0cNldOvQeICqbWqRUzK5fF6zNYy44Q4cIGJZql8HXL/invGiqWLE9f+kU8z4jRisofHIGTBtyJQYYOudg==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
     peerDependencies:
-      '@angular/core': 20.3.33
+      '@angular/core': 20.3.34
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/core@20.3.33':
@@ -2593,6 +2593,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -4875,7 +4876,7 @@ packages:
 
 snapshots:
 
-  '@angular/common@20.3.33(@angular/core@20.3.33(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)':
+  '@angular/common@20.3.34(@angular/core@20.3.33(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)':
     dependencies:
       '@angular/core': 20.3.33(rxjs@7.8.2)(zone.js@0.15.1)
       rxjs: 7.8.2
