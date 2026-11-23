@@ -7,6 +7,14 @@
       <label>Accessibility Widget</label>
       <tab>general</tab>
       <resource>BauerGroup_AccessibilityWidget::config</resource>
+      <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>General</label>
+        <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Enabled</label>
+          <comment>Set to No to stop injecting the widget into the storefront.</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+      </group>
       <group id="appearance" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Appearance</label>
         <field id="position" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

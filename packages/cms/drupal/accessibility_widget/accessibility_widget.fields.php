@@ -279,6 +279,10 @@ return [
           'value' => 'uk',
           'label' => 'Українська',
         ],
+        [
+          'value' => 'lv',
+          'label' => 'Latviešu',
+        ],
       ],
     ],
     [
